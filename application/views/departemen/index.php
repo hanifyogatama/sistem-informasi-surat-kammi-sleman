@@ -22,13 +22,14 @@
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            <?php foreach ($departemen as $departemen) : ?>
+                            <?php foreach ($departemen as $dep) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
-                                    <td><?= $departemen['nama_departemen']; ?></td>
+                                    <td><?= $dep['nama_departemen']; ?></td>
                                     <td>
-                                        <a href="" class="badge badge-success">edit</a>
-                                        <a href="" class="badge badge-danger">delete</a>
+                                        <a href="" data-toggle="modal" data-target="#modal-edit<?= $dep['id_departemen']; ?>" class="badge badge-success">edit</a>
+
+                                        <a href="" data-toggle="modal" data-target="#modal-delete<?= $dep['id_departemen']; ?>" class="badge badge-danger">delete</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
@@ -41,8 +42,7 @@
     </div>
 </div>
 
-<!-- form model input departemen  -->
-
+<!-- form model input add departemen  -->
 <div class="modal fade" id="newDepartemenModal" tabindex="-1" role="dialog" aria-labelledby="newDepartemenModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -52,7 +52,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('departemen'); ?>" method="POST">
+            <form action="<?= base_url('departemen/add'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen name">
@@ -66,3 +66,67 @@
         </div>
     </div>
 </div>
+
+
+<!-- departemen edit departemen -->
+<?php $no = 0;
+foreach ($departemen as $dep) :  $no++; ?>
+    <div class="modal fade" id="modal-edit<?= $dep['id_departemen']; ?>" tabindex="-1" role="dialog" aria-labelledby="newEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newEditModalLabel">Edit Departemen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('departemen/edit'); ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen" value="<?= $dep['nama_departemen']; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i>edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+
+<!-- departemen delete departemen -->
+<?php $no = 0;
+foreach ($departemen as $dep) :  $no++; ?>
+    <div class="modal fade" id="modal-delete<?= $dep['id_departemen']; ?>" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newDeleteModalLabel">Delete departemen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= base_url('dtepartemen/delete/') . $dep['id_departemen'] ?>" method="POST">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <p>yakin ingin menghapus data ?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tidak</button>
+                        <a href="<?= base_url() ?>departemen/delete/<?= $dep['id_departemen']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
