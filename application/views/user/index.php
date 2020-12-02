@@ -5,6 +5,11 @@
             <h6 class="m-0 font-weight-bold text-primary">My Profile</h6>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <?= $this->session->flashdata('message'); ?>
+                </div>
+            </div>
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
