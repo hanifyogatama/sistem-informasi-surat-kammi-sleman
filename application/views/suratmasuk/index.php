@@ -7,9 +7,9 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg">
-                    
+
                     <!-- button -->
-                    <?php echo anchor('suratmasuk/add', '<button class="btn btn-outline-primary btn-sm mb-3"><i class="fa fa-plus "></i> Tambah</button>'); ?>
+                    <?php echo anchor('suratmasuk/add', '<button class="btn btn-outline-primary btn-sm mb-3"><i class="fa fa-plus "></i> Add</button>'); ?>
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -29,7 +29,7 @@
                                     <?php $i = 1; ?>
                                     <?php foreach ($surat_masuk as $sm) : ?>
                                         <tr>
-                                            <th scope="row"><?= $i; ?></th>
+                                            <th scope="row" style="text-align: center;"><?= $i; ?></th>
                                             <td><?= $sm['no_surat']; ?></td>
                                             <td><?= $sm['pengirim'] ?></td>
                                             <td><?= $sm['isi'] ?></td>
@@ -39,12 +39,11 @@
 
                                                 <button type="button" data-toggle="dropdown" id="dropdownMenuButton" class="btn btn-success btn-circle btn-sm "><i class="fas fa-bars" aria-haspopup="true" aria-expanded="false"></i></button>
 
-
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" href="#">Disposisi</a>
-                                                    <a class="dropdown-item" href="<?= base_url('suratmasuk/detail/') . $sm['id_surat_masuk'] ?>">Detail<a>
-                                                            <a class="dropdown-item" href="#">Edit</a>
-                                                            <a class="dropdown-item" href="#">Delete</a>
+                                                    <a class="dropdown-item" href="<?= base_url('disposisi/') . $sm['id_surat_masuk'] ?>">Disposisi<a>
+                                                            <a class="dropdown-item" href="<?= base_url('suratmasuk/detail/') . $sm['id_surat_masuk'] ?>">Detail<a>
+                                                                    <a class="dropdown-item" href="<?= base_url('suratmasuk/edit/') . $sm['id_surat_masuk'] ?>">Edit<a>
+                                                                            <a class="dropdown-item" href="#">Delete</a>
                                                 </div>
 
 

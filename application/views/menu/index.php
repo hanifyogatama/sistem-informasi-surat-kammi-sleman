@@ -11,7 +11,7 @@
 
                     <?= $this->session->flashdata('message'); ?>
 
-                    <a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newMenuModal"><i class="fas fa-plus"> </i> Add</a>
+                    <a href="" class="btn btn-outline-primary btn-sm mb-3" data-toggle="modal" data-target="#newMenuModal"><i class="fas fa-plus"> </i> Add</a>
 
                     <table class="table table-hover">
                         <thead>

@@ -11,24 +11,42 @@ class SuratMasukModel extends CI_Model
     }
 
     // add data
-    public function addSuratMasuk()
+    public function addSuratMasuk($file)
     {
-        $data = ["nama_departemen" => htmlspecialchars($this->input->post('nama_departemen'))];
-        $this->db->insert('departemen', $data);
+        $data = [
+            "no_surat"      => $this->input->post('no_surat', true),
+            "pengirim"      => $this->input->post('pengirim', true),
+            "isi"           => $this->input->post('isi', true),
+            "tanggal_surat" => $this->input->post('tanggal_surat', true),
+            "tanggal_diterima"  => $this->input->post('tanggal_diterima', true),
+            "keterangan"        => $this->input->post('keterangan', true),
+            "file_surat"        => $file
+        ];
+
+        $this->db->insert('surat_masuk', $data);
     }
 
     // get data by id
-    public function getByIdSuratMasukk($id_surat_masuk)
+    public function getByIdSuratMasuk($id_surat_masuk)
     {
         return $this->db->get_where('surat_masuk', ['id_surat_masuk' => $id_surat_masuk])->row_array();
     }
 
     // edit data by id
-    public function editSuratMasuk()
+    public function editSuratMasuk($file)
     {
-        $data = ["nama_departemen" => htmlspecialchars($this->input->post('nama_departemen', true))];
-        $this->db->where('id_departemen', $this->input->post('id_departemen'));
-        $this->db->update('departemen', $data);
+        $data = [
+            "no_surat"      => $this->input->post('no_surat', true),
+            "pengirim"      => $this->input->post('pengirim', true),
+            "isi"           => $this->input->post('isi', true),
+            "tanggal_surat" => $this->input->post('tanggal_surat', true),
+            "tanggal_diterima"  => $this->input->post('tanggal_diterima', true),
+            "keterangan"        => $this->input->post('keterangan', true),
+            "file_surat"        => $file
+        ];
+
+        $this->db->where('id_surat_masuk', $this->input->post('id_surat_masuk'));
+        $this->db->update('surat_masuk', $data);
     }
 
     // delete data by id

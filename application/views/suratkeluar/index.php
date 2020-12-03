@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-lg">
-                    <?php echo anchor('suratkeluar/add', '<button class="btn btn-outline-primary btn-sm mb-3"><i class="fa fa-plus "></i> Tambah</button>'); ?>
+                    <?php echo anchor('suratkeluar/add', '<button class="btn btn-outline-primary btn-sm mb-3"><i class="fa fa-plus "></i> Add</button>'); ?>
 
                     <div class="card-body">
                         <div class="table-responsive">
