@@ -22,6 +22,7 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // role user
     public function role()
     {
         $data['title'] = 'Role';
@@ -36,13 +37,12 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // role asscess
     public function roleAccess($id_role)
     {
         $data['title'] = 'Role Access';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['role'] = $this->db->get_where('user_role', ['id_role' => $id_role])->row_array();
-
         $this->db->where('id_menu !=', 1);
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
@@ -53,6 +53,7 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // change access
     public function changeAccess()
     {
         $menu_id = $this->input->post('menuId');
@@ -74,6 +75,7 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">access changed</div>');
     }
 
+    // backup data
     public function backupData()
     {
         $data['title'] = 'Backup Data';
@@ -86,10 +88,12 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    // user management
     public function userManagement()
     {
         $data['title'] = 'User Management';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['users']  = $this->db->get('user')->result_array();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

@@ -11,9 +11,39 @@
                  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                      <i class="fa fa-bars"></i>
                  </button>
-
                  <!-- Topbar Navbar -->
                  <ul class="navbar-nav ml-auto">
+                     <!-- Nav Item - Messages -->
+                     <li class="nav-item dropdown no-arrow ">
+                         <a class="nav-link text-primary small">
+                             <?php
+                                function tgl_indo($tanggal)
+                                {
+                                    $bulan = array(
+                                        1 =>   'Januari',
+                                        'Februari',
+                                        'Maret',
+                                        'April',
+                                        'Mei',
+                                        'Juni',
+                                        'Juli',
+                                        'Agustus',
+                                        'September',
+                                        'Oktober',
+                                        'November',
+                                        'Desember'
+                                    );
+                                    $pecahkan = explode('-', $tanggal);
+                                    return $pecahkan[2] . ' ' . $bulan[(int)$pecahkan[1]] . ' ' . $pecahkan[0];
+                                }
+                                echo tgl_indo(date('Y-m-d'));
+
+                                ?>
+
+                         </a>
+                         <!-- Dropdown - Messages -->
+
+                     </li>
 
                      <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -36,8 +66,6 @@
                              </a>
                          </div>
                      </li>
-
                  </ul>
-
              </nav>
              <!-- End of Topbar -->
