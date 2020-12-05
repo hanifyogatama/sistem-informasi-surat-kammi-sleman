@@ -47,8 +47,7 @@
 </div>
 <!-- End of Main Content -->
 
-<!-- Input With Modal -->
-
+<!-- add With Modal -->
 <div class="modal fade" id="newMenuModal" tabindex="-1" role="dialog" aria-labelledby="newMenuModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -65,8 +64,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info btn-sm">Add</button>
                 </div>
             </form>
         </div>

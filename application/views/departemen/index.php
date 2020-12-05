@@ -11,7 +11,7 @@
 
                         <?= $this->session->flashdata('message'); ?>
 
-                        <a href="" class="btn btn-outline-primary btn-sm mb-3" data-toggle="modal" data-target="#newDepartemenModal"><i class="fas fa-plus"> </i> Add</a>
+                        <a href="" title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3" data-toggle="modal" data-target="#newDepartemenModal"><i class="fas fa-plus"> </i></a>
 
                         <table class="table table-hover">
                             <thead>
@@ -63,8 +63,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info btn-sm">Add</button>
                 </div>
             </form>
         </div>
@@ -94,8 +94,8 @@ foreach ($departemen as $dep) :  $no++; ?>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tutup</button>
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i>edit</button>
+                        <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i>edit</button>
                     </div>
                 </form>
             </div>
@@ -116,7 +116,7 @@ foreach ($departemen as $dep) :  $no++; ?>
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url('dtepartemen/delete/') . $dep['id_departemen'] ?>" method="POST">
+                <form action="<?= base_url('departemen/delete/') . $dep['id_departemen'] ?>" method="POST">
                     <div class="modal-body">
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
@@ -126,7 +126,7 @@ foreach ($departemen as $dep) :  $no++; ?>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tidak</button>
+                        <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
                         <a href="<?= base_url() ?>departemen/delete/<?= $dep['id_departemen']; ?>" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                 </form>

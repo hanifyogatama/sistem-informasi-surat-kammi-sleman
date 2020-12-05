@@ -5,25 +5,31 @@
         </div>
         <div class="card-body">
             <div class="col-lg-8">
-                <a href="javascript:history.go(-1)" class="btn btn-outline-primary  btn-sm px-3 mb-3" title="back"><i class="fas fa-arrow-left"></i></a>
+                <a href="javascript:history.go(-1)" class="btn btn-outline-primary  btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
 
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Instansi</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" name="email" value="">
+                <form action="" method="post">
+                    <div class="form-group row">
+                        <input type="hidden" class="form-control" id="id_instansi" name="id_instansi" value="<?= $instansi['id_instansi'] ?>">
+
+                        <label for="nama_instansi" class="col-sm-2 col-form-label">Instansi</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="<?= $instansi['nama_instansi'] ?>" placeholder="role">
+                            <?= form_error('nama_instansi', '<small class="text-danger ">', '</small>') ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-sm-2 col-form-label">Alamat</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" name="email" value="">
+
+                    <div class="form-group row">
+                        <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $instansi['alamat'] ?>" placeholder="role">
+                            <?= form_error('alamat', '<small class="text-danger ">', '</small>') ?>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row justify-content-end">
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                    <div class="text-right">
+                        <!--You can add col-lg-12 if you want -->
+                        <button type="submit" name="edit" class="btn btn-info btn-sm">Edit</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

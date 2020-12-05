@@ -27,6 +27,12 @@ class InstansiModel extends CI_Model
         return $this->db->get_where('instansi', ['id_instansi' => $id_instansi])->row_array();
     }
 
+    public function getCountDataInstansi()
+    {
+        return $this->db->query("select * from instansi");
+    }
+
+
     // edit data by id
     public function editInstansi()
     {

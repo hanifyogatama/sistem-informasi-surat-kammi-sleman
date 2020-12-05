@@ -41,7 +41,9 @@ class Departemen extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->DepartemenModel->addDepartemen();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">departemen ditambah</div> ');
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data added</div>');
             redirect('departemen');
         }
     }
@@ -65,7 +67,9 @@ class Departemen extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->DepartemenModel->editDepartemen();
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">departemen diedit</div> ');
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data edited</div>');
             redirect('departemen');
         }
     }
@@ -74,7 +78,9 @@ class Departemen extends CI_Controller
     {
         // $departemenId = $this->input->post('id_departemen');
         $this->DepartemenModel->deleteDepartemen($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Dihapus</div> ');
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data deleted</div>');
         redirect('departemen');
     }
 }
