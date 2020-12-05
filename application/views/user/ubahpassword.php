@@ -22,7 +22,7 @@
                         <input type="password" class="form-control" id="new_password2" name="new_password2">
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Ubah</button>
+                        <button type="submit" class="btn btn-info btn-sm">Edit</button>
                     </div>
                 </form>
             </div>

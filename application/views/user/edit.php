@@ -39,11 +39,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group row justify-content-end">
-                        <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Edit</button>
-                        </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-info btn-sm">Edit</button>
                     </div>
                     </form>
                 </div>

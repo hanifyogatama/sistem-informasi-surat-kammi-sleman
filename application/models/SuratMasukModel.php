@@ -49,6 +49,11 @@ class SuratMasukModel extends CI_Model
         $this->db->update('surat_masuk', $data);
     }
 
+    public function getCountDataSuratKeluar()
+    {
+        return $this->db->query("select * from surat_masuk");
+    }
+
     // delete data by id
     public function deleteSuratMasuk($id)
     {

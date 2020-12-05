@@ -12,7 +12,7 @@
 
                         <?= $this->session->flashdata('message'); ?>
 
-                        <button type="button" href="" title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3" data-toggle="modal" data-target="#newRoleModal"><i class="fas fa-plus"></i> </button>
+                        <!-- <button type="button" href="" title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3" data-toggle="modal" data-target="#newRoleModal"><i class="fas fa-plus"></i> </button> -->
 
                         <table class="table table-hover">
                             <thead>
@@ -31,12 +31,7 @@
                                         <td>
                                             <a href="<?= base_url('admin/roleaccess/') . $role['id_role']; ?>" class="badge badge-warning">access</a>
 
-
-
-                                            <a href="<?= base_url('admin/editRole/') . $role['id_role']; ?>" class="badge badge-success">edit</a>
-
-
-
+                                            <!-- <a href="<?= base_url('admin/editRole/') . $role['id_role']; ?>" class="badge badge-success">edit</a> -->
 
                                             <!-- <a href="" class="badge badge-danger">delete</a> -->
                                         </td>

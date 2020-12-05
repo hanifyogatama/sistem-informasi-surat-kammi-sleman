@@ -10,6 +10,12 @@ class AdminModel extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+
+    public function getCountDataUser()
+    {
+        return $this->db->query("select * from user");
+    }
+
     public function getAllRole()
     {
         $query = "SELECT * FROM user_role ORDER BY id_role DESC";
@@ -27,6 +33,12 @@ class AdminModel extends CI_Model
     public function getByIdRole($id_role)
     {
         return $this->db->get_where('user_role', ['id_role' => $id_role])->row_array();
+    }
+
+    // get user by id
+    public function getByIdUser($id_user)
+    {
+        return $this->db->get_where('user', ['id_user' => $id_user])->row_array();
     }
 
 
@@ -47,5 +59,16 @@ class AdminModel extends CI_Model
     {
         $this->db->where('id_departemen', $id);
         $this->db->delete('departemen');
+    }
+
+
+    public function detailUser($id_user)
+    {
+        $result = $this->db->where('id_user', $id_user)->get('user');
+        if ($result->num_rows() > 0) {
+            return $result->result();
+        } else {
+            return false;
+        }
     }
 }
