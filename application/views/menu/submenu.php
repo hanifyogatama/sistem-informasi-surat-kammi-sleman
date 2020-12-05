@@ -16,7 +16,7 @@
 
                     <?= $this->session->flashdata('message'); ?>
 
-                    <a href="" class="btn btn-outline-primary btn-sm mb-3" data-toggle="modal" data-target="#newSubMenuModal"><i class="fas fa-plus"></i> Add</a>
+                    <a href="" class="btn btn-outline-primary btn-sm px-3 mb-3" title="Add" data-toggle="modal" data-target="#newSubMenuModal"><i class="fas fa-plus"></i></a>
 
                     <table class="table table-hover">
                         <thead>
@@ -40,9 +40,21 @@
                                     <td><?= $submenu['url']; ?></td>
                                     <td><?= $submenu['icon']; ?></td>
                                     <td><?= $submenu['is_active']; ?></td>
-                                    <td>
-                                        <a href="" class="badge badge-success">edit</a>
-                                        <a href="" class="badge badge-danger">delete</a>
+                                    <td align="center">
+                                        <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>
+                                        <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                                            <div class="row justify-content-center text-center">
+                                                <div class="col-sm">
+                                                    <a href="<?= base_url('menu/submenu_edit/') . $submenu['id_menu'] ?>" class="btn btn-primary btn-circle btn-sm mx-3" title="edit"><i class="fas fa-edit"></i>
+                                                    </a>
+
+                                                    <a href="" class="btn btn-danger btn-circle btn-sm mx-3" title="delete" data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash"></i></a>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>

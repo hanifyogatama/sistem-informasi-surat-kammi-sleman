@@ -40,7 +40,6 @@ class Menu extends CI_Controller
     public function submenu()
     {
         $data['title'] = 'Sub Menu Management';
-
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $this->load->model('MenuModel', 'menu');
@@ -73,6 +72,33 @@ class Menu extends CI_Controller
             <span aria-hidden="true">&times;</span>
             </button>new sub menu added</div>');
             redirect('menu/submenu');
+        }
+    }
+
+    public function submenu_edit($id)
+    {
+        $data['title'] = 'Edit Instansi';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        // $data['instansi'] = $this->InstansiModel->getByIdInstansi($id);
+
+
+        // rules
+        $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required');
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('instansi/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->InstansiModel->editInstansi();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data edited</div>');
+            redirect('instansi');
         }
     }
 }

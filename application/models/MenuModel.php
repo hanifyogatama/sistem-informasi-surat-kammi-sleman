@@ -10,7 +10,6 @@ class MenuModel extends CI_Model
                     ON `user_sub_menu`.`id_menu` = `user_menu`.`id_menu`
         ";
 
-
         return $this->db->query($query)->result_array();
     }
 }

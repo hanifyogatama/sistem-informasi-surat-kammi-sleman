@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card-body">
-                                <img src="<?= base_url() . '/assets/img/profile/' . $user->gambar ?>" class="card-img-top" height="180px" width="90px">
+                                <img src="<?= base_url() . '/assets/img/profile/' . $user->gambar ?>" class="img-profile rounded-circle shadow" width="200px" height="200px">
                             </div>
                         </div>
                         <div class="col-md-8">
