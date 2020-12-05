@@ -8,6 +8,7 @@ class Admin extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
+        $this->load->model('AdminModel');
     }
 
     public function index()
@@ -27,14 +28,26 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Role';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['role'] = $this->db->get('user_role')->result_array();
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/role', $data);
-        $this->load->view('templates/footer');
+        // rules
+        $this->form_validation->set_rules('role', 'Role', 'required');
+
+        if ($this->form_validation->run() == false) {
+
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/role', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $this->AdminModel->addRole();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>new role added</div>');
+            redirect('admin/role');
+        }
     }
 
     // role asscess
@@ -75,6 +88,34 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">access changed</div>');
     }
 
+    // edit role 
+    public function editRole($id)
+    {
+        $data['title'] = 'Edit Role';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['role'] = $this->AdminModel->getByIdRole($id);
+
+
+        // rules
+        $this->form_validation->set_rules('role', 'Role', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('admin/edit_role', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $this->AdminModel->editRole();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>role edited</div>');
+            redirect('admin/role');
+        }
+    }
+
     // backup data
     public function backupData()
     {
@@ -88,9 +129,77 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // user management
-    public function userManagement()
+    public function backup()
     {
+        // $data['title'] = 'Backup Data';
+        // $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+
+        $this->load->dbutil();
+        $tanggal = date('Y-m-d');
+        $config  = array(
+            'format' => 'zip',
+            'filename' => 'KammiSleman_db_backup_' . $tanggal . '.sql',
+            'add_drop' => TRUE,
+            'add_insert' => TRUE,
+            'newline' => "\n",
+            'foreign_key_checks' => FALSE
+        );
+
+        $backup = &$this->dbutil->backup($config);
+        $name_file = 'KammiSleman_db_backup_' . $tanggal . '.zip';
+        $this->load->helper('download');
+        force_download($name_file, $backup);
+    }
+
+
+    // user management
+    public function user_management()
+    {
+
+        $data['title'] = 'User Management';
+        $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['users']  = $this->db->get('user')->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/user_management', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+    public function user_management_detail()
+    {
+
+        $data['title'] = 'User Detail';
+        $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['users']  = $this->db->get('user')->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/user_management_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function user_management_edit()
+    {
+
+        $data['title'] = 'Edit User';
+        $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['users']  = $this->db->get('user')->result_array();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('admin/user_management_edit', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function user_management_hapus()
+    {
+
         $data['title'] = 'User Management';
         $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['users']  = $this->db->get('user')->result_array();

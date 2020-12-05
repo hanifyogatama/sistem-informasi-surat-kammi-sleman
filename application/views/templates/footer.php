@@ -2,7 +2,7 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; KAMMI Kamda Sleman 2020</span>
+                <span>Copyright &copy; KAMMI Kamda Sleman 2020 - <?php echo date("Y"); ?></span>
             </div>
         </div>
     </footer>
@@ -39,6 +39,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url('assets/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -97,6 +98,12 @@
                 autoclose: true,
                 todayHighlight: true,
             });
+        });
+
+
+        // tooltip
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 

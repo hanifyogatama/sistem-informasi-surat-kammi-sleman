@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow-sm border-bottom-primary">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
         </div>
@@ -21,8 +21,8 @@
                         <label for="new_password2">Ulangi Password Baru</label>
                         <input type="password" class="form-control" id="new_password2" name="new_password2">
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Ubah Password</button>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Ubah</button>
                     </div>
                 </form>
             </div>

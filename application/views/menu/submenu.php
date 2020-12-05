@@ -1,13 +1,12 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow-sm border-bottom-primary">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg">
-
                     <?php if (validation_errors()) : ?>
                         <div class="alert alert-danger" role="alert">
                             <?= validation_errors(); ?>
@@ -22,7 +21,7 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">No</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Menu</th>
                                 <th scope="col">Url</th>

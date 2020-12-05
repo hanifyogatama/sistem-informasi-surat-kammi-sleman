@@ -1,36 +1,47 @@
-<!-- Begin Page Content -->
 <div class="container-fluid">
-    <div class="card shadow mb-4">
+    <div class="card shadow-sm border-bottom-primary">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">My Profile</h6>
+            <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-lg-6">
-                    <?= $this->session->flashdata('message'); ?>
-                </div>
+            <?= $this->session->flashdata('message'); ?>
+
+            <div class="row justify-content-center">
+                <img src="<?= base_url('assets/img/profile/') . $user['gambar']; ?>" class="img-profile rounded-circle shadow" width="150px" height="150px"><br> <br>
             </div>
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="<?= base_url('assets/img/profile/') . $user['gambar'] ?>" class="card-img" alt="profile image">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $user['nama'] ?></h5>
-                            <p class="card-text"><?= $user['email'] ?></p>
-                            <p class="card-text"><small class="text-muted">Dibuat sejak : <?= date('d F Y', $user['tanggal_dibuat']); ?></small></p>
-                        </div>
+            <br>
+            <div class="row justify-content-center">
+                <div class="card">
+                    <div class="col-md">
+                        <table class="table">
+                            <tr>
+                                <th width="200">Full Name</th>
+                                <td><?= $user['nama']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><?= $user['email']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Date Created</th>
+                                <td><?= date('d F Y', $user['tanggal_dibuat']); ?></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
+                <br>
+                <br>
             </div>
+            <br>
         </div>
     </div>
-    <!-- Page Heading -->
-
 
 </div>
-<!-- /.container-fluid -->
+
+
+
+
+
 
 </div>
 <!-- End of Main Content -->
