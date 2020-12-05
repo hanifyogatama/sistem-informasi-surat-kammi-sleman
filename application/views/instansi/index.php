@@ -7,7 +7,7 @@
             <div class="col-lg">
                 <div class="row">
                     <div class="col-lg">
-                        <?= form_error('departemen', '<div class="alert alert-danger" role = "alert">', '</div>') ?>
+                        <?= form_error('instansi', '<div class="alert alert-danger" role = "alert">', '</div>') ?>
 
                         <?= $this->session->flashdata('message'); ?>
 
@@ -76,15 +76,12 @@
     </div>
 </div>
 
-
-
-
 <!-- departemen delete departemen -->
 <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newDeleteModalLabel">Delete departemen</h5>
+                <h5 class="modal-title" id="newDeleteModalLabel">Delete Departemen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
