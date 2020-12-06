@@ -29,8 +29,9 @@
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $menu['menu']; ?></td>
                                         <td>
-                                            <a href="" class="badge badge-success">edit</a>
-                                            <a href="" class="badge badge-danger">delete</a>
+                                            <a href="<?= base_url('menu/menu_edit/') . $menu['id_menu']; ?>" class="badge badge-success">edit</a>
+
+                                            <a href="" data-toggle="modal" data-target="#modal-delete" class="badge badge-danger">delete</a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -70,4 +71,40 @@
             </form>
         </div>
     </div>
+</div>
+
+<!--  delete menu data -->
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('menu/menu_delete/') . $menu['id_menu'] ?>" method="POST">
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <i class="fas fa-exclamation-circle fa-4x"></i>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="id_menu" value="">
+                        </div>
+                        <div class="form-group">
+                            <p>Are you sure you want to delete data?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                    <a href="<?= base_url() ?>menu/menu_delete/<?= $menu['id_menu']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
 </div>

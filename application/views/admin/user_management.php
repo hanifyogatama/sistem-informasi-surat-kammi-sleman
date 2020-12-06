@@ -69,15 +69,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6 class="modal-title font-weight-bold text-primary" id="newDeleteModalLabel">Delete</h6>
+                <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="POST">
+            <form action="<?= base_url('admin/delete/') . $user['id_user'] ?>" method="POST">
                 <div class="modal-body">
                     <div class="row justify-content-center">
-                        <i class="fas fa-exclamation-circle"></i>
+                        <i class="fas fa-exclamation-circle fa-4x"></i>
                     </div>
                     <br>
                     <div class="row justify-content-center">
@@ -85,13 +85,13 @@
                             <input type="hidden" class="form-control" name="id" value="">
                         </div>
                         <div class="form-group">
-                            <p>Yakin ingin menghapus data ?</p>
+                            <p>Are you sure you want to delete data?</p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Tidak</button>
-                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                    <a href="<?= base_url() ?>admin/delete/<?= $user['id_user']; ?>" class="btn btn-danger btn-sm">Delete</a>
                 </div>
             </form>
         </div>

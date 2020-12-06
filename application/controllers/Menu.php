@@ -7,6 +7,7 @@ class Menu extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('MenuModel');
         is_logged_in();
     }
 
@@ -75,13 +76,38 @@ class Menu extends CI_Controller
         }
     }
 
+
+    public function menu_edit($id)
+    {
+        $data['title'] = 'Edit Status Surat';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['menu'] = $this->MenuModel->getByIdMenu($id);
+
+        // rules
+        $this->form_validation->set_rules('menu', 'Menu', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('menu/menu_edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->MenuModel->editMenu();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data edited</div>');
+            redirect('menu');
+        }
+    }
+
+    // sub menu edit
     public function submenu_edit($id)
     {
         $data['title'] = 'Edit Instansi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         // $data['instansi'] = $this->InstansiModel->getByIdInstansi($id);
-
 
         // rules
         $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required');
@@ -94,11 +120,22 @@ class Menu extends CI_Controller
             $this->load->view('instansi/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->InstansiModel->editInstansi();
+            $this->MenuModel->editInstansi();
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
-            redirect('instansi');
+            redirect('menu');
         }
+    }
+
+    // edit menu
+    public function menu_delete($id)
+    {
+        // $departemenId = $this->input->post('id_departemen');
+        $this->MenuModel->deleteMenu($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data deleted</div>');
+        redirect('menu');
     }
 }

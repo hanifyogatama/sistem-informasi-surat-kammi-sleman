@@ -46,7 +46,7 @@
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <div class="row mx-0 ">
                                                     <div class="col-sm px-1">
-                                                        <a href="<?= base_url('disposisi/') . $sm['id_surat_masuk'] ?>" class="btn btn-info btn-circle btn-sm" title="dispoisi"><i class="fas fa-share-square" aria-haspopup="true" aria-expanded="false"></i></a>
+                                                        <a href="<?= base_url('disposisi') ?>" class="btn btn-info btn-circle btn-sm" title="dispoisi"><i class="fas fa-share-square" aria-haspopup="true" aria-expanded="false"></i></a>
                                                     </div>
 
                                                     <div class="col-sm px-1">

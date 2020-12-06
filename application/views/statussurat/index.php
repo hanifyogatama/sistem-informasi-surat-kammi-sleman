@@ -70,23 +70,29 @@
     </div>
 </div>
 
-<!-- departemen delete departemen -->
+<!--  delete status surat -->
 <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newDeleteModalLabel">Delete Status Surat</h5>
+                <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="<?= base_url('statussurat/delete/') . $status_surat['id_status_surat'] ?>" method="POST">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="id_instansi">
+                    <div class="row justify-content-center">
+                        <i class="fas fa-exclamation-circle fa-4x"></i>
                     </div>
-                    <div class="form-group">
-                        <p>yakin ingin menghapus data ?</p>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="id_status_surat" value="">
+                        </div>
+                        <div class="form-group">
+                            <p>Are you sure you want to delete data?</p>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

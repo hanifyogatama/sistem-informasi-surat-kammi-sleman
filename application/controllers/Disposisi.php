@@ -1,16 +1,16 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dsiposisi extends CI_Controller
+class Disposisi extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('DisposisiModel');
+        //$this->load->model('DisposisiModel');
     }
 
-    public function index($id)
+    public function index()
     {
         $data['title'] = 'Disposisi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();

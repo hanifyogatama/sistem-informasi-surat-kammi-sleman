@@ -292,17 +292,13 @@ class Admin extends CI_Controller
     }
 
 
-    public function user_management_hapus()
+    public function delete($id)
     {
-
-        $data['title'] = 'User Management';
-        $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['users']  = $this->db->get('user')->result_array();
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/usermanagement', $data);
-        $this->load->view('templates/footer');
+        // $departemenId = $this->input->post('id_departemen');
+        $this->AdminModel->deleteUser($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data deleted</div>');
+        redirect('admin/user_management');
     }
 }

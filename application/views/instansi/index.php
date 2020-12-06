@@ -81,18 +81,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newDeleteModalLabel">Delete Departemen</h5>
+                <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="<?= base_url('instansi/delete/') . $instansi['id_instansi'] ?>" method="POST">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="id_instansi">
+                    <div class="row justify-content-center">
+                        <i class="fas fa-exclamation-circle fa-4x"></i>
                     </div>
-                    <div class="form-group">
-                        <p>yakin ingin menghapus data ?</p>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="id_instansi" value="">
+                        </div>
+                        <div class="form-group">
+                            <p>Are you sure you want to delete data?</p>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

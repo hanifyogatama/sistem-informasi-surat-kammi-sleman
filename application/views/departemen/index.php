@@ -111,18 +111,24 @@ foreach ($departemen as $dep) :  $no++; ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newDeleteModalLabel">Delete departemen</h5>
+                    <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form action="<?= base_url('departemen/delete/') . $dep['id_departemen'] ?>" method="POST">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
+                        <div class="row justify-content-center">
+                            <i class="fas fa-exclamation-circle fa-4x"></i>
                         </div>
-                        <div class="form-group">
-                            <p>yakin ingin menghapus data ?</p>
+                        <br>
+                        <div class="row justify-content-center">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
+                            </div>
+                            <div class="form-group">
+                                <p>Are you sure you want to delete data?</p>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
