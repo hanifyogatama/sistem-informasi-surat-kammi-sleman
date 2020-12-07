@@ -18,7 +18,13 @@ class MyFunction
     public function countSuratMasuk()
     {
         $this->ci->load->model('SuratMasukModel');
-        return $this->ci->SuratMasukModel->getCountDataSuratKeluar()->num_rows();
+        return $this->ci->SuratMasukModel->getCountDataSuratMasuk()->num_rows();
+    }
+
+    public function countSuratKeluar()
+    {
+        $this->ci->load->model('SuratKeluarModel');
+        return $this->ci->SuratKeluarModel->getCountDataSuratkeluar()->num_rows();
     }
 
     public function countInstansi()

@@ -10,7 +10,6 @@ class AdminModel extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
-
     public function getCountDataUser()
     {
         return $this->db->query("select * from user");

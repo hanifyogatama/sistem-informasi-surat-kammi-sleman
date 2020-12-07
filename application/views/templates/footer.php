@@ -24,15 +24,28 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <i class="fas fa-exclamation-circle fa-4x"></i>
+                    </div>
+                    <br>
+                    <div class="row justify-content-center">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="id_surat_keluar" value="">
+                        </div>
+                        <div class="form-group">
+                            <p>Are you sure you want to exit?</p>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="<?= base_url('auth') ?>">Logout</a>
+                    <button class="btn btn-warning btn-sm" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-sm" href="<?= base_url('auth') ?>">Logout</a>
                 </div>
             </div>
         </div>

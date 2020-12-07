@@ -254,6 +254,7 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Add User';
         $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['userrole'] = $this->AdminModel->getAllRole();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [

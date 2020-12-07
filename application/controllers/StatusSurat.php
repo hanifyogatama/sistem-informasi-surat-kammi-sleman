@@ -6,7 +6,7 @@ class StatusSurat extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('StatusSuratModel');
+        $this->load->model(['StatusSuratModel']);
     }
 
     public function index()
@@ -26,6 +26,8 @@ class StatusSurat extends CI_Controller
     {
         $data['title'] = 'Tambah Sifat Surat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['status_surat'] = $this->db->get('status_surat')->result_array();
+
         $data['status_surat'] = $this->db->get('status_surat')->result_array();
 
         // rules

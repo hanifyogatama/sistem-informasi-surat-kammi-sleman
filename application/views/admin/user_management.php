@@ -11,6 +11,9 @@
 
                 <?php echo anchor('admin/user_management_add', '<button title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3"><i class="fa fa-plus "></i> </button>'); ?>
 
+                <!-- searching -->
+                <!-- end oof searching -->
+
                 <table class="table table-hover">
                     <thead>
                         <tr>

@@ -63,7 +63,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Surat keluar</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">--</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $this->myfunction->countSuratKeluar(); ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-envelope fa-2x text-gray-300"></i>

@@ -36,8 +36,10 @@ class InstansiModel extends CI_Model
     // edit data by id
     public function editInstansi()
     {
-        $data = ["nama_instansi" => htmlspecialchars($this->input->post('nama_instansi', true))];
-        $data = ["alamat" => htmlspecialchars($this->input->post('alamat', true))];
+        $data = [
+            "nama_instansi"         => $this->input->post('nama_instansi', true),
+            "alamat"                => $this->input->post('alamat', true)
+        ];
         $this->db->where('id_instansi', $this->input->post('id_instansi'));
         $this->db->update('instansi', $data);
     }

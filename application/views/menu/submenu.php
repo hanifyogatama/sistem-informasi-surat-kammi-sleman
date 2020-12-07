@@ -45,7 +45,7 @@
                                         <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                             <div class="row justify-content-center text-center">
                                                 <div class="col-sm">
-                                                    <a href="<?= base_url('menu/submenu_edit/') . $submenu['id_menu'] ?>" class="btn btn-primary btn-circle btn-sm mx-3" title="edit"><i class="fas fa-edit"></i>
+                                                    <a href="<?= base_url('menu/submenu_edit/') . $submenu['id_sub_menu'] ?>" class="btn btn-primary btn-circle btn-sm mx-3" title="edit"><i class="fas fa-edit"></i>
                                                     </a>
 
                                                     <a href="" class="btn btn-danger btn-circle btn-sm mx-3" title="delete" data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash"></i></a>

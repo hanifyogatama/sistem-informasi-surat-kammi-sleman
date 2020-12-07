@@ -81,6 +81,7 @@ class Menu extends CI_Controller
     {
         $data['title'] = 'Edit Status Surat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
         $data['menu'] = $this->MenuModel->getByIdMenu($id);
 
         // rules
@@ -107,24 +108,30 @@ class Menu extends CI_Controller
         $data['title'] = 'Edit Instansi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        // $data['instansi'] = $this->InstansiModel->getByIdInstansi($id);
+        $data['submenu'] = $this->MenuModel->getByIdSubMenu($id);
+        //$data['submenus'] = $this->MenuModel->getSubMenu();
+        // $data['submenu'] = $this->MenuModel->getSubMenu();
+        $data['menu'] = $this->db->get('user_menu')->result_array();
 
         // rules
-        $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('url', 'Url', 'required');
+        $this->form_validation->set_rules('id_menu', 'Id menu', 'required');
+        $this->form_validation->set_rules('icon', 'Icon', 'required');
+        $this->form_validation->set_rules('is_active', 'Active', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
-            $this->load->view('instansi/edit', $data);
+            $this->load->view('menu/submenu_edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $this->MenuModel->editInstansi();
+            $this->MenuModel->editSubMenu();
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
-            redirect('menu');
+            redirect('menu/submenu');
         }
     }
 
