@@ -12,10 +12,10 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="card-body">
+                            <!-- <div class="card-body">
                                 <img src="" class="img-profile rounded-circle shadow" width="200px" height="200px">
-                            </div>
-                        </div>  
+                            </div> -->
+                        </div>
                         <div class="col-md-8">
                             <table class="table">
                                 <br>

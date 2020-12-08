@@ -4,6 +4,7 @@
             <h6 class="m-0 font-weight-bold text-primary"><?= $title  ?></h6>
         </div>
         <div class="card-body">
+
             <div class="row">
                 <div class="col-md-12">
                     <a href="javascript:history.go(-1)" class="btn btn-outline-primary  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
@@ -20,12 +21,13 @@
                             </div>
 
                             <div class="form-group">
+
                                 <div class="">
                                     <label>Pengirim</label>
                                     <select name="id_instansi" id="id_instansi" class="form-control">
                                         <option value="">-Pilih-</option>
                                         <?php foreach ($instansi as $instansi) : ?>
-                                            <option value="<?= $instansi['id_instansi'] ?> "><?= $instansi['nama_instansi'] ?></option>
+                                            <option value="<?= $instansi['id_instansi'] ?>" <?php echo set_select('id_instansi', $instansi['id_instansi'], (!empty($data) && $data == $instansi['id_instansi'] ? TRUE : FALSE)); ?>><?= $instansi['nama_instansi'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?= form_error('id_instansi', '<small class="text-danger ">', '</small>') ?>
@@ -38,7 +40,7 @@
                                     <select name="id_status_surat" id="id_status_surat" class="form-control">
                                         <option value="">-Pilih-</option>
                                         <?php foreach ($status_surat as $status_surat) : ?>
-                                            <option value="<?= $status_surat['id_status_surat'] ?>"><?= $status_surat['status'] ?></option>
+                                            <option value="<?= $status_surat['id_status_surat'] ?>" <?php echo set_select('id_status_surat', $status_surat['id_status_surat'], (!empty($data) && $data == $status_surat['id_status_surat'] ? TRUE : FALSE)); ?>><?= $status_surat['status'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?= form_error('id_status_surat', '<small class="text-danger ">', '</small>') ?>
@@ -81,10 +83,10 @@
                             <div class="card mb-4 py-3">
                                 <div class="card-body">
                                     <div class="form-group col-md-4">
-                                        <label for="">File</label> <br>
+                                        <label for="">File</label><br>
                                         <input type="file" name="file_surat" class="">
                                     </div>
-                                    <?= form_error('file_surat', '<small class="text-danger">', '</small>') ?>
+                                    <?= $this->session->flashdata('message'); ?>
                                 </div>
                             </div>
                         </div>

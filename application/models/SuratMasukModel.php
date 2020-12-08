@@ -17,9 +17,6 @@ class SuratMasukModel extends CI_Model
 
         $query = $this->db->get();
         return $query;
-
-        // $query = "SELECT * FROM surat_masuk ORDER BY id_surat_masuk DESC";
-        // return $this->db->query($query)->result_array();
     }
 
     // add data
@@ -83,5 +80,20 @@ class SuratMasukModel extends CI_Model
     {
         $this->db->where('id_surat_masuk', $id);
         $this->db->delete('surat_masuk');
+    }
+
+    public function addDisposisi()
+    {
+        $data = [
+            "id_surat_masuk"        => $this->input->post('id_surat_masuk', true),
+            "id_departemen"         => $this->input->post('id_departemen', true),
+            "batas_waktu"           => $this->input->post('batas_waktu', true),
+            "id_status_surat"       => $this->input->post('id_status_surat', true),
+            "isi"                   => $this->input->post('isi', true),
+            "keterangan"            => $this->input->post('keterangan', true),
+
+        ];
+
+        $this->db->insert('disposisi', $data);
     }
 }

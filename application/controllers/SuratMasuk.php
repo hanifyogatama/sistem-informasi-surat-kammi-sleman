@@ -7,7 +7,7 @@ class SuratMasuk extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel']);
+        $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
         //  is_logged_in();
     }
 
@@ -18,11 +18,8 @@ class SuratMasuk extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk();
-        // $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
-        // $data['instansi'] = $this->InstansiModel->getAllInstansi();
 
         // rules form add surat masuk
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -71,10 +68,6 @@ class SuratMasuk extends CI_Controller
             'required' => 'tanggal diterima surat belum diisi'
         ]);
 
-        $this->form_validation->set_rules('file_surat', 'File', 'required|trim', [
-            'required' => 'file belum ditambahkan '
-        ]);
-
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -83,14 +76,18 @@ class SuratMasuk extends CI_Controller
             $this->load->view('templates/footer');
         } else {
 
-            $config['allowed_types']    = 'pdf';
+            $config['allowed_types']    = 'docx|pdf';
             $config['max_size']         = '2048';
             $config['upload_path']      = './file_document/';
 
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('file_surat')) {
-                echo $this->upload->display_errors();
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>belum ditambah / salah format</div>');
+                redirect('suratmasuk/add', 'refresh');
             } else {
                 $new_file = $this->upload->data('file_name');
                 $this->SuratMasukModel->addSuratMasuk($new_file);
@@ -101,6 +98,7 @@ class SuratMasuk extends CI_Controller
             }
         }
     }
+
 
     // edit data surat masuk
     public function edit($id)
@@ -129,7 +127,7 @@ class SuratMasuk extends CI_Controller
             $this->load->view('templates/footer');
         } else {
 
-            $config['allowed_types']    = 'pdf';
+            $config['allowed_types']    = 'docx|pdf';
             $config['max_size']         = '2048';
             $config['upload_path']      = './file_document/';
 
@@ -152,6 +150,8 @@ class SuratMasuk extends CI_Controller
         }
     }
 
+
+    // detail data surat masuk 
     public function detail($id)
     {
         $data['title'] = 'Detail Data';
@@ -166,6 +166,8 @@ class SuratMasuk extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+
+    // delete surat masuk data 
     public function delete($id)
     {
         $this->SuratMasukModel->deleteSuratMasuk($id);
@@ -173,5 +175,57 @@ class SuratMasuk extends CI_Controller
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('suratmasuk');
+    }
+
+
+    // get all disposisi data
+    public function disposisi($id)
+    {
+        $data['title'] = 'Disposisi';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        // $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk();
+
+        $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('suratmasuk/disposisi', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+    // add disposisi data
+    public function disposisi_add($id)
+    {
+        $data['title'] = 'Add Data';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['surat_masuk']    = $this->SuratMasukModel->getByIdSuratMasuk($id);
+        $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat2();
+        $data['instansi']       = $this->InstansiModel->getAllInstansi();
+        $data['departemen']     = $this->DepartemenModel->getAllDepartemen();
+
+        // rules
+        $this->form_validation->set_rules('id_surat_masuk', 'Surat masuk', 'required|trim');
+        $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim');
+        $this->form_validation->set_rules('id_departemen', 'Departemen', 'required|trim');
+        $this->form_validation->set_rules('batas_waktu', 'Batas Waktu', 'required|trim');
+        $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'trim');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('suratmasuk/disposisi_add', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $this->SuratMasukModel->addDisposisi();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+            redirect('suratmasuk');
+        }
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2020 at 02:36 PM
+-- Generation Time: Dec 07, 2020 at 03:46 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -57,7 +57,12 @@ INSERT INTO `departemen` (`id_departemen`, `nama_departemen`) VALUES
 --
 
 CREATE TABLE `disposisi` (
-  `id_disposisi` int(11) NOT NULL
+  `id_disposisi` int(11) NOT NULL,
+  `id_departemen` int(11) NOT NULL,
+  `batas_waktu` date NOT NULL,
+  `id_status_surat` int(11) NOT NULL,
+  `isi` varchar(200) NOT NULL,
+  `keterangan` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -106,7 +111,12 @@ INSERT INTO `status_surat` (`id_status_surat`, `status`) VALUES
 --
 
 CREATE TABLE `surat_keluar` (
-  `id_surat_keluar` int(11) NOT NULL
+  `id_surat_keluar` int(11) NOT NULL,
+  `no_surat` varchar(150) NOT NULL,
+  `tanggal_surat` date NOT NULL,
+  `isi` varchar(200) NOT NULL,
+  `keterangan` varchar(200) NOT NULL,
+  `file_surat` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -132,7 +142,7 @@ CREATE TABLE `surat_masuk` (
 --
 
 INSERT INTO `surat_masuk` (`id_surat_masuk`, `no_surat`, `id_instansi`, `id_status_surat`, `isi`, `tanggal_surat`, `tanggal_diterima`, `keterangan`, `file_surat`) VALUES
-(7, '12/HH/12/33', 14, 5, 'cry', '2020-12-07', '2020-12-01', 'happy', '5160411331_BA_Ujian_Proposal_KP5.pdf');
+(9, '12/HH/12/33/3', 13, 5, 'tesr', '2020-12-07', '2020-11-30', 'tesr', '5160411331_BA_Ujian_Proposal_KP7.pdf');
 
 -- --------------------------------------------------------
 
@@ -211,7 +221,7 @@ INSERT INTO `user_menu` (`id_menu`, `menu`) VALUES
 (3, 'Menu'),
 (6, 'Data Master'),
 (7, 'Transaksi Surat'),
-(10, 'Agenda');
+(10, 'Laporan');
 
 -- --------------------------------------------------------
 
@@ -393,7 +403,7 @@ ALTER TABLE `surat_keluar`
 -- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
-  MODIFY `id_surat_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_surat_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -411,7 +421,7 @@ ALTER TABLE `user_access_menu`
 -- AUTO_INCREMENT for table `user_menu`
 --
 ALTER TABLE `user_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_role`

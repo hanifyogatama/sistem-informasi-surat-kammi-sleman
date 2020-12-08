@@ -4,6 +4,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class StatusSuratModel extends CI_Model
 {
     // get all data
+
+    public function getAllStatusSurat2()
+    {
+        $query = "SELECT * FROM status_surat";
+        return $this->db->query($query)->row_array();
+    }
+
+
     public function getAllStatusSurat()
     {
         $query = "SELECT * FROM status_surat ORDER BY id_status_surat DESC";

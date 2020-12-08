@@ -15,8 +15,7 @@
 
                     <?php echo anchor('suratmasuk', '<button title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
 
-                    <?php echo anchor('suratmasuk/export', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
-
+                    <?php echo anchor('suratmasuk', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 
                     <!-- table  -->
                     <div class="table-responsive">
@@ -48,7 +47,7 @@
                                             <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                                 <div class="row mx-0 ">
                                                     <div class="col-sm px-1">
-                                                        <a href="<?= base_url('disposisi') ?>" class="btn btn-info btn-circle btn-sm" title="disposisi"><i class="fas fa-share-square" aria-haspopup="true" aria-expanded="false"></i></a>
+                                                        <a href="<?= base_url('suratmasuk/disposisi/') . $data->id_surat_masuk  ?>" class="btn btn-info btn-circle btn-sm" title="disposisi"><i class="fas fa-share-square" aria-haspopup="true" aria-expanded="false"></i></a>
                                                     </div>
 
                                                     <div class="col-sm px-1">
