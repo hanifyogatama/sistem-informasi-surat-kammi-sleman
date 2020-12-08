@@ -11,7 +11,7 @@
 
                         <?= $this->session->flashdata('message'); ?>
 
-                        <?php echo anchor('suratmasuk', '<button title="Back" class="btn btn-outline-warning btn-sm mb-3 px-3"><i class="fas fa-arrow-left "></i> </button>'); ?>
+                        <?php echo anchor('suratmasuk', '<button title="Back" class="btn btn-outline-dark btn-sm mb-3 px-3"><i class="fas fa-arrow-left "></i> </button>'); ?>
 
                         <?php echo anchor('suratmasuk/disposisi_add/' . $surat_masuk['id_surat_masuk'], '<button title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3"><i class="fa fa-plus "></i> </button>'); ?>
 

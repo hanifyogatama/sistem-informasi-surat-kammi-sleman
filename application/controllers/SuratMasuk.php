@@ -30,7 +30,7 @@ class SuratMasuk extends CI_Controller
     // add surat masuk
     public function add()
     {
-        $data['title'] = 'Add Data';
+        $data['title'] = 'Add Surat Masuk';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['surat_masuk'] = $this->db->get('surat_masuk')->result_array();
@@ -103,7 +103,7 @@ class SuratMasuk extends CI_Controller
     // edit data surat masuk
     public function edit($id)
     {
-        $data['title'] = 'Edit Data';
+        $data['title'] = 'Edit Surat Masuk';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
 
@@ -154,7 +154,7 @@ class SuratMasuk extends CI_Controller
     // detail data surat masuk 
     public function detail($id)
     {
-        $data['title'] = 'Detail Data';
+        $data['title'] = 'Detail Surat Masuk';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk($id);
@@ -243,16 +243,6 @@ class SuratMasuk extends CI_Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public function disposisi_edit($id)
     {
         $data['title'] = 'Edit Data';
@@ -291,5 +281,60 @@ class SuratMasuk extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
             redirect('suratmasuk/disposisi_detail/' . $id);
         }
+    }
+
+    public function exportToExcel()
+    {
+        $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk();
+
+        require(APPPATH . 'PHPExcel/Classes/PHPExcel.php');
+        require(APPPATH . 'PHPExcel/Classes/PHPExcel/Writer/Excel2007.php');
+
+        $objExcel = new PHPExcel();
+
+        $objExcel->getProperties()->setCreator("Kammi Kamda Sleman");
+        $objExcel->getProperties()->setLastModifiedBy("Kammi Kamda Sleman");
+
+        $objExcel->setActiveSheetIndex(0);
+
+        $objExcel->getActiveSheet()->setCellValue('A1', 'NO');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'NO SURAT');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'PENGIRIM');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'SIFAT');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'DESKRIPSI');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'TANGGAL SURAT');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'TANGGAL DITERIMA');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'KETERANGAN');
+        $objExcel->getActiveSheet()->setCellValue('A1', 'DISPOSISI');
+
+        $baris = 2;
+        $no = 1;
+
+        foreach ($data['surat_masuk'] as $suratmasuk) {
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $no++);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->no_surat);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->nama_instansi);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->status);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->isi);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->tanggal_surat);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->tanggal_diterima);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->id_disposisi);
+            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->keterangan);
+
+            $baris++;
+        }
+
+        $fileName = "Data_Surat_Masuk_Kammi_Sleman" . '.xlsx';
+
+        $objExcel->getActiveSheet()->setTitle("Data Surat Masuk");
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $fileName . '"');
+        header('Cache-Control : max-age=0');
+
+        $writer = PHPExcel_IOFactory::createwriter($objExcel, 'Excel2007');
+        $writer->save('php://output');
+
+        exit;
     }
 }

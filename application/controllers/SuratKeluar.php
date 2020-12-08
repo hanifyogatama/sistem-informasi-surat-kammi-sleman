@@ -29,7 +29,7 @@ class SuratKeluar extends CI_Controller
     // add surat keluar
     public function add()
     {
-        $data['title'] = 'Add Data';
+        $data['title'] = 'Add Surat Keluar';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['surat_keluar'] = $this->db->get('surat_keluar')->result_array();
         $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
@@ -91,7 +91,7 @@ class SuratKeluar extends CI_Controller
     // edit data surat masuk
     public function edit($id)
     {
-        $data['title'] = 'Edit Data';
+        $data['title'] = 'Edit Surat Keluar';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['surat_keluar'] = $this->SuratKeluarModel->getByIdSuratKeluar($id);
         $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
@@ -140,7 +140,7 @@ class SuratKeluar extends CI_Controller
     // detail data seurat keluar
     public function detail($id)
     {
-        $data['title'] = 'Detail Data';
+        $data['title'] = 'Detail Surat Keluar';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['surat_keluar'] = $this->SuratKeluarModel->getAllSuratKeluar($id);
