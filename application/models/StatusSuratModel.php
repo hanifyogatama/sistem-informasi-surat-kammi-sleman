@@ -5,7 +5,7 @@ class StatusSuratModel extends CI_Model
 {
     // get all data
 
-    public function getAllStatusSurat2()
+    public function getRowStatusSurat()
     {
         $query = "SELECT * FROM status_surat";
         return $this->db->query($query)->row_array();

@@ -7,9 +7,11 @@
             <div class="col-lg">
                 <div class="row">
                     <div class="col-lg">
-                        <?= form_error('departemen', '<div class="alert alert-danger" role = "alert">', '</div>') ?>
+                        <?= form_error('departemen', '<div class="alert alert-dark" role = "alert">', '</div>') ?>
 
                         <?= $this->session->flashdata('message'); ?>
+
+                        <?php echo anchor('suratmasuk', '<button title="Back" class="btn btn-outline-warning btn-sm mb-3 px-3"><i class="fas fa-arrow-left "></i> </button>'); ?>
 
                         <?php echo anchor('suratmasuk/disposisi_add/' . $surat_masuk['id_surat_masuk'], '<button title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3"><i class="fa fa-plus "></i> </button>'); ?>
 
@@ -18,58 +20,43 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nomor Surat</th>
-                                    <th scope="col">Tujuan</th>
+                                    <th scope="col">Tujuan Disposisi</th>
                                     <th scope="col">Status Surat</th>
                                     <th scope="col">Batas Waktu</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <?php $i = 1; ?>
-                                <?php foreach ($departemen as $dep) : ?>
+                                <?php $i = 1; ?>
+                                <?php foreach ($disposisi->result() as $key => $data) : ?>
                                     <tr>
-                                        <th scope="row"><?= $i; ?></th>
-                                        <td><?= $dep['nama_departemen']; ?></td>
-                                        <td>
-                                            <a href="" data-toggle="modal" data-target="#modal-edit<?= $dep['id_departemen']; ?>" class="badge badge-success">edit</a>
+                                        <th scope="row" style="text-align: center;"><?= $i; ?></th>
+                                        <td><?= $data->nomor_surat ?></td>
+                                        <td><?= $data->nama_departemen ?></td>
+                                        <td><?= $data->status ?></td>
+                                        <td><?= $data->batas_waktu ?></td>
+                                        <td align="center">
 
-                                            <a href="" data-toggle="modal" data-target="#modal-delete<?= $dep['id_departemen']; ?>" class="badge badge-danger">delete</a>
+                                            <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>
+                                            <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
+                                                <div class="row justify-content-center text-center">
+                                                    <div class="col-sm">
+                                                        <a href="<?= base_url('suratmasuk/disposisi_detail/') . $data->id_disposisi ?>" class="btn btn-warning btn-circle btn-sm mx-2" title="detail"><i class="fas fa-eye" aria-haspopup="true" aria-expanded="false"></i></a>
+
+                                                        <a href="" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-circle btn-sm mx-2" title="delete"><i class="fas fa-trash" aria-haspopup="true" aria-expanded="false"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
-                                <?php endforeach; ?> -->
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-</div>
-
-<!-- form model input add departemen  -->
-<div class="modal fade" id="newDepartemenModal" tabindex="-1" role="dialog" aria-labelledby="newDepartemenModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newDepartemenModalLabel">Add Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('departemen/add'); ?>" method="POST">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="disposisi">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info btn-sm">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>

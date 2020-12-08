@@ -4,7 +4,7 @@
             <h6 class="m-0 font-weight-bold text-primary"><?= $title  ?></h6>
         </div>
         <div class="card-body">
-            <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+            <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
             <div class="row">
                 <div class="col-md-12">
                     <?php echo form_open_multipart('suratmasuk/edit/' . $surat_masuk['id_surat_masuk']) ?>

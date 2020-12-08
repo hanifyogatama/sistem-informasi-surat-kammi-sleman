@@ -183,10 +183,8 @@ class SuratMasuk extends CI_Controller
     {
         $data['title'] = 'Disposisi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        // $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk();
-
         $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
+        $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -199,11 +197,11 @@ class SuratMasuk extends CI_Controller
     // add disposisi data
     public function disposisi_add($id)
     {
-        $data['title'] = 'Add Data';
+        $data['title'] = 'Add Data Disposisi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['surat_masuk']    = $this->SuratMasukModel->getByIdSuratMasuk($id);
-        $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat2();
+        $data['surat_masuk']    = $this->SuratMasukModel->getAllSuratMasuk($id)->row_array();
+        $data['status_surat']   = $this->StatusSuratModel->getRowStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
         $data['departemen']     = $this->DepartemenModel->getAllDepartemen();
 
@@ -224,8 +222,74 @@ class SuratMasuk extends CI_Controller
         } else {
 
             $this->SuratMasukModel->addDisposisi();
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data added</div>');
+            redirect('suratmasuk/disposisi/' . $id);
+        }
+    }
+
+    public function disposisi_detail($id)
+    {
+        $data['title'] = 'Detail Data';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2($id);
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('suratmasuk/disposisi_detail', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    public function disposisi_edit($id)
+    {
+        $data['title'] = 'Edit Data';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        //  $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
+
+        // $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
+        // $data['instansi'] = $this->InstansiModel->getAllInstansi();
+
+        $data['disposisi'] = $this->SuratMasukModel->getByIdDisposisi($id);
+
+        //$tol = $data['disposisi'] = $this->db->get('disposisi', 'id_surat_masuk');
+
+        $data['surat_masuk']    = $this->SuratMasukModel->getAllSuratMasuk()->row_array();
+        $data['status_surat']   = $this->StatusSuratModel->getRowStatusSurat();
+        $data['instansi']       = $this->InstansiModel->getAllInstansi();
+        $data['departemen']     = $this->DepartemenModel->getAllDepartemen();
+
+        // rules
+        $this->form_validation->set_rules('id_surat_masuk', 'Surat masuk', 'required|trim');
+        $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim');
+        $this->form_validation->set_rules('id_departemen', 'Departemen', 'required|trim');
+        $this->form_validation->set_rules('batas_waktu', 'Batas Waktu', 'required|trim');
+        $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'trim');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('suratmasuk/disposisi_edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $this->SuratMasukModel->editDisposisi();
             $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
-            redirect('suratmasuk');
+            redirect('suratmasuk/disposisi_detail/' . $id);
         }
     }
 }
