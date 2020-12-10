@@ -7,6 +7,7 @@ class Instansi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->load->model('InstansiModel');
     }
 
@@ -41,7 +42,7 @@ class Instansi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->InstansiModel->addInstansi();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data added</div>');
             redirect('instansi');
@@ -68,7 +69,7 @@ class Instansi extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->InstansiModel->editInstansi();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
             redirect('instansi');
@@ -79,7 +80,9 @@ class Instansi extends CI_Controller
     {
         // $departemenId = $this->input->post('id_departemen');
         $this->InstansiModel->deleteInstansi($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+        //$this->db->delete('instansi', array('id_instansi' => $id));
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('instansi');

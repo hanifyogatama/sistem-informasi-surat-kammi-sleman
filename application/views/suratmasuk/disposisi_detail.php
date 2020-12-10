@@ -13,7 +13,7 @@
 
                     <a href="<?= base_url('suratmasuk/disposisi_edit/') . $data->id_disposisi  ?>" title="Edit" class="btn btn-outline-success btn-sm mb-3 px-3"><i class="fas fa-edit"></i></a>
 
-                    <?php echo anchor('suratmasuk', '<button title="Print"  class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
+                    <?php echo anchor('#', '<button title="Print"  class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
 
                     <div class="row">
 

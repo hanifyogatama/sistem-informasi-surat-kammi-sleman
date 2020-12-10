@@ -5,11 +5,15 @@
         </div>
         <div class="card-body">
             <div class="col-lg">
+
                 <div class="row">
                     <div class="col-lg">
-                        <?= form_error('instansi', '<div class="alert alert-danger" role = "alert">', '</div>') ?>
 
-                        <?= $this->session->flashdata('message'); ?>
+                        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
+
+                        <?= $this->session->flashdata('message2'); ?>
+
+                        <?= form_error('instansi', '<div class="alert alert-danger" role = "alert">', '</div>') ?>
 
                         <a href="" class="btn btn-outline-primary btn-sm mb-3 px-3" title="Add" data-toggle="modal" data-target="#newInstansiModal"><i class="fas fa-plus"> </i></a>
 
@@ -25,14 +29,14 @@
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($instansi as $instansi) : ?>
-                                    <tr>
+                                    <tr id="<?= $instansi['id_instansi']; ?>">
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $instansi['nama_instansi']; ?></td>
                                         <td><?= $instansi['alamat']; ?></td>
                                         <td>
                                             <a href="<?= base_url('instansi/edit/') . $instansi['id_instansi']; ?>" class="badge badge-success">edit</a>
 
-                                            <a href="" data-toggle="modal" data-target="#modal-delete" class="badge badge-danger">delete</a>
+                                            <a href="<?= base_url('instansi/delete/') . $instansi['id_instansi']; ?>" class="badge badge-danger data-delete-2">delete</a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -69,40 +73,6 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-info btn-sm">Add</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<!-- departemen delete departemen -->
-<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('instansi/delete/') . $instansi['id_instansi'] ?>" method="POST">
-                <div class="modal-body">
-                    <div class="row justify-content-center">
-                        <i class="fas fa-exclamation-circle fa-4x"></i>
-                    </div>
-                    <br>
-                    <div class="row justify-content-center">
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" name="id_instansi" value="">
-                        </div>
-                        <div class="form-group">
-                            <p>Are you sure you want to delete data?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                    <a href="<?= base_url() ?>instansi/delete/<?= $instansi['id_instansi']; ?>" class="btn btn-danger btn-sm">Delete</a>
                 </div>
             </form>
         </div>

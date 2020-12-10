@@ -15,7 +15,7 @@
 
                     <?php echo anchor('suratmasuk', '<button title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
 
-                    <?php echo anchor('suratmasuk', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
+                    <?php echo anchor('suratmasuk/exportToPdf', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 
                     <?php echo anchor('suratmasuk/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="far fa-file-excel"></i> </button>'); ?>
 
@@ -43,6 +43,7 @@
                                         <td><?= $data->isi ?></td>
                                         <td><?= $data->tanggal_surat ?></td>
                                         <td><?= $data->tanggal_diterima ?></td>
+                                        <!-- <td><?= date('d F Y', $data->tanggal_surat)  ?></td> -->
                                         <td align="center">
 
                                             <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>

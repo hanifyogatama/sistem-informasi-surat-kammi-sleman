@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="card-body">
-
+                    <?= $this->session->flashdata('message'); ?>
                     <!-- button -->
                     <?php echo anchor('suratkeluar/add', '<button class="btn btn-outline-primary btn-sm mb-3 px-3" title="Add"><i class="fa fa-plus"></i> </button>'); ?>
 
@@ -80,7 +80,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('suratkeluar/delete/') ?>" method="POST">
+            <form action="<?= base_url('suratkeluar/delete/') . $data->id_surat_keluar ?>" method="POST">
                 <div class="modal-body">
                     <div class="row justify-content-center">
                         <i class="fas fa-exclamation-circle fa-4x"></i>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                    <a href="<?= base_url() ?>suratkeluar/delete/?>" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="<?= base_url('suratkeluar/delete/' . $data->id_surat_keluar) ?>" class="btn btn-danger btn-sm">Delete</a>
                 </div>
             </form>
         </div>

@@ -1,12 +1,25 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
+
+
+// Load library phpspreadsheet
+
+
+use PhpOffice\PhpSpreadsheet\Helper\Sample;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+// End load library phpspreadsheet
+
 class SuratMasuk extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
+
         $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
         //  is_logged_in();
     }
@@ -103,12 +116,12 @@ class SuratMasuk extends CI_Controller
     // edit data surat masuk
     public function edit($id)
     {
-        $data['title'] = 'Edit Surat Masuk';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
+        $data['title']          = 'Edit Surat Masuk';
+        $data['user']           = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
-        $data['instansi'] = $this->InstansiModel->getAllInstansi();
+        $data['surat_masuk']    = $this->SuratMasukModel->getByIdSuratMasuk($id);
+        $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
+        $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
         $this->form_validation->set_rules('no_surat', 'No SUrat', 'required|trim');
@@ -136,7 +149,6 @@ class SuratMasuk extends CI_Controller
             if ($this->upload->do_upload('file_surat')) {
 
                 $new_file = $this->upload->data('file_name');
-
                 $this->SuratMasukModel->editSuratMasuk($new_file);
                 $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratmasuk');
@@ -154,10 +166,9 @@ class SuratMasuk extends CI_Controller
     // detail data surat masuk 
     public function detail($id)
     {
-        $data['title'] = 'Detail Surat Masuk';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk($id);
+        $data['title']    = 'Detail Surat Masuk';
+        $data['user']     = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['surat_masuk']   = $this->SuratMasukModel->getAllSuratMasuk($id);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -181,10 +192,10 @@ class SuratMasuk extends CI_Controller
     // get all disposisi data
     public function disposisi($id)
     {
-        $data['title'] = 'Disposisi';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
-        $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2();
+        $data['title']    = 'Disposisi';
+        $data['user']     = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['surat_masuk']    = $this->SuratMasukModel->getByIdSuratMasuk($id);
+        $data['disposisi']      = $this->SuratMasukModel->getAllDisposisi2();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -197,9 +208,8 @@ class SuratMasuk extends CI_Controller
     // add disposisi data
     public function disposisi_add($id)
     {
-        $data['title'] = 'Add Data Disposisi';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
+        $data['title']  = 'Add Data Disposisi';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['surat_masuk']    = $this->SuratMasukModel->getAllSuratMasuk($id)->row_array();
         $data['status_surat']   = $this->StatusSuratModel->getRowStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
@@ -227,12 +237,12 @@ class SuratMasuk extends CI_Controller
         }
     }
 
+    // disposisi detail data
     public function disposisi_detail($id)
     {
-        $data['title'] = 'Detail Data';
+        $data['title']      = 'Detail Data';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2($id);
+        $data['disposisi']  = $this->SuratMasukModel->getAllDisposisi2($id);
 
 
         $this->load->view('templates/header', $data);
@@ -242,11 +252,11 @@ class SuratMasuk extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-
+    // disposisi edit data
     public function disposisi_edit($id)
     {
-        $data['title'] = 'Edit Data';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title']  = 'Edit Data';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         //  $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
 
         // $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
@@ -283,58 +293,106 @@ class SuratMasuk extends CI_Controller
         }
     }
 
+    // disposisi delete data 
+    public function disposisi_delete($id)
+    {
+
+        $this->SuratMasukModel->deleteDisposisi($id);
+        $url = $_SERVER['HTTP_REFERER'];
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss=
+        "alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data deleted</div>');
+        redirect($url);
+    }
+
+    // export to pdf
+    public function exportToPdf()
+    {
+        $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
+        $dataSuratMasuk = $this->SuratMasukModel->getAllSuratMasuk()->result();
+        $data = $this->load->view('pdf/data_surat_masuk', ['surat_masuk' => $dataSuratMasuk], True);
+        $mpdf->WriteHTML($data);
+        $mpdf->SetDisplayMode('fullwidth');
+        $file_name = 'your.pdf';
+        $mpdf->Output($file_name, 'D');
+    }
+
     public function exportToExcel()
     {
-        $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk();
 
-        require(APPPATH . 'PHPExcel/Classes/PHPExcel.php');
-        require(APPPATH . 'PHPExcel/Classes/PHPExcel/Writer/Excel2007.php');
+        $data['title'] = 'Excel';
+        $dataSuratMasuk = $this->SuratMasukModel->getAllSuratMasuk()->result();
 
-        $objExcel = new PHPExcel();
+        $spreadsheet = new Spreadsheet();
 
-        $objExcel->getProperties()->setCreator("Kammi Kamda Sleman");
-        $objExcel->getProperties()->setLastModifiedBy("Kammi Kamda Sleman");
+        // Set document properties
+        $spreadsheet->getProperties()->setCreator('Kammi Kamda Sleman')
+            ->setLastModifiedBy('Kammi Kamda Sleman')
+            ->setTitle('Office 2007 XLSX Test Document')
+            ->setSubject('Office 2007 XLSX Test Document')
+            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+            ->setKeywords('office 2007 openxml php')
+            ->setCategory('Test result file');
 
-        $objExcel->setActiveSheetIndex(0);
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nomor Surat');
+        $sheet->setCellValue('C1', 'Pengirim');
+        $sheet->setCellValue('D1', 'Sifat Surat');
+        $sheet->setCellValue('E1', 'Deskripsi');
+        $sheet->setCellValue('F1', 'Tgl Surat');
+        $sheet->setCellValue('G1', 'Tgl Diterima');
+        $sheet->setCellValue('H1', 'Disposisi');
 
-        $objExcel->getActiveSheet()->setCellValue('A1', 'NO');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'NO SURAT');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'PENGIRIM');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'SIFAT');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'DESKRIPSI');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'TANGGAL SURAT');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'TANGGAL DITERIMA');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'KETERANGAN');
-        $objExcel->getActiveSheet()->setCellValue('A1', 'DISPOSISI');
-
-        $baris = 2;
         $no = 1;
-
-        foreach ($data['surat_masuk'] as $suratmasuk) {
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $no++);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->no_surat);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->nama_instansi);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->status);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->isi);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->tanggal_surat);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->tanggal_diterima);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->id_disposisi);
-            $objExcel->getActiveSheet()->setCellValue('A' . $baris, $suratmasuk->keterangan);
-
-            $baris++;
+        $x = 2;
+        foreach ($dataSuratMasuk as $row) {
+            $sheet->setCellValue('A' . $x, $no++);
+            $sheet->setCellValue('B' . $x, $row->no_surat);
+            $sheet->setCellValue('C' . $x, $row->nama_instansi);
+            $sheet->setCellValue('D' . $x, $row->status);
+            $sheet->setCellValue('E' . $x, $row->isi);
+            $sheet->setCellValue('F' . $x, $row->tanggal_surat);
+            $sheet->setCellValue('G' . $x, $row->tanggal_diterima);
+            $sheet->setCellValue('H' . $x, $row->keteranagn);
+            $x++;
         }
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'laporan-siswa';
 
-        $fileName = "Data_Surat_Masuk_Kammi_Sleman" . '.xlsx';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
 
-        $objExcel->getActiveSheet()->setTitle("Data Surat Masuk");
 
+        // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle('Report Excel ' . date('d-m-Y H'));
+
+        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+        $spreadsheet->setActiveSheetIndex(0);
+
+        // Redirect output to a client’s web browser (Xlsx)
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="' . $fileName . '"');
-        header('Cache-Control : max-age=0');
+        header('Content-Disposition: attachment;filename="Report Excel.xlsx"');
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
 
-        $writer = PHPExcel_IOFactory::createwriter($objExcel, 'Excel2007');
+        // If you're serving to IE over SSL, then the following may be needed
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        ob_end_clean();
         $writer->save('php://output');
-
         exit;
+
+
+        // $writer->save('php://output');
+        // $this->load->view('excel/surat_masuk_excel', $data);
     }
 }

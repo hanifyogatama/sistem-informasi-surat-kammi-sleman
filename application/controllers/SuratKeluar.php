@@ -7,6 +7,7 @@ class SuratKeluar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->load->model(['SuratKeluarModel', 'InstansiModel', 'StatusSuratModel']);
         //  is_logged_in();
     }
@@ -101,8 +102,8 @@ class SuratKeluar extends CI_Controller
         $this->form_validation->set_rules('no_surat', 'No SUrat', 'required|trim');
         $this->form_validation->set_rules('id_instansi', 'Instansi', 'required|trim');
         $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim');
-        $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
         $this->form_validation->set_rules('tanggal_surat', 'Tanggal Surat', 'required|trim');
+        $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
 
         if ($this->form_validation->run() == FALSE) {
@@ -125,13 +126,13 @@ class SuratKeluar extends CI_Controller
 
                 $this->SuratKeluarModel->editSuratKeluar($new_file);
                 $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
-                redirect('suratmasuk');
+                redirect('suratkeluar');
             } else {
 
-                $old_file = $data['surat_masuk']['file_surat'];
-                $this->SuratMasukModel->editSuratMasuk($old_file);
+                $old_file = $data['surat_keluar']['file_surat'];
+                $this->SuratKeluarModel->editSuratKeluar($old_file);
                 $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
-                redirect('suratmasuk');
+                redirect('suratkeluar');
             }
         }
     }
@@ -156,7 +157,7 @@ class SuratKeluar extends CI_Controller
     // delete data suart keluar
     public function delete($id)
     {
-        $this->suratKeluarModel->deleteSuratKeluar($id);
+        $this->SuratKeluarModel->deleteSuratKeluar($id);
         $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');

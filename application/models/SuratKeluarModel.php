@@ -20,7 +20,6 @@ class SuratKeluarModel extends CI_Model
         return $query;
     }
 
-
     // add surat keluar data
     public function addSuratKeluar($file)
     {
@@ -64,8 +63,8 @@ class SuratKeluarModel extends CI_Model
             "no_surat"              => $this->input->post('no_surat', true),
             "id_instansi"           => $this->input->post('id_instansi', true),
             "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "isi"                   => $this->input->post('isi', true),
             "tanggal_surat"         => $this->input->post('tanggal_surat', true),
+            "isi"                   => $this->input->post('isi', true),
             "keterangan"            => $this->input->post('keterangan', true),
             "file_surat"            => $file
         ];

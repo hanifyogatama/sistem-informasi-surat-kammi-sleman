@@ -104,7 +104,6 @@ class SuratMasukModel extends CI_Model
         return $query;
     }
 
-
     // add diposisi data
     public function addDisposisi()
     {
@@ -115,7 +114,6 @@ class SuratMasukModel extends CI_Model
             "id_status_surat"       => $this->input->post('id_status_surat', true),
             "isi"                   => $this->input->post('isi', true),
             "keterangan"            => $this->input->post('keterangan', true),
-
         ];
 
         $this->db->insert('disposisi', $data);
@@ -127,8 +125,6 @@ class SuratMasukModel extends CI_Model
         return $this->db->get_where('disposisi', ['id_disposisi' => $id])->row_array();
     }
 
-
-
     // edit disposisi
     public function editDisposisi()
     {
@@ -139,10 +135,16 @@ class SuratMasukModel extends CI_Model
             "id_status_surat"       => $this->input->post('id_status_surat', true),
             "isi"                   => $this->input->post('isi', true),
             "keterangan"            => $this->input->post('keterangan', true),
-
         ];
 
         $this->db->where('id_disposisi', $this->input->post('id_disposisi'));
         $this->db->update('disposisi', $data);
+    }
+
+    // delete disposisi
+    public function deleteDisposisi($id)
+    {
+        $this->db->where('id_disposisi', $id);
+        $this->db->delete('disposisi');
     }
 }

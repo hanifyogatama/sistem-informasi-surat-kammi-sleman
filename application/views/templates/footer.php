@@ -76,51 +76,17 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
 
+    <script src="<?= base_url('assets/'); ?>js-sweet-alert/sweetalert2.all.min.js"></script>
+    <script src="<?= base_url('assets/'); ?>js/myscript.js"></script>
+
 
     <script>
         // jquary tampil gambar
         $('.custom-file-input').on('change', function() {
             let fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
-        });
-
-        // ajax menu
-        $('.form-check-input').on('click', function() {
-            const menuId = $(this).data('menu');
-            const roleId = $(this).data('role');
-
-            $.ajax({
-                url: "<?= base_url('admin/changeaccess'); ?>",
-                type: 'post',
-                data: {
-                    menuId: menuId,
-                    roleId: roleId
-                },
-                success: function() {
-                    document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
-                }
-
-            });
-        });
-
-
-        // date
-        $(function() {
-            $(".datepicker").datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true,
-            });
-        });
-
-
-        // tooltip
-        $(document).ready(function() {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+            $(this).next('.custom-file-label').addClass(" selected").html(fileName);
+        }); // ajax menu $('.form-check-input').on('click', function() { const menuId=$(this).data('menu'); const roleId=$(this).data('role'); $.ajax({ url: "<?= base_url('admin/changeaccess'); ?>" , type: 'post' , data: { menuId: menuId, roleId: roleId }, success: function() { document.location.href="<?= base_url('admin/roleaccess/'); ?>" + roleId; } }); }); // date $(function() { $(".datepicker").datepicker({ format: 'yyyy-mm-dd' , autoclose: true, todayHighlight: true, }); }); // tooltip $(document).ready(function() { $('[data-toggle="tooltip" ]').tooltip(); }); 
     </script>
-
-
     </body>
 
     </html>

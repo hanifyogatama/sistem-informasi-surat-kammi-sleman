@@ -78,12 +78,11 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                    <button type="submit" class="btn btn-success btn-sm float-right">Edit</button>
                     <?php form_close(); ?>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </div>

@@ -7,6 +7,7 @@ class InstansiModel extends CI_Model
     public function getAllInstansi()
     {
         $query = "SELECT * FROM instansi ORDER BY id_instansi DESC";
+
         return $this->db->query($query)->result_array();
     }
 
