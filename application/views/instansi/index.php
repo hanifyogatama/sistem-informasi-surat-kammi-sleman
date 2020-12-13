@@ -71,8 +71,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info btn-sm">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info">Add</button>
                 </div>
             </form>
         </div>

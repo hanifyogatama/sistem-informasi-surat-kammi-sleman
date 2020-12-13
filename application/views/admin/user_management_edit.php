@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="submit" name="user_management_edit" class="btn btn-info btn-sm">Edit</button>
+                                <button type="submit" name="user_management_edit" class="btn btn-info ">Edit</button>
                             </div>
                         </form>
                     </div>

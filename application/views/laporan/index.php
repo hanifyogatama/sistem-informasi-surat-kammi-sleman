@@ -39,6 +39,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" title="Procces"><i class="fas fa-cog fa-sm text-white-50 px-2"></i></a>
+
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" title="Print"><i class="fas fa-print fa-sm text-white-50 px-2"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,6 +112,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" title="Procces"><i class="fas fa-cog fa-sm text-white-50 px-2"></i></a>
+
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" title="Print"><i class="fas fa-print fa-sm text-white-50 px-2"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,6 +137,13 @@
                                             </select>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" title="Procces"><i class="fas fa-cog fa-sm text-white-50 px-2"></i> </a>
+
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" title="Print"><i class="fas fa-print fa-sm text-white-50 px-2"></i> </a>
                                 </div>
                             </div>
                         </div>

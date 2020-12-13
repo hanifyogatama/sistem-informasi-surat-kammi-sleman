@@ -53,7 +53,7 @@
                     </div>
                     <div class="text-right">
                         <!--You can add col-lg-12 if you want -->
-                        <button type="submit" class="btn btn-info btn-sm">Add</button>
+                        <button type="submit" class="btn btn-info">Add</button>
                     </div>
                 </form>
             </div>

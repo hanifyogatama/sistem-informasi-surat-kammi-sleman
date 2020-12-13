@@ -48,7 +48,7 @@
 
                     <div class="text-right">
                         <!--You can add col-lg-12 if you want -->
-                        <button type="submit" name="submenu_edit" class="btn btn-info btn-sm">Edit</button>
+                        <button type="submit" name="submenu_edit" class="btn btn-info">Edit</button>
                     </div>
                 </form>
             </div>

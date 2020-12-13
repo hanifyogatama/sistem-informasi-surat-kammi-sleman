@@ -63,8 +63,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info btn-sm">Add</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info">Add</button>
                 </div>
             </form>
         </div>
@@ -94,8 +94,8 @@ foreach ($departemen as $dep) :  $no++; ?>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i>edit</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-info"><i class="fa fa-pencil"></i>edit</button>
                     </div>
                 </form>
             </div>
@@ -132,8 +132,8 @@ foreach ($departemen as $dep) :  $no++; ?>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                        <a href="<?= base_url() ?>departemen/delete/<?= $dep['id_departemen']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                        <a href="<?= base_url() ?>departemen/delete/<?= $dep['id_departemen']; ?>" class="btn btn-danger">Delete</a>
                     </div>
                 </form>
             </div>
