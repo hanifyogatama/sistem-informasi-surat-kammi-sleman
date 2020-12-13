@@ -153,7 +153,9 @@ class Admin extends CI_Controller
 
         $data['title'] = 'User Management';
         $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['users']  = $this->db->get('user')->result_array();
+
+        //$data['users']  = $this->db->get('user')->result_array();
+        $data['users'] = $this->AdminModel->getAllUserManagement()->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -179,11 +181,11 @@ class Admin extends CI_Controller
 
     public function user_management_edit($id)
     {
-
         $data['title'] = 'Edit User';
         $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        // $data['users']  = $this->db->get('user')->result_array();
-        $data['users'] = $this->AdminModel->getByIdUser($id);
+        $data['users']      = $this->AdminModel->getByIdUser($id);
+        $data['userrole']   = $this->AdminModel->getAllRole();
+        $data['status_user']   = $this->AdminModel->getAllStatusUser();
 
         $this->form_validation->set_rules('nama', 'Full Name', 'required|trim');
         $this->form_validation->set_rules('password1', 'New Password', 'trim|min_length[5]|matches[password2]');
@@ -199,6 +201,8 @@ class Admin extends CI_Controller
         } else {
             $nama = $this->input->post('nama');
             $email = $this->input->post('email');
+            $id_role = $this->input->post('id_role');
+            $status_user = $this->input->post('is_active');
 
             $password = $this->input->post('password1');
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -227,6 +231,8 @@ class Admin extends CI_Controller
                 }
             }
 
+            $this->db->set('id_role', $id_role);
+            $this->db->set('is_active', $status_user);
             $this->db->set('nama', $nama);
             $this->db->set('password', $password_hash);
             $this->db->where('email', $email);
@@ -280,7 +286,7 @@ class Admin extends CI_Controller
                 'gambar' => 'default.png',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
                 'id_role' => htmlspecialchars($this->input->post('id_role', true)),
-                'is_active' => 1,
+                'is_active' => 0,
                 'tanggal_dibuat' => time()
             ];
 

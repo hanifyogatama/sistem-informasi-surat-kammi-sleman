@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="col-lg">
-                    <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+                    <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
 
                     <a href="<?= base_url('admin/user_management_edit/') . $user->id_user ?>" title="Edit" class="btn btn-outline-success btn-sm mb-3 px-3"><i class="fas fa-edit"></i></a>
 
@@ -36,8 +36,15 @@
                                 <tr>
                                     <td>Status</td>
                                     <td>
+
+
                                         <strong>
-                                            <div class="badge badge-success"><?= $user->status_user; ?></div>
+                                            <?php $x = $user->is_active;
+                                            if ($x == 0) : ?>
+                                                <div class="badge badge-danger"><?= $user->status_user; ?></div>
+                                            <?php elseif ($x == 1) : ?>
+                                                <div class="badge badge-success"><?= $user->status_user; ?></div>
+                                            <?php endif; ?>
                                         </strong>
                                     </td>
                                 </tr>

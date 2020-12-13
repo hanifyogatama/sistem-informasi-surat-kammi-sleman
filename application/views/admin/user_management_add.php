@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg-8">
-                <a href="javascript:history.go(-1)" class="btn btn-outline-dark  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
+                <a href="javascript:history.go(-1)" class="btn btn-outline-primary  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
 
                 <form action="<?= base_url('admin/user_management_add'); ?>" method="post">
                     <div class="form-group row">

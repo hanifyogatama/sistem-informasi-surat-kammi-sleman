@@ -21,6 +21,12 @@ class AdminModel extends CI_Model
         return $this->db->query($query)->result_array();
     }
 
+    public function getAllStatusUser()
+    {
+        $query = "SELECT * FROM status_user ORDER BY id_status_user ASC";
+        return $this->db->query($query)->result_array();
+    }
+
     // add new data  role
     public function addRole()
     {
@@ -75,16 +81,20 @@ class AdminModel extends CI_Model
 
         $query = $this->db->get();
         return $query;
+    }
 
+    public function getAllUserManagement($id = null)
+    {
+        $this->db->select('user.*, status_user.status as status_user');
+        $this->db->from('user');
+        $this->db->join('status_user', 'status_user.id_status_user = user.is_active');
+        $this->db->order_by('user.id_user', 'ASC');
 
-
-
-        // $result = $this->db->where('id_user', $id_user)->get('user');
-        // if ($result->num_rows() > 0) {
-        //     return $result->result();
-        // } else {
-        //     return false;
-        // }
+        if ($id != null) {
+            $this->db->where('user.id_user', $id);
+        }
+        $query = $this->db->get();
+        return $query;
     }
 
     public function deleteUser($id)

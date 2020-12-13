@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg">
-                <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark px-3 btn-sm  mb-3"><i class="fas fa-arrow-left"></i></a>
+                <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary px-3 btn-sm  mb-3"><i class="fas fa-arrow-left"></i></a>
                 <div class="row">
                     <div class="col-lg-8">
                         <form action="" method="POST" enctype="multipart/form-data">
@@ -40,27 +40,29 @@
                                 </div>
                             </div>
 
-                            <!-- <fieldset class="form-group">
-                            <div class="row">
-                                <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                                <div class="col-sm">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                                        <label class="form-check-label" for="gridRadios1">
-                                            Aktif
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-sm">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                                        <label class="form-check-label" for="gridRadios2">
-                                            Non Aktif
-                                        </label>
-                                    </div>
+                            <div class="form-group row">
+                                <label for="id_role" class="col-sm-2 col-form-label">Role</label>
+                                <div class="col-sm-10 ">
+                                    <select name="id_role" id="id_role" class="form-control">
+                                        <option value="">-Pilih-</option>
+                                        <?php foreach ($userrole as $userrole) : ?>
+                                            <option value="<?= $userrole['id_role'] ?>" <?= $userrole['id_role'] == $users['id_role'] ? "selected" : null ?>><?= $userrole['role'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                             </div>
-                         </fieldset> -->
+
+                            <div class="form-group row">
+                                <label for="is_active" class="col-sm-2 col-form-label">Status</label>
+                                <div class="col-sm-10 ">
+                                    <select name="is_active" id="is_active" class="form-control">
+                                        <option value="">-Pilih-</option>
+                                        <?php foreach ($status_user as $status_user) : ?>
+                                            <option value="<?= $status_user['id_status_user'] ?>" <?= $status_user['id_status_user'] == $users['is_active'] ? "selected" : null ?>><?= $status_user['status'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-2">

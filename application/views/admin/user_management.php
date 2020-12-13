@@ -31,26 +31,26 @@
                         <?php foreach ($users as $user) : ?>
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
-                                <td><img src="<?= base_url('assets/img/profile/') . $user['gambar'] ?>" class="img-profile rounded-circle" alt="profile image" width="30px" height="30px"></td>
+                                <td><img src="<?= base_url('assets/img/profile/') . $user->gambar ?>" class="img-profile rounded-circle" alt="profile image" width="30px" height="30px"></td>
 
-                                <td><?= $user['nama']; ?></td>
-                                <td><?= $user['email']; ?></td>
-                                <td style="text-align: center;"><?= $user['is_active']; ?></td>
+                                <td><?= $user->nama; ?></td>
+                                <td><?= $user->email; ?></td>
+                                <td style="text-align: center;"><?= $user->status_user; ?></td>
                                 <td align="center">
                                     <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>
 
                                     <div class="dropdown-menu shadow " aria-labelledby="dropdownMenuButton">
                                         <div class="row mx-0 ">
                                             <div class="col-sm ">
-                                                <a href="<?= base_url('admin/user_management_detail/') . $user['id_user'] ?>" class="btn btn-info btn-circle btn-sm" title="detail"><i class="fas fa-eye" aria-haspopup="true" aria-expanded="false"></i></a>
+                                                <a href="<?= base_url('admin/user_management_detail/') . $user->id_user ?>" class="btn btn-info btn-circle btn-sm" title="detail"><i class="fas fa-eye" aria-haspopup="true" aria-expanded="false"></i></a>
                                             </div>
 
                                             <div class="col-sm">
-                                                <a href="<?= base_url('admin/user_management_edit/') . $user['id_user'] ?>" class="btn btn-primary btn-circle btn-sm" title="edit"><i class="fas fa-edit"></i></a>
+                                                <a href="<?= base_url('admin/user_management_edit/') . $user->id_user ?>" class="btn btn-primary btn-circle btn-sm" title="edit"><i class="fas fa-edit"></i></a>
                                             </div>
 
                                             <div class="col-sm">
-                                                <a href="<?= base_url('admin/delete/') . $user['id_user'] ?>" class="btn btn-danger btn-circle btn-sm data-delete-2" title="delete"><i class="fas fa-trash"></i></a>
+                                                <a href="<?= base_url('admin/delete/') . $user->id_user ?>" class="btn btn-danger btn-circle btn-sm data-delete-2" title="delete"><i class="fas fa-trash"></i></a>
                                             </div>
                                         </div>
                                     </div>

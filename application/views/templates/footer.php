@@ -24,7 +24,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                    <h6 class="m-0 font-weight-bold text-primary">Logout<strong></strong></h6>
+
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
