@@ -4,13 +4,15 @@
             <h6 class="m-0 font-weight-bold text-primary"><?= $title  ?></h6>
         </div>
         <div class="card-body">
-            <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+            <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+            
             <div class="row">
                 <div class="col-md-12">
-                    <?= form_open_multipart('suratkeluar/edit/' . $surat_keluar['id_surat_keluar']) ?>
+                    <?php echo form_open_multipart('suratkeluar/edit/' . $surat_keluar['id_surat_keluar']) ?>
                     <div class="form-row">
                         <div class="col-lg-6">
                             <input type="hidden" name="id_surat_keluar" class="form-control" value="<?= $surat_keluar['id_surat_keluar']; ?>">
+
                             <div class="form-group">
                                 <div class="">
                                     <label>Nomor Surat</label>
@@ -78,6 +80,5 @@
             </div>
         </div>
     </div>
-
 </div>
 </div>

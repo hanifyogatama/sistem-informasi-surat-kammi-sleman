@@ -7,15 +7,14 @@ class SuratKeluar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
         $this->load->model(['SuratKeluarModel', 'InstansiModel', 'StatusSuratModel']);
         //  is_logged_in();
     }
 
     public function index()
     {
-        $data['title'] = 'Surat Keluar';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title']     = 'Surat Keluar';
+        $data['user']      = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['surat_keluar'] = $this->SuratKeluarModel->getAllSuratKeluar();
         // rules form add surat keluar
@@ -30,11 +29,11 @@ class SuratKeluar extends CI_Controller
     // add surat keluar
     public function add()
     {
-        $data['title'] = 'Add Surat Keluar';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['surat_keluar'] = $this->db->get('surat_keluar')->result_array();
-        $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
-        $data['instansi'] = $this->InstansiModel->getAllInstansi();
+        $data['title']  = 'Add Surat Keluar';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['surat_keluar']   = $this->db->get('surat_keluar')->result_array();
+        $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
+        $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
         $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim', [
@@ -87,15 +86,15 @@ class SuratKeluar extends CI_Controller
         }
     }
 
-
-    // edit data surat masuk
+    // edit data surat keluar
     public function edit($id)
     {
-        $data['title'] = 'Edit Surat Keluar';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['surat_keluar'] = $this->SuratKeluarModel->getByIdSuratKeluar($id);
-        $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
-        $data['instansi'] = $this->InstansiModel->getAllInstansi();
+        $data['title']  = 'Edit Surat Keluar';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $data['surat_keluar']   = $this->SuratKeluarModel->getByIdSuratKeluar($id);
+        $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
+        $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
         $this->form_validation->set_rules('no_surat', 'No SUrat', 'required|trim');
@@ -103,7 +102,7 @@ class SuratKeluar extends CI_Controller
         $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim');
         $this->form_validation->set_rules('tanggal_surat', 'Tanggal Surat', 'required|trim');
         $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
+        $this->form_validation->set_rules('keterangan', 'Keterangan');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -122,7 +121,6 @@ class SuratKeluar extends CI_Controller
             if ($this->upload->do_upload('file_surat')) {
 
                 $new_file = $this->upload->data('file_name');
-
                 $this->SuratKeluarModel->editSuratKeluar($new_file);
                 $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratkeluar');
@@ -136,12 +134,10 @@ class SuratKeluar extends CI_Controller
         }
     }
 
-
-    // detail data seurat keluar
     public function detail($id)
     {
-        $data['title'] = 'Detail Surat Keluar';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title']  = 'Detail Surat Keluar';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['surat_keluar'] = $this->SuratKeluarModel->getAllSuratKeluar($id);
 

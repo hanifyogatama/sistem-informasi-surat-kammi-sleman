@@ -207,7 +207,6 @@ class Admin extends CI_Controller
             $password = $this->input->post('password1');
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-
             $upload_image = $_FILES['gambar'];
 
             if ($upload_image) {

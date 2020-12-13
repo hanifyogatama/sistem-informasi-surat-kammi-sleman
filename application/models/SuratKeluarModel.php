@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class SuratKeluarModel extends CI_Model
 {
 
-    // get all surat keluar data
+
     public function getAllSuratKeluar($id = null)
     {
         $this->db->select('surat_keluar.*, instansi.nama_instansi as nama_instansi, status_surat.status as status');
@@ -21,7 +21,7 @@ class SuratKeluarModel extends CI_Model
         return $query;
     }
 
-    // add surat keluar data
+
     public function addSuratKeluar($file)
     {
         $data = [
@@ -38,14 +38,12 @@ class SuratKeluarModel extends CI_Model
     }
 
 
-    // get data by id
-    public function getByIdSuratKeluar($id_surat_keluar)
+    public function getByIdSuratKeluar($id)
     {
-        return $this->db->get_where('surat_keluar', ['id_surat_keluar' => $id_surat_keluar])->row_array();
+        return $this->db->get_where('surat_keluar', ['id_surat_keluar' => $id])->row_array();
     }
 
 
-    // detail surat keluar by id
     public function detailSuratKeluar($id)
     {
         $result = $this->db->where('id_surat_keluar', $id)->get('surat_keluar');
@@ -57,7 +55,6 @@ class SuratKeluarModel extends CI_Model
     }
 
 
-    // edit data by id
     public function editSuratKeluar($file)
     {
         $data = [
@@ -75,14 +72,12 @@ class SuratKeluarModel extends CI_Model
     }
 
 
-    // count surat keluar data
     public function getCountDataSuratKeluar()
     {
         return $this->db->query("select * from surat_keluar");
     }
 
 
-    // delete surat keluar data by id
     public function deleteSuratKeluar($id)
     {
         $this->db->where('id_surat_keluar', $id);

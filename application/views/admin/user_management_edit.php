@@ -58,7 +58,7 @@
                                     <select name="is_active" id="is_active" class="form-control">
                                         <option value="">-Pilih-</option>
                                         <?php foreach ($status_user as $status_user) : ?>
-                                            <option value="<?= $status_user['id_status_user'] ?>" <?= $status_user['id_status_user'] == $users['is_active'] ? "selected" : null ?>><?= $status_user['status'] ?></option>
+                                            <option value="<?= $status_user['id_status_active'] ?>" <?= $status_user['id_status_active'] == $users['is_active'] ? "selected" : null ?>><?= $status_user['status'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

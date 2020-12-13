@@ -23,7 +23,7 @@ class AdminModel extends CI_Model
 
     public function getAllStatusUser()
     {
-        $query = "SELECT * FROM status_user ORDER BY id_status_user ASC";
+        $query = "SELECT * FROM status_active ORDER BY id_status_active ASC";
         return $this->db->query($query)->result_array();
     }
 
