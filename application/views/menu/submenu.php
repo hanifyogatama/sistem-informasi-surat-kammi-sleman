@@ -13,8 +13,9 @@
                         </div>
                     <?php endif; ?>
 
+                    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 
-                    <?= $this->session->flashdata('message'); ?>
+                    <?= $this->session->flashdata('message2'); ?>
 
                     <a href="" class="btn btn-outline-primary btn-sm px-3 mb-3" title="Add" data-toggle="modal" data-target="#newSubMenuModal"><i class="fas fa-plus"></i></a>
 
@@ -35,24 +36,29 @@
                             <?php foreach ($submenu as $submenu) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
-                                    <td><?= $submenu['title']; ?></td>
-                                    <td><?= $submenu['menu']; ?></td>
-                                    <td><?= $submenu['url']; ?></td>
-                                    <td><?= $submenu['icon']; ?></td>
-                                    <td><?= $submenu['is_active']; ?></td>
+                                    <td><?= $submenu->title; ?></td>
+                                    <td><?= $submenu->nama_menu; ?></td>
+                                    <td><?= $submenu->url; ?></td>
+                                    <td><?= $submenu->icon; ?></td>
+                                    <td>
+                                        <strong>
+                                            <?php $x = $submenu->is_active;
+                                            if ($x == 0) : ?>
+                                                <div class="badge badge-danger"><?= $submenu->status; ?></div>
+                                            <?php elseif ($x == 1) : ?>
+                                                <div class="badge badge-success"><?= $submenu->status; ?></div>
+                                            <?php endif; ?>
+                                        </strong>
+                                    </td>
                                     <td align="center">
                                         <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>
                                         <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                             <div class="row justify-content-center text-center">
                                                 <div class="col-sm">
-                                                    <a href="<?= base_url('menu/submenu_edit/') . $submenu['id_sub_menu'] ?>" class="btn btn-primary btn-circle btn-sm mx-3" title="edit"><i class="fas fa-edit"></i>
+                                                    <a href="<?= base_url('menu/submenu_edit/') . $submenu->id_sub_menu ?>" class="btn btn-primary btn-circle btn-sm mx-3" title="edit"><i class="fas fa-edit"></i>
                                                     </a>
-
-                                                    <a href="" class="btn btn-danger btn-circle btn-sm mx-3" title="delete" data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash"></i></a>
-
+                                                    <a href="<?= base_url('menu/sub_menu_delete/') . $submenu->id_sub_menu ?>" class="btn btn-danger btn-circle btn-sm mx-3 data-delete-2" title="delete"><i class="fas fa-trash"></i></a>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </td>
@@ -88,7 +94,7 @@
                     </div>
                     <div class="form-group">
                         <select name="id_menu" id="id_menu" class="form-control">
-                            <option value="">Select Menu</option>
+                            <option value="">-Select-</option>
                             <?php foreach ($menu as $menu) : ?>
                                 <option value="<?= $menu['id_menu'] ?>"><?= $menu['menu'] ?></option>
                             <?php endforeach; ?>
@@ -110,7 +116,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
+                    <button type="reset" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-info btn-sm">Add</button>
                 </div>
             </form>

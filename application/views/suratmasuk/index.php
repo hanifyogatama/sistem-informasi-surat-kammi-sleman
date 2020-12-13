@@ -40,7 +40,7 @@
                                         <th scope="row" style="text-align: center;"><?= $i; ?></th>
                                         <td><?= $data->no_surat ?></td>
                                         <td><?= $data->nama_instansi ?></td>
-                                        <td><?= $data->isi ?></td>
+                                        <td><?= word_limiter($data->isi, 4) ?></td>
                                         <td><?= $data->tanggal_surat ?></td>
                                         <td><?= $data->tanggal_diterima ?></td>
                                         <!-- <td><?= date('d F Y', $data->tanggal_surat)  ?></td> -->

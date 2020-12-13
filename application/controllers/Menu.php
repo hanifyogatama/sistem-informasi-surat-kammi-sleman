@@ -31,9 +31,9 @@ class Menu extends CI_Controller
         } else {
 
             $this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>new menu added</div>');
+            </button>data added</div>');
             redirect('menu');
         }
     }
@@ -45,7 +45,8 @@ class Menu extends CI_Controller
 
         $this->load->model('MenuModel', 'menu');
 
-        $data['submenu'] = $this->menu->getSubMenu();
+        // $data['submenu'] = $this->menu->getSubMenu();
+        $data['submenu'] = $this->MenuModel->getAllSubMenu()->result();
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         // rules form add sub menu
@@ -69,9 +70,9 @@ class Menu extends CI_Controller
                 'is_active' => $this->input->post('is_active')
             ];
             $this->db->insert('user_sub_menu', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>new sub menu added</div>');
+            </button>data added</div>');
             redirect('menu/submenu');
         }
     }
@@ -95,7 +96,7 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->MenuModel->editMenu();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
             redirect('menu');
@@ -118,7 +119,7 @@ class Menu extends CI_Controller
         $this->form_validation->set_rules('url', 'Url', 'required');
         $this->form_validation->set_rules('id_menu', 'Id menu', 'required');
         $this->form_validation->set_rules('icon', 'Icon', 'required');
-        $this->form_validation->set_rules('is_active', 'Active', 'required');
+
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -128,7 +129,7 @@ class Menu extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->MenuModel->editSubMenu();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
             redirect('menu/submenu');
@@ -140,9 +141,19 @@ class Menu extends CI_Controller
     {
         // $departemenId = $this->input->post('id_departemen');
         $this->MenuModel->deleteMenu($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('menu');
+    }
+
+    public function sub_menu_delete($id)
+    {
+        // $departemenId = $this->input->post('id_departemen');
+        $this->MenuModel->deleteSubMenu($id);
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>data deleted</div>');
+        redirect('menu/submenu');
     }
 }

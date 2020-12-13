@@ -9,7 +9,7 @@
 
                     <?= $this->session->flashdata('message'); ?>
 
-                    <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+                    <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
 
                     <a href="<?= base_url('suratmasuk/disposisi_edit/') . $data->id_disposisi  ?>" title="Edit" class="btn btn-outline-success btn-sm mb-3 px-3"><i class="fas fa-edit"></i></a>
 

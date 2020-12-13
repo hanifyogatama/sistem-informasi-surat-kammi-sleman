@@ -3,6 +3,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class MenuModel extends CI_Model
 {
+
+
+    public function getAllSubMenu($id = null)
+    {
+        $this->db->select('user_sub_menu.*, user_menu.menu as nama_menu, status_active.status as status');
+        $this->db->from('user_sub_menu');
+        $this->db->join('user_menu', 'user_menu.id_menu = user_sub_menu.id_menu');
+        $this->db->join('status_active', 'status_active.id_status_active = user_sub_menu.is_active');
+        $this->db->order_by('user_sub_menu.id_sub_menu', 'ASC');
+
+        if ($id != null) {
+            $this->db->where('user_sub_menu.id_sub_menu', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
+
     public function getSubMenu()
     {
         $query = "SELECT `user_sub_menu`.* , `user_menu`.`menu` 
@@ -45,8 +63,7 @@ class MenuModel extends CI_Model
             'title' => $this->input->post('title'),
             'id_menu' => $this->input->post('id_menu'),
             'url' => $this->input->post('url'),
-            'icon' => $this->input->post('icon'),
-            'is_active' => $this->input->post('is_active')
+            'icon' => $this->input->post('icon')
         ];
 
         $this->db->where('id_sub_menu', $this->input->post('id_sub_menu'));
@@ -58,5 +75,11 @@ class MenuModel extends CI_Model
     {
         $this->db->where('id_menu', $id);
         $this->db->delete('user_menu');
+    }
+
+    public function deleteSubMenu($id)
+    {
+        $this->db->where('id_sub_menu', $id);
+        $this->db->delete('user_sub_menu');
     }
 }

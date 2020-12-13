@@ -19,20 +19,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="menu" class="col-sm-2 col-form-label">Menu</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="id_menu" name="id_menu" value="<?= $submenu['id_menu'] ?>" placeholder="menu">
-                            <?= form_error('menu', '<small class="text-danger ">', '</small>') ?>
+                        <label for="id_menu" class="col-sm-2 col-form-label">Menu</label>
+                        <div class="col-sm-10 ">
+                            <select name="id_menu" id="id_menu" class="form-control">
+                                <option value="">-Select-</option>
+                                <?php foreach ($menu as $menu) : ?>
+                                    <option value="<?= $menu['id_menu'] ?>" <?= $menu['id_menu'] == $submenu['id_menu'] ? "selected" : null ?>><?= $menu['menu'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <select name="id_menu" id="id_menu" class="form-control">
-                            <option value="">Select Menu</option>
-                            <?php foreach ($menu as $menu) : ?>
-                                <option value="<?= $menu['id_menu'] ?>"><?= $menu['menu'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
                     </div>
 
                     <div class="form-group row">
@@ -48,14 +43,6 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="icon" name="icon" value="<?= $submenu['icon'] ?>" placeholder="icon">
                             <?= form_error('icon', '<small class="text-danger ">', '</small>') ?>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="icon" class="col-sm-2 col-form-label">Icon</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="is_active" name="is_active" value="<?= $submenu['is_active'] ?>" placeholder="icon">
-                            <?= form_error('is_active', '<small class="text-danger ">', '</small>') ?>
                         </div>
                     </div>
 

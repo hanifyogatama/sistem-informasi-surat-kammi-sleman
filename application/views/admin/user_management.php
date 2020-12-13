@@ -35,7 +35,18 @@
 
                                 <td><?= $user->nama; ?></td>
                                 <td><?= $user->email; ?></td>
-                                <td style="text-align: center;"><?= $user->status_user; ?></td>
+                                <td>
+                                    <strong>
+                                        <?php $x = $user->is_active;
+                                        if ($x == 0) : ?>
+                                            <div class="badge badge-danger">
+                                                <?= $user->status_user; ?>
+                                            </div>
+                                        <?php elseif ($x == 1) : ?>
+                                            <div class="badge badge-success"><?= $user->status_user; ?></div>
+                                        <?php endif; ?>
+                                    </strong>
+                                </td>
                                 <td align="center">
                                     <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>
 

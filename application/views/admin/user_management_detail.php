@@ -36,8 +36,6 @@
                                 <tr>
                                     <td>Status</td>
                                     <td>
-
-
                                         <strong>
                                             <?php $x = $user->is_active;
                                             if ($x == 0) : ?>

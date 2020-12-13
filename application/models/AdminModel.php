@@ -70,10 +70,10 @@ class AdminModel extends CI_Model
     public function detailUser($id = null)
     {
 
-        $this->db->select('user.*, user_role.role as nama_role, status_user.status as status_user');
+        $this->db->select('user.*, user_role.role as nama_role, status_active.status as status_user');
         $this->db->from('user');
         $this->db->join('user_role', 'user_role.id_role = user.id_role');
-        $this->db->join('status_user', 'status_user.id_status_user = user.is_active');
+        $this->db->join('status_active', 'status_active.id_status_active = user.is_active');
 
         if ($id != null) {
             $this->db->where('user.id_user',  $id);
@@ -85,9 +85,9 @@ class AdminModel extends CI_Model
 
     public function getAllUserManagement($id = null)
     {
-        $this->db->select('user.*, status_user.status as status_user');
+        $this->db->select('user.*, status_active.status as status_user');
         $this->db->from('user');
-        $this->db->join('status_user', 'status_user.id_status_user = user.is_active');
+        $this->db->join('status_active', 'status_active.id_status_active = user.is_active');
         $this->db->order_by('user.id_user', 'ASC');
 
         if ($id != null) {

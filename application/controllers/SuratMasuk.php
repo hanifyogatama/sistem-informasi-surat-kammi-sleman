@@ -219,7 +219,7 @@ class SuratMasuk extends CI_Controller
         } else {
 
             $this->SuratMasukModel->addDisposisi();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data added</div>');
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data added</div>');
             redirect('suratmasuk/disposisi/' . $id);
         }
     }
@@ -275,7 +275,7 @@ class SuratMasuk extends CI_Controller
         } else {
 
             $this->SuratMasukModel->editDisposisi();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
             redirect('suratmasuk/disposisi_detail/' . $id);
         }
     }
@@ -283,11 +283,9 @@ class SuratMasuk extends CI_Controller
     // disposisi delete data 
     public function disposisi_delete($id)
     {
-
         $this->SuratMasukModel->deleteDisposisi($id);
         $url = $_SERVER['HTTP_REFERER'];
-
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss=
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss=
         "alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
@@ -353,10 +351,7 @@ class SuratMasuk extends CI_Controller
         // Rename worksheet
         $spreadsheet->getActiveSheet()->setTitle('Surat Masuk ' . date('d-m-Y H'));
 
-        // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
-
-        // Redirect output to a client’s web browser (Xlsx)
 
         $filename = "Surat_Masuk_Kammi_Sleman_" . date("d-m-Y") . ".xlsx";
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -365,7 +360,6 @@ class SuratMasuk extends CI_Controller
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
 
-        // If you're serving to IE over SSL, then the following may be needed
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
         header('Cache-Control: cache, must-revalidate'); // HTTP/1.1

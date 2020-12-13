@@ -7,7 +7,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <a href="javascript:history.go(-1)" class="btn btn-outline-dark  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
+                    <a href="javascript:history.go(-1)" class="btn btn-outline-primary  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
 
                     <?php echo form_open_multipart('suratmasuk/disposisi_add/' . $surat_masuk['id_surat_masuk'])   ?>
                     <div class="form-row">
@@ -77,7 +77,7 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-sm float-right">Add</button>
+                    <button type="submit" class="btn btn-info  float-right">Add</button>
 
                     <?php form_close(); ?>
                 </div>
