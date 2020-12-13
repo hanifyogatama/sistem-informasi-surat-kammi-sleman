@@ -21,7 +21,6 @@
                             </div>
 
                             <div class="form-group">
-
                                 <div class="">
                                     <label>Pengirim</label>
                                     <select name="id_instansi" id="id_instansi" class="form-control">

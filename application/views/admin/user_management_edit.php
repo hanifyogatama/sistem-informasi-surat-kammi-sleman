@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg">
-                <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary px-3 btn-sm  mb-3"><i class="fas fa-arrow-left"></i></a>
+                <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark px-3 btn-sm  mb-3"><i class="fas fa-arrow-left"></i></a>
                 <div class="row">
                     <div class="col-lg-8">
                         <form action="" method="POST" enctype="multipart/form-data">

@@ -7,13 +7,13 @@
         <div class="card-body">
             <div class="row">
                 <div class="card-body">
+                    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
 
-                    <?= $this->session->flashdata('message'); ?>
-
+                    <?= $this->session->flashdata('message2'); ?>
                     <!-- button -->
                     <?php echo anchor('suratmasuk/add', '<button title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3"><i class="fa fa-plus "></i> </button>'); ?>
 
-                    <?php echo anchor('suratmasuk', '<button title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
+                    <?php echo anchor('suratmasuk/print', '<button title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
 
                     <?php echo anchor('suratmasuk/exportToPdf', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 
@@ -62,7 +62,7 @@
                                                     </div>
 
                                                     <div class="col-sm px-1">
-                                                        <a href="" data-toggle="modal" data-target="#modal-delete" class="btn btn-danger btn-circle btn-sm" title="delete"><i class="fas fa-trash" aria-haspopup="true" aria-expanded="false"></i></a>
+                                                        <a href="<?= base_url('suratmasuk/delete/') . $data->id_surat_masuk ?>" class="btn btn-danger btn-circle btn-sm data-delete-2" title="delete"><i class="fas fa-trash" aria-haspopup="true" aria-expanded="false"></i></a>
                                                     </div>
 
                                                 </div>
@@ -77,43 +77,6 @@
                 </div>
 
             </div>
-        </div>
-    </div>
-</div>
-
-
-
-<!--  delete data surat keluar -->
-
-<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="<?= base_url('suratmasuk/delete/') . $data->id_surat_masuk ?>" method="POST">
-                <div class="modal-body">
-                    <div class="row justify-content-center">
-                        <i class="fas fa-exclamation-circle fa-4x"></i>
-                    </div>
-                    <br>
-                    <div class="row justify-content-center">
-                        <div class="form-group">
-                            <input type="hidden" class="form-control" name="id_surat_masuk" value="">
-                        </div>
-                        <div class="form-group">
-                            <p>Are you sure you want to delete data?</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-warning btn-sm" data-dismiss="modal">Cancel</button>
-                    <a href="<?= base_url() ?>suratmasuk/delete/<?= $data->id_surat_masuk ?>" class="btn btn-danger btn-sm">Delete</a>
-                </div>
-            </form>
         </div>
     </div>
 </div>

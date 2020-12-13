@@ -17,7 +17,7 @@ class AdminModel extends CI_Model
 
     public function getAllRole()
     {
-        $query = "SELECT * FROM user_role ORDER BY id_role DESC";
+        $query = "SELECT * FROM user_role ORDER BY id_role ASC";
         return $this->db->query($query)->result_array();
     }
 
@@ -61,14 +61,30 @@ class AdminModel extends CI_Model
     }
 
 
-    public function detailUser($id_user)
+    public function detailUser($id = null)
     {
-        $result = $this->db->where('id_user', $id_user)->get('user');
-        if ($result->num_rows() > 0) {
-            return $result->result();
-        } else {
-            return false;
+
+        $this->db->select('user.*, user_role.role as nama_role, status_user.status as status_user');
+        $this->db->from('user');
+        $this->db->join('user_role', 'user_role.id_role = user.id_role');
+        $this->db->join('status_user', 'status_user.id_status_user = user.is_active');
+
+        if ($id != null) {
+            $this->db->where('user.id_user',  $id);
         }
+
+        $query = $this->db->get();
+        return $query;
+
+
+
+
+        // $result = $this->db->where('id_user', $id_user)->get('user');
+        // if ($result->num_rows() > 0) {
+        //     return $result->result();
+        // } else {
+        //     return false;
+        // }
     }
 
     public function deleteUser($id)

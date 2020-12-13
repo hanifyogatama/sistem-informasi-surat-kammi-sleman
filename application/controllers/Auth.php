@@ -54,9 +54,9 @@ class Auth extends CI_Controller
                     // save in session
                     $this->session->set_userdata($data);
                     if ($user['id_role'] == 1) {
-                        redirect('admin');
+                        redirect('dashboard');
                     } else {
-                        redirect('user');
+                        redirect('dashboard');
                     }
                 } else {
                     $this->session->set_flashdata('message',  '<div class="alert alert-danger" role = "alert">wrong password </div>');

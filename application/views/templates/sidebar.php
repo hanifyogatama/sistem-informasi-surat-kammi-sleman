@@ -9,15 +9,7 @@
                 <div class="sidebar-brand-text mx-3">Kammi Sleman</div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item ">
-                <a class="nav-link pt-0" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">

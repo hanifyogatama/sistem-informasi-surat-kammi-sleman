@@ -11,20 +11,17 @@ class Admin extends CI_Controller
         $this->load->model('AdminModel');
     }
 
-
-    public function index()
-    {
-        $data['title'] = 'Dashboard';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
-        // get coount data user
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/index', $data);
-        $this->load->view('templates/footer');
-    }
+    // public function index()
+    // {
+    //     $data['title'] = 'Dashboard';
+    //     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+    //     // get coount data user
+    //     $this->load->view('templates/header', $data);
+    //     $this->load->view('templates/sidebar', $data);
+    //     $this->load->view('templates/topbar', $data);
+    //     $this->load->view('admin/index', $data);
+    //     $this->load->view('templates/footer');
+    // }
 
     // role user
     public function role()
@@ -46,9 +43,9 @@ class Admin extends CI_Controller
         } else {
 
             $this->AdminModel->addRole();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>new role added</div>');
+            </button>data added</div>');
             redirect('admin/role');
         }
     }
@@ -59,7 +56,7 @@ class Admin extends CI_Controller
         $data['title'] = 'Role Access';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['role'] = $this->db->get_where('user_role', ['id_role' => $id_role])->row_array();
-        $this->db->where('id_menu !=', 1);
+        $this->db->where('id_menu !=', 2);
         $data['menu'] = $this->db->get('user_menu')->result_array();
 
         $this->load->view('templates/header', $data);
@@ -88,7 +85,7 @@ class Admin extends CI_Controller
             $this->db->delete('user_access_menu', $data);
         }
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">access changed</div>');
+        $this->session->set_flashdata('message2', '<div class="alert alert-success" role = "alert">access changed</div>');
     }
 
     // edit role 
@@ -110,7 +107,7 @@ class Admin extends CI_Controller
         } else {
 
             $this->AdminModel->editRole();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>role edited</div>');
             redirect('admin/role');
@@ -151,8 +148,6 @@ class Admin extends CI_Controller
         force_download($name_file, $backup);
     }
 
-
-    // user management
     public function user_management()
     {
 
@@ -167,15 +162,13 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    // user management detail
     public function user_management_detail($id_user)
     {
 
         $data['title'] = 'User Detail';
         $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['users']  = $this->AdminModel->detailUser($id_user);
-
+        $data['users']  = $this->AdminModel->detailUser($id_user)->result();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -192,9 +185,7 @@ class Admin extends CI_Controller
         // $data['users']  = $this->db->get('user')->result_array();
         $data['users'] = $this->AdminModel->getByIdUser($id);
 
-
         $this->form_validation->set_rules('nama', 'Full Name', 'required|trim');
-        // $this->form_validation->set_rules('password1', 'Old Password', 'required|trim');
         $this->form_validation->set_rules('password1', 'New Password', 'trim|min_length[5]|matches[password2]');
         $this->form_validation->set_rules('password2', 'Confirm New Password', 'trim|min_length[5]|matches[password2]');
 
@@ -240,11 +231,9 @@ class Admin extends CI_Controller
             $this->db->set('password', $password_hash);
             $this->db->where('email', $email);
             $this->db->update('user');
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>profile has been updated</div>');
-
             redirect('admin/user_management');
         }
     }
@@ -254,19 +243,28 @@ class Admin extends CI_Controller
 
         $data['title'] = 'Add User';
         $data['user']  = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
         $data['userrole'] = $this->AdminModel->getAllRole();
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim', [
+            'required' => 'nama belum disi'
+        ]);
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+            'required'  => 'email belum disi',
             'is_unique' => 'email has already registered'
         ]);
 
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[5]|matches[password2]', [
-            'matches' => 'password dont match',
-            'min_length' => 'password too short'
+            'required'      => 'password belum disi',
+            'matches'       => 'password tidak sesuai',
+            'min_length'    => 'password terlalu pendek , min 6 karakter'
         ]);
 
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+
+        $this->form_validation->set_rules('id_role', 'Role', 'required', [
+            'required' => 'role belum disi'
+        ]);
 
         if ($this->form_validation->run() == false) {
 
@@ -281,13 +279,15 @@ class Admin extends CI_Controller
                 'email' => htmlspecialchars($this->input->post('email', true)),
                 'gambar' => 'default.png',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'id_role' => 2,
+                'id_role' => htmlspecialchars($this->input->post('id_role', true)),
                 'is_active' => 1,
                 'tanggal_dibuat' => time()
             ];
 
             $this->db->insert('user', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">Congratulation, your account has been registered. Please login</div>');
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>Congratulation, your account has been registered</div>');
             redirect('admin/user_management');
         };
     }
@@ -297,7 +297,7 @@ class Admin extends CI_Controller
     {
         // $departemenId = $this->input->post('id_departemen');
         $this->AdminModel->deleteUser($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('admin/user_management');

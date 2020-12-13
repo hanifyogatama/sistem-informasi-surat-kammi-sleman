@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-info btn-sm">Edit</button>
+                        <button type="submit" class="btn btn-info btn-m ">Edit Profile</button>
                     </div>
                     </form>
                 </div>

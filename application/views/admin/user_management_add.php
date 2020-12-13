@@ -5,11 +5,10 @@
         </div>
         <div class="card-body">
             <div class="col-lg-8">
-                <a href="javascript:history.go(-1)" class="btn btn-outline-primary  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
+                <a href="javascript:history.go(-1)" class="btn btn-outline-dark  btn-sm px-3 mb-3" title="Back"><i class="fas fa-arrow-left"></i></a>
 
                 <form action="<?= base_url('admin/user_management_add'); ?>" method="post">
                     <div class="form-group row">
-                        <input type="hidden" class="form-control" id="id_role" name="id_role" value="">
                         <label for="role" class="col-sm-2 col-form-label">Full Name</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="nama" name="nama" placeholder="full name" value="<?= set_value('nama') ?>">
@@ -18,7 +17,6 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="hidden" class="form-control" id="id_role" name="id_role" value="">
                         <label for="role" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
                             <input type="email" class="form-control" id="email" name="email" placeholder="email" value="<?= set_value('email') ?>">
@@ -27,8 +25,20 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="hidden" class="form-control" id="id_role" name="id_role" value="">
-                        <label for="role" class="col-sm-2 col-form-label">Password</label>
+                        <label for="id_role" class="col-sm-2 col-form-label">Role</label>
+                        <div class="col-sm-10 ">
+                            <select name="id_role" id="id_role" class="form-control">
+                                <option value="">-Pilih-</option>
+                                <?php foreach ($userrole as $userrole) : ?>
+                                    <option value="<?= $userrole['id_role'] ?>" <?php echo set_select('id_role', $userrole['id_role'], (!empty($data) && $data == $userrole['id_role'] ? TRUE : FALSE)); ?>><?= $userrole['role'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?= form_error('id_role', '<small class="text-danger">', '</small>') ?>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
                             <div class="row">
                                 <div class="col-sm-6 ">

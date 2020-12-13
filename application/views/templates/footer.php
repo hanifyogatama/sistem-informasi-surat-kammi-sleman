@@ -2,7 +2,7 @@
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">
             <div class="copyright text-center my-auto">
-                <span>Copyright &copy; KAMMI Kamda Sleman 2020 - <?php echo date("Y"); ?></span>
+                <span>Copyright &copy; KAMMI Kamda Sleman 2020 - <?= date("Y"); ?></span>
             </div>
         </div>
     </footer>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row justify-content-center">
-                        <i class="fas fa-exclamation-circle fa-4x"></i>
+                        <img src="<?= base_url('assets/img/profile/exit.png') ?>" width="200">
                     </div>
                     <br>
                     <div class="row justify-content-center">
@@ -85,7 +85,38 @@
         $('.custom-file-input').on('change', function() {
             let fileName = $(this).val().split('\\').pop();
             $(this).next('.custom-file-label').addClass(" selected").html(fileName);
-        }); // ajax menu $('.form-check-input').on('click', function() { const menuId=$(this).data('menu'); const roleId=$(this).data('role'); $.ajax({ url: "<?= base_url('admin/changeaccess'); ?>" , type: 'post' , data: { menuId: menuId, roleId: roleId }, success: function() { document.location.href="<?= base_url('admin/roleaccess/'); ?>" + roleId; } }); }); // date $(function() { $(".datepicker").datepicker({ format: 'yyyy-mm-dd' , autoclose: true, todayHighlight: true, }); }); // tooltip $(document).ready(function() { $('[data-toggle="tooltip" ]').tooltip(); }); 
+        });
+
+        // ajax menu 
+        $('.form-check-input').on('click', function() {
+            const menuId = $(this).data('menu');
+            const roleId = $(this).data('role');
+            $.ajax({
+                url: "<?= base_url('admin/changeaccess'); ?>",
+                type: 'post',
+                data: {
+                    menuId: menuId,
+                    roleId: roleId
+                },
+                success: function() {
+                    document.location.href = "<?= base_url('admin/roleaccess/'); ?>" + roleId;
+                }
+            });
+        });
+
+        // date 
+        $(function() {
+            $(".datepicker").datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true,
+            });
+        });
+
+        // tooltip 
+        $(document).ready(function() {
+            $('[data-toggle="tooltip" ]').tooltip();
+        });
     </script>
     </body>
 

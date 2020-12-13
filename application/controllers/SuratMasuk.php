@@ -1,25 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
-
-
-// Load library phpspreadsheet
-
-
-use PhpOffice\PhpSpreadsheet\Helper\Sample;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-// End load library phpspreadsheet
 
 class SuratMasuk extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
-
         $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
         //  is_logged_in();
     }
@@ -29,7 +19,6 @@ class SuratMasuk extends CI_Controller
     {
         $data['title'] = 'Surat Masuk';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk();
 
         // rules form add surat masuk
@@ -43,18 +32,16 @@ class SuratMasuk extends CI_Controller
     // add surat masuk
     public function add()
     {
-        $data['title'] = 'Add Surat Masuk';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title']  = 'Add Surat Masuk';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['surat_masuk'] = $this->db->get('surat_masuk')->result_array();
-
-        $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
-        $data['instansi'] = $this->InstansiModel->getAllInstansi();
-
+        $data['surat_masuk']    = $this->db->get('surat_masuk')->result_array();
+        $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
+        $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
         $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim', [
-            'required' => 'nomor surat harus diisi'
+            'is_unique' => 'nomor surat sudah ada'
         ]);
 
         $this->form_validation->set_rules('id_instansi', 'Instansi', 'required|trim', [
@@ -97,14 +84,14 @@ class SuratMasuk extends CI_Controller
 
             if (!$this->upload->do_upload('file_surat')) {
 
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>belum ditambah / salah format</div>');
                 redirect('suratmasuk/add', 'refresh');
             } else {
                 $new_file = $this->upload->data('file_name');
                 $this->SuratMasukModel->addSuratMasuk($new_file);
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>data added</div>');
                 redirect('suratmasuk');
@@ -150,13 +137,13 @@ class SuratMasuk extends CI_Controller
 
                 $new_file = $this->upload->data('file_name');
                 $this->SuratMasukModel->editSuratMasuk($new_file);
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratmasuk');
             } else {
 
                 $old_file = $data['surat_masuk']['file_surat'];
                 $this->SuratMasukModel->editSuratMasuk($old_file);
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratmasuk');
             }
         }
@@ -168,7 +155,7 @@ class SuratMasuk extends CI_Controller
     {
         $data['title']    = 'Detail Surat Masuk';
         $data['user']     = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['surat_masuk']   = $this->SuratMasukModel->getAllSuratMasuk($id);
+        $data['surat_masuk']  = $this->SuratMasukModel->getAllSuratMasuk($id);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -182,7 +169,7 @@ class SuratMasuk extends CI_Controller
     public function delete($id)
     {
         $this->SuratMasukModel->deleteSuratMasuk($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('suratmasuk');
@@ -307,7 +294,6 @@ class SuratMasuk extends CI_Controller
         redirect($url);
     }
 
-    // export to pdf
     public function exportToPdf()
     {
         $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
@@ -315,18 +301,17 @@ class SuratMasuk extends CI_Controller
         $data = $this->load->view('pdf/data_surat_masuk', ['surat_masuk' => $dataSuratMasuk], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
-        $file_name = 'your.pdf';
+        $file_name = "Surat_Masuk_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
         $mpdf->Output($file_name, 'D');
     }
 
     public function exportToExcel()
     {
 
-        $data['title'] = 'Excel';
-        $dataSuratMasuk = $this->SuratMasukModel->getAllSuratMasuk()->result();
+        $data['title']      = 'Excel';
+        $dataSuratMasuk     = $this->SuratMasukModel->getAllSuratMasuk()->result();
 
         $spreadsheet = new Spreadsheet();
-
         // Set document properties
         $spreadsheet->getProperties()->setCreator('Kammi Kamda Sleman')
             ->setLastModifiedBy('Kammi Kamda Sleman')
@@ -344,8 +329,7 @@ class SuratMasuk extends CI_Controller
         $sheet->setCellValue('E1', 'Deskripsi');
         $sheet->setCellValue('F1', 'Tgl Surat');
         $sheet->setCellValue('G1', 'Tgl Diterima');
-        $sheet->setCellValue('H1', 'Disposisi');
-
+        $sheet->setCellValue('H1', 'Keterangan');
         $no = 1;
         $x = 2;
         foreach ($dataSuratMasuk as $row) {
@@ -360,22 +344,23 @@ class SuratMasuk extends CI_Controller
             $x++;
         }
         $writer = new Xlsx($spreadsheet);
-        $filename = 'laporan-siswa';
+        $filename = 'surat-masuk' . date('d-m-Y H');
 
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
         header('Cache-Control: max-age=0');
 
-
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle('Report Excel ' . date('d-m-Y H'));
+        $spreadsheet->getActiveSheet()->setTitle('Surat Masuk ' . date('d-m-Y H'));
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);
 
         // Redirect output to a client’s web browser (Xlsx)
+
+        $filename = "Surat_Masuk_Kammi_Sleman_" . date("d-m-Y") . ".xlsx";
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment;filename="Report Excel.xlsx"');
+        header("Content-Disposition: attachment;filename={$filename}");
         header('Cache-Control: max-age=0');
         // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
@@ -387,12 +372,14 @@ class SuratMasuk extends CI_Controller
         header('Pragma: public'); // HTTP/1.0
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-        ob_end_clean();
+        //ob_end_clean();
         $writer->save('php://output');
         exit;
+    }
 
-
-        // $writer->save('php://output');
-        // $this->load->view('excel/surat_masuk_excel', $data);
+    public function print()
+    {
+        $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk()->result();
+        $this->load->view('print/surat_masuk', $data);
     }
 }

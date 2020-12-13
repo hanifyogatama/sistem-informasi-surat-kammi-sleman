@@ -10,11 +10,11 @@ class SuratMasukModel extends CI_Model
         $this->db->from('surat_masuk');
         $this->db->join('instansi', 'instansi.id_instansi = surat_masuk.id_instansi');
         $this->db->join('status_surat', 'status_surat.id_status_surat = surat_masuk.id_status_surat');
+        $this->db->order_by('surat_masuk.id_surat_masuk', 'DESC');
 
         if ($id != null) {
-            $this->db->where('id_surat_masuk', $id);
+            $this->db->where('surat_masuk.id_surat_masuk', $id);
         }
-
         $query = $this->db->get();
         return $query;
     }

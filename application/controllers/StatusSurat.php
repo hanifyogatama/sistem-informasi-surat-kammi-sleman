@@ -41,7 +41,7 @@ class StatusSurat extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->StatusSuratModel->addStatusSurat();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data added</div>');
             redirect('statussurat');
@@ -65,7 +65,7 @@ class StatusSurat extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->StatusSuratModel->editStatusSurat();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
             redirect('statussurat');
@@ -76,7 +76,7 @@ class StatusSurat extends CI_Controller
     {
         // $departemenId = $this->input->post('id_departemen');
         $this->StatusSuratModel->deleteStatusSurat($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('statussurat');
