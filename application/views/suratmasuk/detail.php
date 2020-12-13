@@ -6,18 +6,26 @@
             </div>
             <div class="card-body">
                 <div class="col-lg">
-                    <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-dark btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+                    <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
 
                     <a href="<?= base_url('suratmasuk/edit/') . $data->id_surat_masuk  ?>" title="Edit" class="btn btn-outline-success btn-sm mb-3 px-3"><i class="fas fa-edit"></i></a>
 
                     <div class="row">
                         <div class="col-md-4">
-                            <!-- <div class="card-body">
-                                <img src="" class="img-profile rounded-circle shadow" width="200px" height="200px">
-                            </div> -->
+                            <div class="card-body mt-5 px-auto">
+                                <h6>File</h6>
+                                <img src="<?= base_url('assets/img/profile/PDF_file_icon.png') ?>" class="img-profile" width="130px" height="150px">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-8">
-                            <table class="table">
+                        <div class=" col-md-8">
+                            <table class="table table-hover">
                                 <br>
                                 <tr>
                                     <td>Nomor Surat</td>
@@ -31,13 +39,20 @@
                                     <td>Sifat Surat</td>
                                     <td><strong><?= $data->status; ?></strong></td>
                                 </tr>
+
+                                <?php
+                                $oldDateSurat = $data->tanggal_surat;
+                                $oldDateDiterima = $data->tanggal_diterima;
+                                $newDateSurat = date("d-m-Y", strtotime($oldDateSurat));
+                                $newDateDiterima = date("d-m-Y", strtotime($oldDateDiterima)); ?>
+
                                 <tr>
                                     <td>Tanggal Surat</td>
-                                    <td><strong><?= $data->tanggal_surat; ?></strong></td>
+                                    <td><strong><?= $newDateSurat ?></strong></td>
                                 </tr>
                                 <tr>
                                     <td>Tanggal Diterima</td>
-                                    <td><strong><?= $data->tanggal_diterima; ?></strong></td>
+                                    <td><strong><?= $newDateDiterima ?></strong></td>
                                 </tr>
                                 <tr>
                                     <td>Deskripsi</td>

@@ -11,9 +11,10 @@ class SuratKeluarModel extends CI_Model
         $this->db->from('surat_keluar');
         $this->db->join('instansi', 'instansi.id_instansi = surat_keluar.id_instansi');
         $this->db->join('status_surat', 'status_surat.id_status_surat = surat_keluar.id_status_surat');
+        $this->db->order_by("surat_keluar.id_surat_keluar", "asc");
 
         if ($id != null) {
-            $this->db->where('id_surat_keluar', $id);
+            $this->db->where('surat_keluar.id_surat_keluar', $id);
         }
 
         $query = $this->db->get();

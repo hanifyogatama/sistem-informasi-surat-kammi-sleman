@@ -40,9 +40,16 @@
                                         <th scope="row" style="text-align: center;"><?= $i; ?></th>
                                         <td><?= $data->no_surat ?></td>
                                         <td><?= $data->nama_instansi ?></td>
-                                        <td><?= word_limiter($data->isi, 4) ?></td>
-                                        <td><?= $data->tanggal_surat ?></td>
-                                        <td><?= $data->tanggal_diterima ?></td>
+                                        <td><?= word_limiter($data->isi, 3) ?></td>
+
+                                        <?php
+                                        $oldDateSurat = $data->tanggal_surat;
+                                        $oldDateDiterima = $data->tanggal_diterima;
+                                        $newDateSurat = date("d-m-Y", strtotime($oldDateSurat));
+                                        $newDateDiterima = date("d-m-Y", strtotime($oldDateDiterima)); ?>
+
+                                        <td><?= $newDateSurat ?></td>
+                                        <td><?= $newDateDiterima ?></td>
                                         <!-- <td><?= date('d F Y', $data->tanggal_surat)  ?></td> -->
                                         <td align="center">
 

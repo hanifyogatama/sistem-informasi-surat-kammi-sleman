@@ -53,10 +53,6 @@ class SuratKeluar extends CI_Controller
             'required' => 'deskripsi surat belum diisi'
         ]);
 
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim', [
-            'required' => 'keterangan surat belum diisi'
-        ]);
-
         $this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'required', [
             'required' => 'tanggal surat belum diisi'
         ]);
@@ -76,11 +72,14 @@ class SuratKeluar extends CI_Controller
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('file_surat')) {
-                echo $this->upload->display_errors();
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>belum ditambah / salah format</div>');
+                redirect('suratkeluar/add', 'refresh');
             } else {
                 $new_file = $this->upload->data('file_name');
                 $this->SuratKeluarModel->addSuratKeluar($new_file);
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>data added</div>');
                 redirect('suratkeluar');
@@ -125,13 +124,13 @@ class SuratKeluar extends CI_Controller
                 $new_file = $this->upload->data('file_name');
 
                 $this->SuratKeluarModel->editSuratKeluar($new_file);
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratkeluar');
             } else {
 
                 $old_file = $data['surat_keluar']['file_surat'];
                 $this->SuratKeluarModel->editSuratKeluar($old_file);
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratkeluar');
             }
         }
@@ -158,7 +157,7 @@ class SuratKeluar extends CI_Controller
     public function delete($id)
     {
         $this->SuratKeluarModel->deleteSuratKeluar($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('suratkeluar');

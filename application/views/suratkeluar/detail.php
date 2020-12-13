@@ -12,12 +12,20 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <!-- <div class="card-body">
-                                <img src="" class="img-profile rounded-circle shadow" width="200px" height="200px">
-                            </div> -->
+                            <div class="card-body mt-5 px-auto">
+                                <h6>File</h6>
+                                <img src="<?= base_url('assets/img/profile/PDF_file_icon.png') ?>" class="img-profile" width="130px" height="150px">
+                            </div>
+                            <div class="row">
+                                <div class="col-sm">
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+
+                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-8">
-                            <table class="table">
+                            <table class="table table-hover">
                                 <br>
                                 <tr>
                                     <td>Nomor Surat</td>
@@ -33,7 +41,10 @@
                                 </tr>
                                 <tr>
                                     <td>Tanggal Surat</td>
-                                    <td><strong><?= $data->tanggal_surat; ?></strong></td>
+                                    <?php
+                                    $oldate = $data->tanggal_surat;
+                                    $newDate = date("d-m-Y", strtotime($oldate)); ?>
+                                    <td><strong><?= $newDate  ?></strong></td>
                                 </tr>
                                 <tr>
                                     <td>Deskripsi</td>

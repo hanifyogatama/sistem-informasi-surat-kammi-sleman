@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <label>Keterangan</label>
+                                    <label>Keterangan <sup><em>(*optional)</em></sup></label>
                                     <textarea class="form-control" rows="4" id="keterangan" name="keterangan"><?= set_value('keterangan') ?></textarea>
                                     <?= form_error('keterangan', '<small class="text-danger">', '</small>') ?>
                                 </div>
@@ -78,12 +78,12 @@
                                         <input type="file" name="file_surat" class="">
                                     </div>
                                     <?= form_error('file_surat', '<small class="text-danger">', '</small>') ?>
+                                    <?= $this->session->flashdata('message'); ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-info btn-sm float-right">Add</button>
-
                     <?php form_close(); ?>
                 </div>
             </div>

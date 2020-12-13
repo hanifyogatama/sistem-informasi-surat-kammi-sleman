@@ -84,7 +84,7 @@ class SuratMasuk extends CI_Controller
 
             if (!$this->upload->do_upload('file_surat')) {
 
-                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>belum ditambah / salah format</div>');
                 redirect('suratmasuk/add', 'refresh');
