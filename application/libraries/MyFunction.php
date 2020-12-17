@@ -32,4 +32,10 @@ class MyFunction
         $this->ci->load->model('InstansiModel');
         return $this->ci->InstansiModel->getCountDataInstansi()->num_rows();
     }
+
+    public function getDataDiposisiLaporan()
+    {
+        $this->ci->load->model('LaporanModel');
+        return $this->ci->LaporanModel->getDisposisidata->get('nama_departemen')->result();
+    }
 }

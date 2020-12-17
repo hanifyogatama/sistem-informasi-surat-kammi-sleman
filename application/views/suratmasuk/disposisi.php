@@ -16,6 +16,10 @@
 
                         <?php echo anchor('suratmasuk/disposisi_add/' . $surat_masuk['id_surat_masuk'], '<button title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3"><i class="fa fa-plus "></i> </button>'); ?>
 
+                        <?php echo anchor('suratmasuk/printDisposisi', '<button title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
+
+                        <?php echo anchor('suratmasuk/pdfDisposisi', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
+
                         <table class="table table-hover">
                             <thead>
                                 <tr>

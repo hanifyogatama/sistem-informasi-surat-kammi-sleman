@@ -1,6 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
+
 class SuratKeluar extends CI_Controller
 {
 
@@ -148,8 +154,6 @@ class SuratKeluar extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-
-    // delete data suart keluar
     public function delete($id)
     {
         $this->SuratKeluarModel->deleteSuratKeluar($id);
@@ -157,5 +161,88 @@ class SuratKeluar extends CI_Controller
             <span aria-hidden="true">&times;</span>
             </button>data deleted</div>');
         redirect('suratkeluar');
+    }
+
+    public function exportToPdf()
+    {
+        $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
+        $dataSuratKeluar = $this->SuratKeluarModel->getAllSuratKeluar()->result();
+        $data = $this->load->view('pdf/data_surat_keluar', ['surat_keluar' => $dataSuratKeluar], True);
+        $mpdf->WriteHTML($data);
+        $mpdf->SetDisplayMode('fullwidth');
+        $file_name = "Surat_Keluar_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $mpdf->Output($file_name, 'D');
+    }
+
+    public function exportToExcel()
+    {
+
+        $data['title']      = 'Excel';
+        $dataSuratKeluar = $this->SuratKeluarModel->getAllSuratKeluar()->result();
+
+        $spreadsheet = new Spreadsheet();
+        // Set document properties
+        $spreadsheet->getProperties()->setCreator('Kammi Kamda Sleman')
+            ->setLastModifiedBy('Kammi Kamda Sleman')
+            ->setTitle('Office 2007 XLSX Test Document')
+            ->setSubject('Office 2007 XLSX Test Document')
+            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+            ->setKeywords('office 2007 openxml php')
+            ->setCategory('Test result file');
+
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nomor Surat');
+        $sheet->setCellValue('C1', 'Penerima');
+        $sheet->setCellValue('D1', 'Sifat Surat');
+        $sheet->setCellValue('E1', 'Deskripsi');
+        $sheet->setCellValue('F1', 'Tgl Surat');
+        $sheet->setCellValue('H1', 'Keterangan');
+        $no = 1;
+        $x = 2;
+        foreach ($dataSuratKeluar as $row) {
+            $sheet->setCellValue('A' . $x, $no++);
+            $sheet->setCellValue('B' . $x, $row->no_surat);
+            $sheet->setCellValue('C' . $x, $row->nama_instansi);
+            $sheet->setCellValue('D' . $x, $row->status);
+            $sheet->setCellValue('E' . $x, $row->isi);
+            $sheet->setCellValue('F' . $x, $row->tanggal_surat);
+            $sheet->setCellValue('H' . $x, $row->keteranagn);
+            $x++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'surat-keluar' . date('d-m-Y H');
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle('Surat Keluar ' . date('d-m-Y H'));
+
+        $spreadsheet->setActiveSheetIndex(0);
+
+        $filename = "Surat_Keluar_Kammi_Sleman_" . date("d-m-Y") . ".xlsx";
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment;filename={$filename}");
+        header('Cache-Control: max-age=0');
+        // If you're serving to IE 9, then the following may be needed
+        header('Cache-Control: max-age=1');
+
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+        header('Pragma: public'); // HTTP/1.0
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        //ob_end_clean();
+        $writer->save('php://output');
+        exit;
+    }
+
+    public function print()
+    {
+        $data['surat_keluar'] =  $this->SuratKeluarModel->getAllSuratKeluar()->result();
+        $this->load->view('print/surat_keluar', $data);
     }
 }

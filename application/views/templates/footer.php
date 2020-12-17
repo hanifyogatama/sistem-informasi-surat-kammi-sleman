@@ -32,7 +32,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row justify-content-center">
-                        <img src="<?= base_url('assets/img/profile/exit.png') ?>" width="200">
+                        <img src="<?= base_url('assets/img/web/logout.gif') ?>" width="200px" alt="">
                     </div>
                     <br>
                     <div class="row justify-content-center">
@@ -119,6 +119,52 @@
             $('[data-toggle="tooltip" ]').tooltip();
         });
     </script>
+
+
+    <script type="text/javascript">
+        var ctx = document.getElementById("myPieChart1");
+        var myPieChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Sosmas", "test", "test", "test", "test", "test"],
+                datasets: [{
+                    data: [
+
+
+
+                        <?= $this->db->query("select id_departemen from disposisi where id_departemen = '1'")->num_rows() ?>
+
+
+
+
+                        , 30, 15, 15, 10, 11
+                    ],
+                    backgroundColor: ['#4e73df', '#ff9100', '#1cc88a', '#36b9cc', '#f52505', '#bdbbbd'],
+                    hoverBackgroundColor: ['#2e59d9', '#de9433', '#17a673', '#2c9faf', '#cc3f29', '#cc3f29'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                }],
+            },
+            options: {
+                maintainAspectRatio: false,
+                tooltips: {
+                    backgroundColor: "rgb(255,255,255)",
+                    bodyFontColor: "#858796",
+                    borderColor: '#dddfeb',
+                    borderWidth: 1,
+                    xPadding: 15,
+                    yPadding: 15,
+                    displayColors: false,
+                    caretPadding: 10,
+                },
+                legend: {
+                    display: false
+                },
+                cutoutPercentage: 80,
+            },
+        });
+    </script>
+
+
     </body>
 
     </html>

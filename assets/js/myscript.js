@@ -29,3 +29,6 @@ $('.data-delete-2').on('click', function (e) {
     })
 
 });
+
+
+

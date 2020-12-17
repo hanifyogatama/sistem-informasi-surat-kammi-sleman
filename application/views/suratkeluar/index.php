@@ -13,11 +13,11 @@
                     <!-- button -->
                     <?php echo anchor('suratkeluar/add', '<button class="btn btn-outline-primary btn-sm mb-3 px-3" title="Add"><i class="fa fa-plus"></i> </button>'); ?>
 
-                    <?php echo anchor('suratkeluar', '<button class="btn btn-outline-success btn-sm mb-3 px-3 " title="Print"><i class="fa fa-print" ></i> </button>'); ?>
+                    <?php echo anchor('suratkeluar/print', '<button class="btn btn-outline-success btn-sm mb-3 px-3 " title="Print"><i class="fa fa-print" ></i> </button>'); ?>
 
-                    <?php echo anchor('suratkeluar', '<button class="btn btn-outline-danger btn-sm mb-3 px-3 " title="Export to pdf"><i class="fa fa-file-pdf" ></i> </button>'); ?>
+                    <?php echo anchor('suratkeluar/exportToPdf', '<button class="btn btn-outline-danger btn-sm mb-3 px-3 " title="Export to pdf"><i class="fa fa-file-pdf" ></i> </button>'); ?>
 
-                    <?php echo anchor('suratkeluar', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="far fa-file-excel"></i> </button>'); ?>
+                    <?php echo anchor('suratkeluar/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="far fa-file-excel"></i> </button>'); ?>
 
                     <!-- table  -->
                     <div class="table-responsive">

@@ -1,152 +1,47 @@
 <div class="container-fluid">
-    <div class="card shadow-sm border-bottom-primary">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?></h6>
-        </div>
-        <div class="card-body">
-            <div class="card mb-0 py-3 ">
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-sm mb-4">
+            <div class="card border-bottom-danger shadow h-100 py-2">
                 <div class="card-body">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Select Data : </div>
-                    <div class="">
-                        <select name="" id="" class="form-control">
-                            <option value="">-Select-</option>
-                            <option value="1">Surat Masuk</option>
-                            <option value="2">Surat Keluar</option>
-                            <option value="3">Disposisi</option>
-                        </select>
+                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                        Surat masuk</div>
+                    <div class="row no-gutters justify-content-center">
+                        <img src="<?= base_url('assets/img/web/chart.gif') ?>" width="100px" height="100px" alt="">
+                    </div>
+                    <div class="text-xs font-weight-bold text-center text-primary text-uppercase mb-1">
+                        <a href="<?= base_url('laporan/suratmasuk') ?>">Go to report ></a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- filter by area -->
-        <div class="card-body filter-by">
-            <div class="row">
-                <div class="col-sm">
-                    <div class="card py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Filter by Date : </div>
-                                    <div class="form-group">
-                                        <label for="" class="text-xs font-weight-bold text-danger text-uppercase mb-1 "><small>Start</small></label>
-                                        <input type="date" name="tanggal_surat" id="tanggal_surat" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="" class="text-xs font-weight-bold text-danger text-uppercase mb-1 align-end"><small>End</small></label>
-                                        <input type="date" name="tanggal_diterima" id="tanggal_diterima" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" title="Procces"><i class="fas fa-cog fa-sm text-white-50 px-2"></i></a>
 
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" title="Print"><i class="fas fa-print fa-sm text-white-50 px-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-sm mb-4">
+            <div class="card border-bottom-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                        Surat keluar</div>
+                    <div class="row no-gutters justify-content-center">
+                        <img src="<?= base_url('assets/img/web/chart.gif') ?>" width="100px" height="100px" alt="">
+                    </div>
+                    <div class="text-xs font-weight-bold text-center text-dark text-uppercase mb-1">
+                        <a href="<?= base_url('laporan/suratkeluar') ?>">Go to report ></a>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <div class="card py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                        Filter by Month : </div>
-                                    <div class="form-group">
-                                        <label for="" class="text-xs font-weight-bold text-danger text-uppercase mb-1 "><small>Year</small></label>
-                                        <div class="">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">-Select-</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="" class="text-xs font-weight-bold text-danger text-uppercase mb-1 "><small>Start</small></label>
-                                                <div class="">
-                                                    <select name="" id="" class="form-control">
-                                                        <option value="">-Select-</option>
-                                                        <option value="">Januari</option>
-                                                        <option value="">Februari</option>
-                                                        <option value="">Maret</option>
-                                                        <option value="">April</option>
-                                                        <option value="">Mei</option>
-                                                        <option value="">Juni</option>
-                                                        <option value="">Juli</option>
-                                                        <option value="">Agustus</option>
-                                                        <option value="">September</option>
-                                                        <option value="">Oktober</option>
-                                                        <option value="">November</option>
-                                                        <option value="">Desember</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm">
-                                            <div class="form-group">
-                                                <label for="" class="text-xs font-weight-bold text-danger text-uppercase mb-1 "><small>End</small></label>
-                                                <div class="">
-                                                    <select name="" id="" class="form-control">
-                                                        <option value="">-Select-</option>
-                                                        <option value="">Januari</option>
-                                                        <option value="">Februari</option>
-                                                        <option value="">Maret</option>
-                                                        <option value="">April</option>
-                                                        <option value="">Mei</option>
-                                                        <option value="">Juni</option>
-                                                        <option value="">Juli</option>
-                                                        <option value="">Agustus</option>
-                                                        <option value="">September</option>
-                                                        <option value="">Oktober</option>
-                                                        <option value="">November</option>
-                                                        <option value="">Desember</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" title="Procces"><i class="fas fa-cog fa-sm text-white-50 px-2"></i></a>
+            </div>
+        </div>
 
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" title="Print"><i class="fas fa-print fa-sm text-white-50 px-2"></i></a>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-sm mb-4">
+            <div class="card border-bottom-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                        Disposisi</div>
+                    <div class="row no-gutters justify-content-center">
+                        <img src="<?= base_url('assets/img/web/chart.gif') ?>" width="100px" height="100px" alt="">
                     </div>
-                </div>
-                <div class="col-sm">
-                    <div class="card py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        Filter by Year : </div>
-                                    <div class="form-group">
-                                        <label for="" class="text-xs font-weight-bold text-danger text-uppercase mb-1 "><small>Year</small></label>
-                                        <div class="">
-                                            <select name="" id="" class="form-control">
-                                                <option value="">-Select-</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm">
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" title="Procces"><i class="fas fa-cog fa-sm text-white-50 px-2"></i> </a>
-
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" title="Print"><i class="fas fa-print fa-sm text-white-50 px-2"></i> </a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="text-xs font-weight-bold text-center text-succes text-uppercase mb-1">
+                        <a href="<?= base_url('laporan/disposisi') ?>">Go to report ></a>
                     </div>
                 </div>
             </div>

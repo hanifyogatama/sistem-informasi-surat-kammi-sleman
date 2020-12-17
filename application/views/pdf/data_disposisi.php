@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surat Masuk</title>
+    <title>Disposisi</title>
+
 
     <style>
         table,
@@ -24,37 +25,32 @@
             <tr>
                 <th>No</th>
                 <th>Nomor Surat</th>
-                <th>Pengirim</th>
+                <th>Tujuan Disposisi</th>
                 <th>Sifat Surat</th>
                 <th>Deskripsi</th>
-                <th>Tanggal Surat</th>
-                <th>Tanggal Diterima</th>
+                <th>Batas Waktu</th>
                 <th>Ket</th>
             </tr>
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            <?php foreach ($surat_masuk as $data) : ?>
+            <?php foreach ($disposisi as $data) : ?>
                 <tr>
                     <th><?= $i; ?></th>
-                    <td><?= $data->no_surat ?></td>
-                    <td><?= $data->nama_instansi ?></td>
+                    <td><?= $data->nomor_surat ?></td>
+                    <td><?= $data->nama_departemen ?></td>
                     <td><?= $data->status ?></td>
                     <td><?= $data->isi ?></td>
                     <?php
-                    $oldate = $data->tanggal_surat;
+                    $oldate = $data->batas_waktu;
                     $newDate = date("d-m-Y", strtotime($oldate)); ?>
                     <td><?= $newDate ?></td>
-                    <td><?= $data->tanggal_diterima ?></td>
                     <td><?= $data->keterangan ?></td>
                 </tr>
                 <?php $i++; ?>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <script type="text/javascript">
-        window.print();
-    </script>
 </body>
 
 </html>

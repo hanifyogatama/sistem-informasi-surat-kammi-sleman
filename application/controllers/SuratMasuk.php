@@ -250,9 +250,6 @@ class SuratMasuk extends CI_Controller
         // $data['instansi'] = $this->InstansiModel->getAllInstansi();
 
         $data['disposisi'] = $this->SuratMasukModel->getByIdDisposisi($id);
-
-        //$tol = $data['disposisi'] = $this->db->get('disposisi', 'id_surat_masuk');
-
         $data['surat_masuk']    = $this->SuratMasukModel->getAllSuratMasuk()->row_array();
         $data['status_surat']   = $this->StatusSuratModel->getRowStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
@@ -280,7 +277,6 @@ class SuratMasuk extends CI_Controller
         }
     }
 
-    // disposisi delete data 
     public function disposisi_delete($id)
     {
         $this->SuratMasukModel->deleteDisposisi($id);
@@ -375,5 +371,28 @@ class SuratMasuk extends CI_Controller
     {
         $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk()->result();
         $this->load->view('print/surat_masuk', $data);
+    }
+
+    public function printDisposisi()
+    {
+        $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2()->result();
+        $this->load->view('print/disposisi', $data);
+    }
+
+    public function pdfDisposisi()
+    {
+        $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
+        $dataDisposisi = $this->SuratMasukModel->getAllDisposisi2()->result();
+        $data = $this->load->view('pdf/data_disposisi', ['disposisi' => $dataDisposisi], True);
+        $mpdf->WriteHTML($data);
+        $mpdf->SetDisplayMode('fullwidth');
+        $file_name = "Disposisi_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $mpdf->Output($file_name, 'D');
+    }
+
+    public function printDisposisiPerItem($id)
+    {
+        $data['disposisi'] = $this->SuratMasukModel->getByIdDisposisi($id);
+        $this->load->view('print/disposisi', $data);
     }
 }
