@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '14a72d9525ef70a1fea06c8ac9d54cb5b30097a0',
+    'reference' => '05c083d56647748306c54c5b0ba1d670e2b0c37f',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '14a72d9525ef70a1fea06c8ac9d54cb5b30097a0',
+      'reference' => '05c083d56647748306c54c5b0ba1d670e2b0c37f',
     ),
     'maennchen/zipstream-php' => 
     array (
