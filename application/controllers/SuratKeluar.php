@@ -245,4 +245,34 @@ class SuratKeluar extends CI_Controller
         $data['surat_keluar'] =  $this->SuratKeluarModel->getAllSuratKeluar()->result();
         $this->load->view('print/surat_keluar', $data);
     }
+
+    public function download($fileName = NULL)
+    {
+        if ($fileName) {
+            $file = realpath("file_document") . "\\" . $fileName;
+            // check file exists    
+            if (file_exists($file)) {
+                // get file content
+                $data = file_get_contents($file);
+                //force download
+                force_download($fileName, $data);
+            } else {
+                // Redirect to base url
+                redirect(base_url());
+            }
+        }
+    }
+
+
+    function pdf($item)
+    {
+
+        $file = realpath("file_document") . "\\" . $item;;
+
+        header('Content-type: application/pdf');
+        header('Content-Disposition: inline; filename="' . $file . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        readfile($file);
+    }
 }

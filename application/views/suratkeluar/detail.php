@@ -18,9 +18,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm">
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+                                    <a href="<?= base_url('suratkeluar/pdf/') . $data->file_surat  ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
 
-                                    <a href="<?= base_url(''); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+                                    <a href="<?= base_url('suratmasuk/download/') . $data->file_surat  ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
                                 </div>
                             </div>
                         </div>

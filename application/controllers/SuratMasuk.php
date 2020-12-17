@@ -11,6 +11,7 @@ class SuratMasuk extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('download');
+        $this->load->library('Pdf');
         $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
         //  is_logged_in();
     }
@@ -418,5 +419,18 @@ class SuratMasuk extends CI_Controller
                 redirect(base_url());
             }
         }
+    }
+
+
+    function pdf($item)
+    {
+
+        $file = realpath("file_document") . "\\" . $item;;
+
+        header('Content-type: application/pdf');
+        header('Content-Disposition: inline; filename="' . $file . '"');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        readfile($file);
     }
 }

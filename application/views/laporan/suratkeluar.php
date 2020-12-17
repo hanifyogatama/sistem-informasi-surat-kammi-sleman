@@ -6,11 +6,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="card-body">
-                    <!-- button -->
+
                     <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
 
                     <?php echo anchor('suratkeluar', '<button class="btn btn-outline-danger btn-sm mb-3 px-3 " title="Export to pdf"><i class="fa fa-file-pdf" ></i> </button>'); ?>
-                    <!-- table  -->
 
                     <table class="table table-hover">
                         <thead>
@@ -38,7 +37,6 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
