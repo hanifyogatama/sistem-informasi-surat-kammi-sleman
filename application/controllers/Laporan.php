@@ -34,7 +34,6 @@ class Laporan extends CI_Controller
         $endDate = $this->input->get('tanggalakhir');
 
         $data['surat_masuk'] = $this->LaporanModel->filterByDateSuratMasuk($startDate, $endDate);
-
         // rules form add surat masuk
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -60,7 +59,7 @@ class Laporan extends CI_Controller
 
     public function disposisi()
     {
-        $data['title']    = 'Disposisi';
+        $data['title']    = 'Laporan Disposisi';
         $data['user']     = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['disposisi']      = $this->SuratMasukModel->getAllDisposisi2();
 

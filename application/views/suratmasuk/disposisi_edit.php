@@ -37,6 +37,17 @@
 
                             <div class="form-group">
                                 <div class="">
+                                    <label>Pengirim</label>
+
+                                    <input type="hidden" name="id_instansi" id="id_instansi" class="form-control" value="<?= $surat_masuk['id_instansi'] ?>" readonly>
+
+                                    <input type="text" name="" id="" class="form-control" value="<?= $surat_masuk['nama_instansi'] ?>" readonly>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="">
                                     <label>Tujuan Departemen</label>
                                     <select name="id_departemen" id="id_departemen" class="form-control">
                                         <option value="">-Pilih-</option>

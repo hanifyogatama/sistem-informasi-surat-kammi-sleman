@@ -10,6 +10,7 @@ class SuratMasuk extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper('download');
         $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
         //  is_logged_in();
     }
@@ -231,7 +232,6 @@ class SuratMasuk extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['disposisi']  = $this->SuratMasukModel->getAllDisposisi2($id);
 
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -244,12 +244,8 @@ class SuratMasuk extends CI_Controller
     {
         $data['title']  = 'Edit Data';
         $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        //  $data['surat_masuk'] = $this->SuratMasukModel->getByIdSuratMasuk($id);
 
-        // $data['status_surat'] = $this->StatusSuratModel->getAllStatusSurat();
-        // $data['instansi'] = $this->InstansiModel->getAllInstansi();
-
-        $data['disposisi'] = $this->SuratMasukModel->getByIdDisposisi($id);
+        $data['disposisi']      = $this->SuratMasukModel->getByIdDisposisi($id);
         $data['surat_masuk']    = $this->SuratMasukModel->getAllSuratMasuk()->row_array();
         $data['status_surat']   = $this->StatusSuratModel->getRowStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
@@ -373,26 +369,54 @@ class SuratMasuk extends CI_Controller
         $this->load->view('print/surat_masuk', $data);
     }
 
-    public function printDisposisi()
+    public function printAllDisposisi()
     {
         $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2()->result();
         $this->load->view('print/disposisi', $data);
     }
 
-    public function pdfDisposisi()
+    public function pdfAllDisposisi()
     {
         $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
         $dataDisposisi = $this->SuratMasukModel->getAllDisposisi2()->result();
         $data = $this->load->view('pdf/data_disposisi', ['disposisi' => $dataDisposisi], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
+        $file_name = "All_Disposisi_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $mpdf->Output($file_name, 'D');
+    }
+
+    public function printDisposisi($id)
+    {
+        $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2($id);
+        $this->load->view('print/disposisi_per_item', $data);
+    }
+
+    public function pdfDisposisi($id)
+    {
+        $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
+        $dataDisposisiItem = $this->SuratMasukModel->getAllDisposisi2($id);
+        $data = $this->load->view('pdf/disposisi', ['disposisi' => $dataDisposisiItem], True);
+        $mpdf->WriteHTML($data);
+        $mpdf->SetDisplayMode('fullwidth');
         $file_name = "Disposisi_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
         $mpdf->Output($file_name, 'D');
     }
 
-    public function printDisposisiPerItem($id)
+    public function download($fileName = NULL)
     {
-        $data['disposisi'] = $this->SuratMasukModel->getByIdDisposisi($id);
-        $this->load->view('print/disposisi', $data);
+        if ($fileName) {
+            $file = realpath("file_document") . "\\" . $fileName;
+            // check file exists    
+            if (file_exists($file)) {
+                // get file content
+                $data = file_get_contents($file);
+                //force download
+                force_download($fileName, $data);
+            } else {
+                // Redirect to base url
+                redirect(base_url());
+            }
+        }
     }
 }

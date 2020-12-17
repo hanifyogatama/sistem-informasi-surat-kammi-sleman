@@ -18,7 +18,7 @@
                                 <th>No</th>
                                 <th>No Surat</th>
                                 <th>Penerima</th>
-                                <th>Isi</th>
+                                <th>Deskripsi</th>
                                 <th>Tanggal Surat</th>
                             </tr>
                         </thead>

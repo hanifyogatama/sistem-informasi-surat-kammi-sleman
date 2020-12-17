@@ -13,7 +13,9 @@
 
                     <a href="<?= base_url('suratmasuk/disposisi_edit/') . $data->id_disposisi  ?>" title="Edit" class="btn btn-outline-success btn-sm mb-3 px-3"><i class="fas fa-edit"></i></a>
 
-                    <?php echo anchor('#', '<button title="Print"  class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
+                    <a href="<?= base_url('suratmasuk/printDisposisi/') . $data->id_disposisi  ?>" title="Print" class="btn btn-outline-warning btn-sm mb-3 px-3"><i class="fas fa-print"></i></a>
+
+                    <a href="<?= base_url('suratmasuk/pdfDisposisi/') . $data->id_disposisi  ?>" title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3"><i class="fa fa-file-pdf"></i></a>
 
                     <div class="row">
 
@@ -25,12 +27,24 @@
                                     <td><strong><?= $data->nomor_surat; ?></strong></td>
                                 </tr>
                                 <tr>
+                                    <td>Tanggal Surat</td>
+                                    <td><strong><?= $data->tanggal_surat; ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Tanggal Diterima</td>
+                                    <td><strong><?= $data->tanggal_diterima; ?></strong></td>
+                                </tr>
+                                <tr>
                                     <td>Tujuan Disposisi</td>
                                     <td><strong><?= $data->nama_departemen; ?></strong></td>
                                 </tr>
                                 <tr>
                                     <td>Sifat Surat</td>
                                     <td><strong><?= $data->status; ?></strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Asal Surat</td>
+                                    <td><strong><?= $data->nama_instansi; ?></strong></td>
                                 </tr>
                                 <tr>
                                     <td>Batas Waktu</td>

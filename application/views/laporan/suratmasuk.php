@@ -46,7 +46,7 @@
                                 <th>No</th>
                                 <th>No Surat</th>
                                 <th>Pengirim</th>
-                                <th>Isi</th>
+                                <th>Deskripsi</th>
                                 <th>Tanggal Surat</th>
                                 <th>Tanggal Diterima</th>
                             </tr>
