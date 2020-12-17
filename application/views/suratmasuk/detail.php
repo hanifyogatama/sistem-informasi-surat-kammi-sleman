@@ -18,7 +18,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm">
-                                    <a href="<?= base_url('suratmasuk/pdf/') . $data->file_surat  ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+                                    <a href="<?= base_url('suratmasuk/pdf/') . $data->file_surat  ?>" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
 
 
 

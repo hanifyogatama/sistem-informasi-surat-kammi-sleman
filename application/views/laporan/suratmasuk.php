@@ -35,8 +35,10 @@
                         <?php echo anchor('suratmasuk/exportToPdf', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
                         <h6 class="font-weight-bold mt-2 text-primary">Laporan Surat Masuk tanggal <?= date('d F Y'); ?></h6>
                     <?php else : ?>
-                        <?php echo anchor('laporan/pdf', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
-                        <h5 class="font-weight-bold mt-2 text-primary">Laporan surat masuk tanggal <?= $newTanggalAwal . ' s/d ' . $newTanggalAkhir ?></h5>
+                        <?php echo anchor('laporan/pdfSuratMasuk?tanggalawal=' . $tanggalAwal . '&tanggalakhir=' . $tanggalAkhir, '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
+
+
+                        <h6 class="font-weight-bold mt-2 text-primary">Laporan surat masuk tanggal <?= $newTanggalAwal . ' s/d ' . $newTanggalAkhir ?></h6>
                     <?php endif; ?>
 
                     <table class="table table-hover">

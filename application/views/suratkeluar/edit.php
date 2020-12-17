@@ -4,7 +4,10 @@
             <h6 class="m-0 font-weight-bold text-primary"><?= $title ?></h6>
         </div>
         <div class="card-body">
+
             <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
+
+
             <div class="row">
                 <div class="col-md-12">
                     <form action="<?= base_url('suratkeluar/edit/' . $surat_keluar['id_surat_keluar']) ?>" method="post" enctype="multipart/form-data">
@@ -70,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-success btn-sm float-right">Edit</button>
+                        <button type="submit" class="btn btn-success float-right">Edit</button>
                     </form>
                 </div>
             </div>

@@ -16,7 +16,7 @@ class Laporan extends CI_Controller
         $data['title'] = 'Laporan';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['tahun_surat_masuk'] = $this->LaporanModel->getYearSuratMasuk();
+        // $data['tahun_surat_masuk'] = $this->LaporanModel->getYearSuratMasuk();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -47,7 +47,10 @@ class Laporan extends CI_Controller
         $data['title']     = 'Laporan Surat Keluar';
         $data['user']      = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
-        $data['surat_keluar'] = $this->SuratKeluarModel->getAllSuratKeluar();
+        $startDate = $this->input->get('tanggalawal');
+        $endDate = $this->input->get('tanggalakhir');
+
+        $data['surat_keluar'] = $this->LaporanModel->filterByDateSuratKeluar($startDate, $endDate);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -61,7 +64,10 @@ class Laporan extends CI_Controller
     {
         $data['title']    = 'Laporan Disposisi';
         $data['user']     = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['disposisi']      = $this->SuratMasukModel->getAllDisposisi2();
+        $startDate = $this->input->get('tanggalawal');
+        $endDate = $this->input->get('tanggalakhir');
+
+        $data['disposisi'] = $this->LaporanModel->filterByDateSuratDisposisi($startDate, $endDate);
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -70,10 +76,14 @@ class Laporan extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function pdf()
+    public function pdfSuratMasuk()
     {
+
+        $startDate  = $this->input->get('tanggalawal');
+        $endDate    = $this->input->get('tanggalakhir');
+
         $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
-        $dataSuratMasuk = $this->LaporanModel->filterByDateSuratMasuk()->result();
+        $dataSuratMasuk = $this->LaporanModel->filterByDateSuratMasuk($startDate, $endDate)->result();
         $data = $this->load->view('pdf/data_surat_masuk', ['surat_masuk' => $dataSuratMasuk], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
@@ -81,7 +91,33 @@ class Laporan extends CI_Controller
         $mpdf->Output($file_name, 'D');
     }
 
-    public function chart()
+    public function pdfSuratkeluar()
     {
+
+        $startDate  = $this->input->get('tanggalawal');
+        $endDate    = $this->input->get('tanggalakhir');
+
+        $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
+        $dataSuratKeluar = $this->LaporanModel->filterByDateSuratKeluar($startDate, $endDate)->result();
+        $data = $this->load->view('pdf/data_surat_keluar', ['surat_keluar' => $dataSuratKeluar], True);
+        $mpdf->WriteHTML($data);
+        $mpdf->SetDisplayMode('fullwidth');
+        $file_name = "Surat_Keluar_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $mpdf->Output($file_name, 'D');
+    }
+
+    public function pdfSuratDisposisi()
+    {
+
+        $startDate = $this->input->get('tanggalawal');
+        $endDate = $this->input->get('tanggalakhir');
+
+        $mpdf = new \Mpdf\Mpdf(['format' => 'Legal', 'orientation' => 'L']);
+        $dataSuratDisposisi = $this->LaporanModel->filterByDateSuratDisposisi($startDate, $endDate)->result();
+        $data = $this->load->view('pdf/data_disposisi', ['disposisi' => $dataSuratDisposisi], True);
+        $mpdf->WriteHTML($data);
+        $mpdf->SetDisplayMode('fullwidth');
+        $file_name = "Disposisi_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $mpdf->Output($file_name, 'D');
     }
 }

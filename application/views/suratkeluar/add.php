@@ -83,7 +83,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-info btn-sm float-right">Add</button>
+                    <button type="submit" class="btn btn-info  float-right">Add</button>
                     <?php form_close(); ?>
                 </div>
             </div>

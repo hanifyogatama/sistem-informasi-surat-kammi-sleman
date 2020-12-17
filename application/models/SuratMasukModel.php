@@ -96,6 +96,8 @@ class SuratMasukModel extends CI_Model
         $this->db->join('surat_masuk', 'surat_masuk.id_surat_masuk = disposisi.id_surat_masuk');
         $this->db->join('status_surat', 'status_surat.id_status_surat = disposisi.id_status_surat');
         $this->db->join('instansi', 'instansi.id_instansi = disposisi.id_instansi');
+        $this->db->order_by('disposisi.id_disposisi', 'DESC');
+
 
         if ($id != null) {
             $this->db->where('disposisi.id_disposisi',  $id);
@@ -116,6 +118,7 @@ class SuratMasukModel extends CI_Model
             "id_status_surat"       => $this->input->post('id_status_surat', true),
             "isi"                   => $this->input->post('isi', true),
             "keterangan"            => $this->input->post('keterangan', true),
+            "tanggal_dibuat"        => date('Y-m-d')
         ];
 
         $this->db->insert('disposisi', $data);

@@ -43,7 +43,7 @@
                                     <td><strong><?= $data->status; ?></strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Asal Surat</td>
+                                    <td>Pengirim</td>
                                     <td><strong><?= $data->nama_instansi; ?></strong></td>
                                 </tr>
                                 <tr>

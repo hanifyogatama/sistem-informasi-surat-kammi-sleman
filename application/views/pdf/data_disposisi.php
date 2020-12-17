@@ -25,6 +25,7 @@
             <tr>
                 <th>No</th>
                 <th>Nomor Surat</th>
+                <th>Pengirim</th>
                 <th>Tujuan Disposisi</th>
                 <th>Sifat Surat</th>
                 <th>Deskripsi</th>
@@ -38,6 +39,7 @@
                 <tr>
                     <th><?= $i; ?></th>
                     <td><?= $data->nomor_surat ?></td>
+                    <td><?= $data->nama_instansi ?></td>
                     <td><?= $data->nama_departemen ?></td>
                     <td><?= $data->status ?></td>
                     <td><?= $data->isi ?></td>

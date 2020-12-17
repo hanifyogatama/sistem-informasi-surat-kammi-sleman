@@ -11,7 +11,6 @@ class SuratMasuk extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('download');
-        $this->load->library('Pdf');
         $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
         //  is_logged_in();
     }
@@ -42,7 +41,8 @@ class SuratMasuk extends CI_Controller
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
-        $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim', [
+        $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim|is_unique[surat_masuk.no_surat]', [
+            'required' => 'pengirim surat belum diisi',
             'is_unique' => 'nomor surat sudah ada'
         ]);
 

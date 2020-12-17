@@ -42,8 +42,9 @@ class SuratKeluar extends CI_Controller
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
-        $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim', [
-            'required' => 'nomor surat harus diisi'
+        $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim|is_unique[surat_keluar.no_surat]', [
+            'required' => 'pengirim surat belum diisi',
+            'is_unique' => 'nomor surat sudah ada'
         ]);
 
         $this->form_validation->set_rules('id_instansi', 'Instansi', 'required|trim', [
