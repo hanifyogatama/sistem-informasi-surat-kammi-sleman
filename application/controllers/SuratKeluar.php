@@ -267,9 +267,7 @@ class SuratKeluar extends CI_Controller
 
     function pdf($item)
     {
-
         $file = realpath("file_document") . "\\" . $item;;
-
         header('Content-type: application/pdf');
         header('Content-Disposition: inline; filename="' . $file . '"');
         header('Content-Transfer-Encoding: binary');

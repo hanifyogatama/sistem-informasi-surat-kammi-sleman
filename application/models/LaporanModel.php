@@ -5,8 +5,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class LaporanModel extends CI_Model
 {
 
-
-
     function filterByDateSuratMasuk($startDate = null, $endDate = null)
     {
         $this->db->select('surat_masuk.*, instansi.nama_instansi as nama_instansi, status_surat.status as status');

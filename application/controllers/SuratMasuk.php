@@ -426,7 +426,6 @@ class SuratMasuk extends CI_Controller
     {
 
         $file = realpath("file_document") . "\\" . $item;;
-
         header('Content-type: application/pdf');
         header('Content-Disposition: inline; filename="' . $file . '"');
         header('Content-Transfer-Encoding: binary');

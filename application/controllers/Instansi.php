@@ -56,7 +56,6 @@ class Instansi extends CI_Controller
 
         $data['instansi'] = $this->InstansiModel->getByIdInstansi($id);
 
-
         // rules
         $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
