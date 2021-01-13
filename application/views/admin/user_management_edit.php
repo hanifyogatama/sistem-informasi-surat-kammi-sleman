@@ -7,7 +7,7 @@
             <div class="col-lg">
                 <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary px-3 btn-sm  mb-3"><i class="fas fa-arrow-left"></i></a>
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-9">
                         <form action="" method="POST" enctype="multipart/form-data">
 
                             <div class="form-group row">
@@ -30,7 +30,7 @@
                                 <div class="col-sm-10">
                                     <div class="row">
                                         <div class="col-sm-6 ">
-                                            <input type="password" class="form-control form-control-user" id="password1" placeholder="password" name="password1">
+                                            <input type="password" class="form-control form-control-user" id="password1" placeholder="password" name="password1" autocomplete="new-password">
                                             <?= form_error('password1', '<small class="text-danger pl-3">', '</small>') ?>
                                         </div>
                                         <div class="col-sm-6">
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                                 <div class="col-sm-2">
                                     Foto
                                 </div>
@@ -81,7 +81,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="text-right">
                                 <button type="submit" name="user_management_edit" class="btn btn-info ">Edit</button>
                             </div>
