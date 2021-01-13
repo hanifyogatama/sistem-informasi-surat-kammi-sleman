@@ -19,8 +19,8 @@ function is_logged_in()
             'id_menu' => $menuId
         ]);
 
-        if ($userAcces->num_rows() < 1) {
-            redirect('auth/blocked');
+        if ($userAcces->num_rows() > 1) {
+            redirect('dashboard');
         }
     }
 }

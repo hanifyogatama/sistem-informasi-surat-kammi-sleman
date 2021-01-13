@@ -8,6 +8,7 @@ class Departemen extends CI_Controller
     {
         parent::__construct();
         $this->load->model('DepartemenModel');
+        is_logged_in();
     }
 
     public function index()

@@ -7,6 +7,7 @@ class StatusSurat extends CI_Controller
     {
         parent::__construct();
         $this->load->model(['StatusSuratModel']);
+        is_logged_in();
     }
 
     public function index()

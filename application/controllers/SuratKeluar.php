@@ -14,7 +14,7 @@ class SuratKeluar extends CI_Controller
     {
         parent::__construct();
         $this->load->model(['SuratKeluarModel', 'InstansiModel', 'StatusSuratModel']);
-        //  is_logged_in();
+        is_logged_in();
     }
 
     public function index()

@@ -9,6 +9,12 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
+        // $this->load->helper(array('form', 'url', 'security'));
+
+        // $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        // $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        // $this->output->set_header('Pragma: no-cache');
+        // $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     }
 
     public function index()
@@ -16,7 +22,7 @@ class Auth extends CI_Controller
 
         // session
         // if ($this->session->userdata('email')) {
-        //     redirect('user');
+        //     redirect('dashboard');
         // }
 
         // rules form login
@@ -116,12 +122,22 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('email');
-        $this->session->unset_userdata('id_role');
+        $this->clearCache();
+
+        $data = array('email', 'id_role');
+        $this->session->unset_userdata($data);
         $this->session->sess_destroy();
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">you have been logged out</div>');
         redirect('auth');
+    }
+
+    protected function clearCache()
+    {
+        $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     }
 
     public function blocked()

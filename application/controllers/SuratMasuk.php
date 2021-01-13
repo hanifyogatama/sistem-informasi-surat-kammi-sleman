@@ -12,7 +12,7 @@ class SuratMasuk extends CI_Controller
         parent::__construct();
         $this->load->helper('download');
         $this->load->model(['SuratMasukModel', 'InstansiModel', 'StatusSuratModel', 'DepartemenModel']);
-        //  is_logged_in();
+        is_logged_in();
     }
 
     // get all data from surat masuk

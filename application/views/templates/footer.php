@@ -46,7 +46,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-warning btn-sm" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-sm" href="<?= base_url('auth') ?>">Logout</a>
+                    <a class="btn btn-danger btn-sm" href="<?= base_url('auth/logout') ?>">Logout</a>
                 </div>
             </div>
         </div>
