@@ -199,12 +199,12 @@ class Admin extends CI_Controller
             $this->load->view('admin/user_management_edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $nama = $this->input->post('nama');
-            $email = $this->input->post('email');
+            $nama = htmlspecialchars($this->input->post('nama', true));
+            $email = htmlspecialchars($this->input->post('email', true));
             $id_role = $this->input->post('id_role');
             $status_user = $this->input->post('is_active');
 
-            $password = $this->input->post('password1');
+            $password = htmlspecialchars($this->input->post('password1', true));
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
             $upload_image = $_FILES['gambar'];
@@ -252,11 +252,11 @@ class Admin extends CI_Controller
         $data['userrole'] = $this->AdminModel->getAllRole();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim', [
-            'required' => 'nama belum disi'
+            'required' => 'nama belum diisi'
         ]);
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-            'required'  => 'email belum disi',
-            'is_unique' => 'email has already registered'
+            'required'  => 'email belum diisi',
+            'is_unique' => 'email sudah terdaftar'
         ]);
 
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[5]|matches[password2]', [
@@ -268,7 +268,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
 
         $this->form_validation->set_rules('id_role', 'Role', 'required', [
-            'required' => 'role belum disi'
+            'required' => 'role belum dipilih'
         ]);
 
         if ($this->form_validation->run() == false) {

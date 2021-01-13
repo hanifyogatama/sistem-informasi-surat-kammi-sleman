@@ -24,14 +24,16 @@ class StatusSurat extends CI_Controller
 
     public function add()
     {
-        $data['title'] = 'Tambah Sifat Surat';
+        $data['title'] = 'Tambah Status Surat';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['status_surat'] = $this->db->get('status_surat')->result_array();
 
         $data['status_surat'] = $this->db->get('status_surat')->result_array();
 
         // rules
-        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('status', 'Status', 'required', [
+            'required' => 'status surat harus diisi '
+        ]);
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -55,7 +57,9 @@ class StatusSurat extends CI_Controller
         $data['status_surat'] = $this->StatusSuratModel->getByIdStatusSurat($id);
 
         // rules
-        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('status', 'Status', 'required', [
+            'required' => 'status surat belum diisi'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);

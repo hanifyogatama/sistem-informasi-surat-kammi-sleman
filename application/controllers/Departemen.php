@@ -31,7 +31,9 @@ class Departemen extends CI_Controller
         $data['departemen'] = $this->db->get('departemen')->result_array();
 
         // rules
-        $this->form_validation->set_rules('nama_departemen', 'Departemen', 'required');
+        $this->form_validation->set_rules('nama_departemen', 'Departemen', 'required', [
+            'required' => 'nama departemen belum diisi'
+        ]);
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -57,7 +59,9 @@ class Departemen extends CI_Controller
         $data['departemen'] = $this->db->get('departemen')->result_array();
 
         // rules
-        $this->form_validation->set_rules('nama_departemen', 'Departemen', 'required');
+        $this->form_validation->set_rules('nama_departemen', 'Departemen', 'required', [
+            'required' => 'nama departemen harus diisi'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);

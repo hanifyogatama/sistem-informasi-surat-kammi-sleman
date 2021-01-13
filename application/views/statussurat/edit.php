@@ -13,7 +13,7 @@
 
                         <label for="status" class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="status" name="status" value="<?= $status_surat['status'] ?>" placeholder="status">
+                            <input type="text" class="form-control" id="status" name="status" value="<?= $status_surat['status'] ?>" placeholder="status" autocomplete="off">
                             <?= form_error('status', '<small class="text-danger ">', '</small>') ?>
                         </div>
                     </div>

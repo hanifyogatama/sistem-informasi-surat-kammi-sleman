@@ -9,17 +9,17 @@
                 <form action="<?= base_url('user/ubahpassword'); ?>" method="POST">
                     <div class="form-group">
                         <label for="old_password">Password Lama</label>
-                        <input type="password" class="form-control" id="old_password" name="old_password">
+                        <input type="password" class="form-control" id="old_password" name="old_password" autocomplete="new-password">
                         <?= form_error('old_password', '<small class="text-danger pl-3">', '</small>') ?>
                     </div>
                     <div class="form-group">
                         <label for="new_password1">Password Baru</label>
-                        <input type="password" class="form-control" id="new_password1" name="new_password1">
+                        <input type="password" class="form-control" id="new_password1" name="new_password1" autocomplete="new-password">
                         <?= form_error('new_password1', '<small class="text-danger pl-3">', '</small>') ?>
                     </div>
                     <div class="form-group">
                         <label for="new_password2">Ulangi Password Baru</label>
-                        <input type="password" class="form-control" id="new_password2" name="new_password2">
+                        <input type="password" class="form-control" id="new_password2" name="new_password2" autocomplete="new-password">
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-info">Edit</button>

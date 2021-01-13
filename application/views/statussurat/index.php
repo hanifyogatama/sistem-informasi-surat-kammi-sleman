@@ -60,7 +60,8 @@
             <form action="<?= base_url('statussurat/add'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="status" name="status" placeholder="status surat">
+                        <input type="text" class="form-control" id="status" name="status" placeholder="status surat" autocomplete="off">
+                        <?= form_error('status', '<small class="text-danger ">', '</small>') ?>
                     </div>
                 </div>
                 <div class="modal-footer">

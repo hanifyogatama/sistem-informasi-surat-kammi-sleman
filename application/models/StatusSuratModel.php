@@ -22,7 +22,7 @@ class StatusSuratModel extends CI_Model
     public function addStatusSurat()
     {
         $data = [
-            "status"   => $this->input->post('status', true)
+            "status"   => htmlspecialchars($this->input->post('status', true))
         ];
 
         $this->db->insert('status_surat', $data);

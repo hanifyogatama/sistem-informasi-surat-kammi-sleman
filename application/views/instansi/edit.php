@@ -7,13 +7,13 @@
             <div class="col-lg-8">
                 <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary  btn-sm px-3 mb-3"><i class="fas fa-arrow-left"></i></a>
 
-                <form action="" method="post">
+                <form autocomplete="off" action="" method="post">
                     <div class="form-group row">
                         <input type="hidden" class="form-control" id="id_instansi" name="id_instansi" value="<?= $instansi['id_instansi'] ?>">
 
                         <label for="nama_instansi" class="col-sm-2 col-form-label">Instansi</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="<?= $instansi['nama_instansi'] ?>" placeholder="role">
+                            <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="<?= $instansi['nama_instansi'] ?>" placeholder="nama instansi" autocomplete="off">
                             <?= form_error('nama_instansi', '<small class="text-danger ">', '</small>') ?>
                         </div>
                     </div>
@@ -21,7 +21,7 @@
                     <div class="form-group row">
                         <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $instansi['alamat'] ?>" placeholder="role">
+                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $instansi['alamat'] ?>" placeholder="alamat" autocomplete="off">
                             <?= form_error('alamat', '<small class="text-danger ">', '</small>') ?>
                         </div>
                     </div>

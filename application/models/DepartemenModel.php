@@ -13,7 +13,7 @@ class DepartemenModel extends CI_Model
     // add data
     public function addDepartemen()
     {
-        $data = ["nama_departemen" => htmlspecialchars($this->input->post('nama_departemen'))];
+        $data = ["nama_departemen" => htmlspecialchars($this->input->post('nama_departemen', true))];
         $this->db->insert('departemen', $data);
     }
 

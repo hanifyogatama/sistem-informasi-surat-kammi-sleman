@@ -15,8 +15,8 @@ class InstansiModel extends CI_Model
     public function addInstansi()
     {
         $data = [
-            "nama_instansi"         => $this->input->post('nama_instansi', true),
-            "alamat"                => $this->input->post('alamat', true)
+            "nama_instansi"         => htmlspecialchars($this->input->post('nama_instansi', true)),
+            "alamat"                => htmlspecialchars($this->input->post('alamat', true))
         ];
 
         $this->db->insert('instansi', $data);
@@ -38,8 +38,8 @@ class InstansiModel extends CI_Model
     public function editInstansi()
     {
         $data = [
-            "nama_instansi"         => $this->input->post('nama_instansi', true),
-            "alamat"                => $this->input->post('alamat', true)
+            "nama_instansi"         => htmlspecialchars($this->input->post('nama_instansi', true)),
+            "alamat"                => htmlspecialchars($this->input->post('alamat', true))
         ];
         $this->db->where('id_instansi', $this->input->post('id_instansi'));
         $this->db->update('instansi', $data);

@@ -59,7 +59,8 @@
             <form action="<?= base_url('departemen/add'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen name">
+                        <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen name" autocomplete="off">
+                        <?= form_error('nama_departemen', '<small class="text-danger ">', '</small>') ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -90,7 +91,8 @@ foreach ($departemen as $dep) :  $no++; ?>
                             <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen" value="<?= $dep['nama_departemen']; ?>">
+                            <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen" value="<?= $dep['nama_departemen']; ?>" autocomplete="off">
+                            <?= form_error('nama_departemen', '<small class="text-danger ">', '</small>') ?>
                         </div>
                     </div>
                     <div class="modal-footer">

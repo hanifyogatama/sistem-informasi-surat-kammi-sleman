@@ -64,10 +64,12 @@
             <form action="<?= base_url('instansi/add'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" placeholder="instansi">
+                        <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" placeholder="instansi" autocomplete="off">
+                        <?= form_error('nama_instansi', '<small class="text-danger ">', '</small>') ?>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="alamat">
+                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="alamat" autocomplete="off">
+                        <?= form_error('alamat', '<small class="text-danger ">', '</small>') ?>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -31,8 +31,12 @@ class Instansi extends CI_Controller
         $data['instansi'] = $this->db->get('instansi')->result_array();
 
         // rules
-        $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required', [
+            'required' => 'nama instansi belum diisi'
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required', [
+            'required' => 'alamat belum diisi'
+        ]);
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -57,8 +61,12 @@ class Instansi extends CI_Controller
         $data['instansi'] = $this->InstansiModel->getByIdInstansi($id);
 
         // rules
-        $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('nama_instansi', 'Instansi', 'required', [
+            'required' => 'nama instansi harus diisi'
+        ]);
+        $this->form_validation->set_rules('alamat', 'Alamat', 'required', [
+            'required' => 'alamat harus diisi'
+        ]);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);

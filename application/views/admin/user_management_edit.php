@@ -8,7 +8,7 @@
                 <a href="javascript:history.go(-1)" title="Back" class="btn btn-outline-primary px-3 btn-sm  mb-3"><i class="fas fa-arrow-left"></i></a>
                 <div class="row">
                     <div class="col-lg-9">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form autocomplete="off" action="" method="POST" enctype="multipart/form-data">
 
                             <div class="form-group row">
                                 <label for="name" class="col-sm-2 col-form-label">Full Name</label>
@@ -34,7 +34,7 @@
                                             <?= form_error('password1', '<small class="text-danger pl-3">', '</small>') ?>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="repeat password">
+                                            <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="repeat password" autocomplete="new-password">
                                         </div>
                                     </div>
                                 </div>

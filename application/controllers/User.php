@@ -38,7 +38,7 @@ class User extends CI_Controller
             $this->load->view('user/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            $nama = $this->input->post('nama');
+            $nama = htmlspecialchars($this->input->post('nama', true));
             $email = $this->input->post('email');
             $upload_image = $_FILES['gambar'];
 
@@ -67,7 +67,10 @@ class User extends CI_Controller
             $this->db->where('email', $email);
             $this->db->update('user');
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">your profile has been updated</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>your profile has been updated</div>');
+
             redirect('user');
         }
     }
@@ -78,8 +81,13 @@ class User extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         // rules
-        $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');
-        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[5]|matches[new_password2]');
+        $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim', [
+            'required' => 'password lama belum diisi'
+        ]);
+
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[5]|matches[new_password2]', [
+            'required' => 'password baru belum diisi'
+        ]);
         $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[5]|matches[new_password1]');
 
         if ($this->form_validation->run() == false) {
@@ -93,7 +101,7 @@ class User extends CI_Controller
             $new_password = $this->input->post('new_password1');
 
             if (!password_verify($old_password, $data['user']['password'])) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role = "alert">wrong old password</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role = "alert">wrong current password</div>');
                 redirect('user/ubahpassword');
             } else {
                 if ($old_password == $new_password) {
