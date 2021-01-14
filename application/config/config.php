@@ -159,7 +159,9 @@ $config['composer_autoload'] = 'assets/vendor/autoload.php';
 | DO NOT CHANGE THIS UNLESS YOU FULLY UNDERSTAND THE REPERCUSSIONS!!
 |
 */
-$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+// $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
+//$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-\=';
+$config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-\=\+\(\)\!\@\&\#\^\%';
 
 /*
 |--------------------------------------------------------------------------
@@ -184,6 +186,7 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 |
 */
 $config['enable_query_strings'] = FALSE;
+// $config['enable_query_strings'] = TRUE;
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 $config['directory_trigger'] = 'd';

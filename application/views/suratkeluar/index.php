@@ -13,7 +13,7 @@
                     <!-- button -->
                     <?php echo anchor('suratkeluar/add', '<button class="btn btn-outline-primary btn-sm mb-3 px-3" title="Add"><i class="fa fa-plus"></i> </button>'); ?>
 
-                    <?php echo anchor('suratkeluar/print', '<button class="btn btn-outline-success btn-sm mb-3 px-3 " title="Print"><i class="fa fa-print" ></i> </button>'); ?>
+                    <?php echo anchor('suratkeluar/print', '<button class="btn btn-outline-success btn-sm mb-3 px-3 " title="Print"><i class="fa fa-print" ></i> </button>', 'target="_blank"'); ?>
 
                     <?php echo anchor('suratkeluar/exportToPdf', '<button class="btn btn-outline-danger btn-sm mb-3 px-3 " title="Export to pdf"><i class="fa fa-file-pdf" ></i> </button>'); ?>
 

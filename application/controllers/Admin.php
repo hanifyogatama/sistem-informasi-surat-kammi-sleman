@@ -1,3 +1,5 @@
+<!-- https://stackoverflow.com/questions/30936919/how-to-check-if-an-array-is-empty-in-phpcodeigniter -->
+
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 

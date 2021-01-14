@@ -6,6 +6,7 @@ class SuratMasukModel extends CI_Model
     // get all data
     public function getAllSuratMasuk($id = null)
     {
+
         $this->db->select('surat_masuk.*, instansi.nama_instansi as nama_instansi, status_surat.status as status');
         $this->db->from('surat_masuk');
         $this->db->join('instansi', 'instansi.id_instansi = surat_masuk.id_instansi');
@@ -23,13 +24,13 @@ class SuratMasukModel extends CI_Model
     public function addSuratMasuk($file)
     {
         $data = [
-            "no_surat"              => $this->input->post('no_surat', true),
-            "id_instansi"           => $this->input->post('id_instansi', true),
-            "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "isi"                   => $this->input->post('isi', true),
-            "tanggal_surat"         => $this->input->post('tanggal_surat', true),
-            "tanggal_diterima"      => $this->input->post('tanggal_diterima', true),
-            "keterangan"            => $this->input->post('keterangan', true),
+            "no_surat"              => htmlspecialchars($this->input->post('no_surat', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "tanggal_surat"         => htmlspecialchars($this->input->post('tanggal_surat', true)),
+            "tanggal_diterima"      => htmlspecialchars($this->input->post('tanggal_diterima', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true)),
             "file_surat"            => $file
         ];
 
@@ -46,13 +47,13 @@ class SuratMasukModel extends CI_Model
     public function editSuratMasuk($file)
     {
         $data = [
-            "no_surat"              => $this->input->post('no_surat', true),
-            "id_instansi"           => $this->input->post('id_instansi', true),
-            "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "isi"                   => $this->input->post('isi', true),
-            "tanggal_surat"         => $this->input->post('tanggal_surat', true),
-            "tanggal_diterima"      => $this->input->post('tanggal_diterima', true),
-            "keterangan"            => $this->input->post('keterangan', true),
+            "no_surat"              => htmlspecialchars($this->input->post('no_surat', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "tanggal_surat"         => htmlspecialchars($this->input->post('tanggal_surat', true)),
+            "tanggal_diterima"      => htmlspecialchars($this->input->post('tanggal_diterima', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true)),
             "file_surat"            => $file
         ];
 
@@ -111,13 +112,13 @@ class SuratMasukModel extends CI_Model
     public function addDisposisi()
     {
         $data = [
-            "id_surat_masuk"        => $this->input->post('id_surat_masuk', true),
-            "id_departemen"         => $this->input->post('id_departemen', true),
-            "id_instansi"           => $this->input->post('id_instansi', true),
-            "batas_waktu"           => $this->input->post('batas_waktu', true),
-            "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "isi"                   => $this->input->post('isi', true),
-            "keterangan"            => $this->input->post('keterangan', true),
+            "id_surat_masuk"        => htmlspecialchars($this->input->post('id_surat_masuk', true)),
+            "id_departemen"         => htmlspecialchars($this->input->post('id_departemen', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "batas_waktu"           => htmlspecialchars($this->input->post('batas_waktu', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true)),
             "tanggal_dibuat"        => date('Y-m-d')
         ];
 
@@ -134,13 +135,13 @@ class SuratMasukModel extends CI_Model
     public function editDisposisi()
     {
         $data = [
-            "id_surat_masuk"        => $this->input->post('id_surat_masuk', true),
-            "id_departemen"         => $this->input->post('id_departemen', true),
-            "id_instansi"           => $this->input->post('id_instansi', true),
-            "batas_waktu"           => $this->input->post('batas_waktu', true),
-            "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "isi"                   => $this->input->post('isi', true),
-            "keterangan"            => $this->input->post('keterangan', true),
+            "id_surat_masuk"        => htmlspecialchars($this->input->post('id_surat_masuk', true)),
+            "id_departemen"         => htmlspecialchars($this->input->post('id_departemen', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "batas_waktu"           => htmlspecialchars($this->input->post('batas_waktu', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true)),
         ];
 
         $this->db->where('id_disposisi', $this->input->post('id_disposisi'));

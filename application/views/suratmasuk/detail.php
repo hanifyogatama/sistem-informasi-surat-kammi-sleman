@@ -40,8 +40,16 @@
                                 </tr>
                                 <tr>
                                     <td>Sifat Surat</td>
-                                    <td><strong><?= $data->status; ?></strong></td>
+                                    <!-- <td><strong><?= $data->status; ?></strong></td> -->
+                                    <?php $x = $data->status;
+                                    if ($x == '') : ?>
+                                        <><strong><?= 'kosong' ?></strong></>
+                                    <?php else : ?>
+                                        <td><strong><?= $data->status; ?></strong></td>
+                                    <?php endif; ?>
+
                                 </tr>
+
 
                                 <?php
                                 $oldDateSurat = $data->tanggal_surat;

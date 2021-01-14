@@ -14,18 +14,18 @@
                             <div class="form-group">
                                 <div class="">
                                     <label>Nomor Surat</label>
-                                    <input type="text" name="no_surat" id="no_surat" class="form-control" value="<?= set_value('no_surat') ?>">
+                                    <input type="text" name="no_surat" id="no_surat" class="form-control" value="<?= set_value('no_surat') ?>" autocomplete="off">
                                     <?php echo form_error('no_surat', '<div class="text-danger small">', '</div>'); ?>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="">
-                                    <label>Penerima</label>
+                                    <label>Pengirim</label>
                                     <select name="id_instansi" id="id_instansi" class="form-control">
                                         <option value="">-Pilih-</option>
                                         <?php foreach ($instansi as $instansi) : ?>
-                                            <option value="<?= $instansi['id_instansi'] ?> "><?= $instansi['nama_instansi'] ?></option>
+                                            <option value="<?= $instansi['id_instansi'] ?>" <?php echo set_select('id_instansi', $instansi['id_instansi'], (!empty($data) && $data == $instansi['id_instansi'] ? TRUE : FALSE)); ?>><?= $instansi['nama_instansi'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?= form_error('id_instansi', '<small class="text-danger ">', '</small>') ?>
@@ -38,7 +38,9 @@
                                     <select name="id_status_surat" id="id_status_surat" class="form-control">
                                         <option value="">-Pilih-</option>
                                         <?php foreach ($status_surat as $status_surat) : ?>
-                                            <option value="<?= $status_surat['id_status_surat'] ?>"><?= $status_surat['status'] ?></option>
+                                            <option value="<?= $status_surat['id_status_surat'] ?>" <?php echo set_select('id_status_surat', $status_surat['id_status_surat'], (!empty($data) && $data == $status_surat['id_status_surat'] ? TRUE : FALSE)); ?>>
+                                                <?= $status_surat['status'] ?>
+                                            </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <?= form_error('id_status_surat', '<small class="text-danger ">', '</small>') ?>
@@ -79,6 +81,14 @@
                                     </div>
                                     <?= form_error('file_surat', '<small class="text-danger">', '</small>') ?>
                                     <?= $this->session->flashdata('message'); ?>
+                                    <div>
+                                        <p>
+                                            <small class="text-primary">
+                                                - format file pdf / docx </br>
+                                                - ukuran file max 2mb
+                                            </small>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

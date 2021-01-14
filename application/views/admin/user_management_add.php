@@ -11,7 +11,7 @@
                     <div class="form-group row">
                         <label for="role" class="col-sm-2 col-form-label">Full Name</label>
                         <div class="col-sm-10">
-                            <input autocomplete="new-password" type="text" class="form-control" id="nama" name="nama" placeholder="full name" value="<?= set_value('nama') ?>">
+                            <input autocomplete="off" type="text" class="form-control" id="nama" name="nama" placeholder="full name" value="<?= set_value('nama') ?>">
                             <?= form_error('nama', '<small class="text-danger">', '</small>') ?>
                         </div>
                     </div>

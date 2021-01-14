@@ -49,7 +49,20 @@ class User extends CI_Controller
 
                 $this->load->library('upload', $config);
 
-                if ($this->upload->do_upload('gambar')) {
+                if (!$this->upload->do_upload('gambar')) {
+
+                    // echo $this->upload->display_errors();
+
+                    $errorGambar = $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>format file salah / ukuran melebihi maksimal</div>');
+
+                    $this->load->view('templates/header', $data);
+                    $this->load->view('templates/sidebar', $data);
+                    $this->load->view('templates/topbar', $data);
+                    $this->load->view('user/edit', $data,  $errorGambar);
+                    $this->load->view('templates/footer');
+                } else {
                     $old_gambar = $data['user']['gambar'];
 
                     if ($old_gambar != 'default.png') {
@@ -58,20 +71,17 @@ class User extends CI_Controller
 
                     $new_gambar = $this->upload->data('file_name');
                     $this->db->set('gambar', $new_gambar);
-                } else {
-                    echo $this->upload->display_errors();
+                    $this->db->set('nama', $nama);
+                    $this->db->where('email', $email);
+                    $this->db->update('user');
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>your profile has been updated</div>');
+
+                    redirect('user');
                 }
             }
-
-            $this->db->set('nama', $nama);
-            $this->db->where('email', $email);
-            $this->db->update('user');
-
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>your profile has been updated</div>');
-
-            redirect('user');
         }
     }
 

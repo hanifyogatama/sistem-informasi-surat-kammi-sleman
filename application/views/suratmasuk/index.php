@@ -13,7 +13,7 @@
                     <!-- button -->
                     <?php echo anchor('suratmasuk/add', '<button title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3"><i class="fa fa-plus "></i> </button>'); ?>
 
-                    <?php echo anchor('suratmasuk/print', '<button title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>'); ?>
+                    <?php echo  anchor('suratmasuk/print', '<button target= title="Print"  class="btn btn-outline-success btn-sm mb-3 px-3 "><i class="fa fa-print "></i> </button>', 'target="_blank"'); ?>
 
                     <?php echo anchor('suratmasuk/exportToPdf', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 

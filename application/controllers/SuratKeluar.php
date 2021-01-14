@@ -43,7 +43,7 @@ class SuratKeluar extends CI_Controller
 
         // rules
         $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim|is_unique[surat_keluar.no_surat]', [
-            'required' => 'pengirim surat belum diisi',
+            'required' => 'nomor surat belum diisi',
             'is_unique' => 'nomor surat sudah ada'
         ]);
 
@@ -63,6 +63,12 @@ class SuratKeluar extends CI_Controller
             'required' => 'tanggal surat belum diisi'
         ]);
 
+        if (empty($_FILES['file_surat']['name'])) {
+            $this->form_validation->set_rules('file_surat', 'Document', 'required', [
+                'required' => 'pastikan file sudah dicantumkan'
+            ]);
+        }
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
@@ -78,10 +84,15 @@ class SuratKeluar extends CI_Controller
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('file_surat')) {
-                $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $errorSurat = $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-                </button>belum ditambah / salah format</div>');
-                redirect('suratkeluar/add', 'refresh');
+                </button>file salah format / ukuran melebihi maksimal</div>');
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('suratkeluar/add', $data,  $errorSurat);
+                $this->load->view('templates/footer');
             } else {
                 $new_file = $this->upload->data('file_name');
                 $this->SuratKeluarModel->addSuratKeluar($new_file);

@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <div class="">
                                     <label>Nomor Surat</label>
-                                    <input type="text" name="no_surat" id="no_surat" class="form-control" value="<?= set_value('no_surat') ?>">
+                                    <input type="text" name="no_surat" id="no_surat" class="form-control" value="<?= set_value('no_surat') ?>" autocomplete="off">
                                     <?php echo form_error('no_surat', '<div class="text-danger small">', '</div>'); ?>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <label>Keterangan</label>
+                                    <label>Keterangan <sup><em>(*optional)</em></sup></label>
                                     <textarea class="form-control" rows="4" id="keterangan" name="keterangan"><?= set_value('keterangan') ?></textarea>
                                     <?= form_error('keterangan', '<small class="text-danger">', '</small>') ?>
                                 </div>
@@ -85,9 +85,20 @@
                                         <label for="">File</label><br>
                                         <input type="file" name="file_surat" class="">
                                     </div>
+                                    <?= form_error('file_surat', '<small class="text-danger">', '</small>') ?>
                                     <?= $this->session->flashdata('message'); ?>
+                                    <div>
+                                        <p>
+                                            <small class="text-primary">
+                                                - format file pdf / docx </br>
+                                                - ukuran file max 2mb
+                                            </small>
+                                        </p>
+                                    </div>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                     <button type="submit" class="btn btn-info  float-right">Add</button>

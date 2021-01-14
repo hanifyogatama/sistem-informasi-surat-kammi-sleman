@@ -17,7 +17,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label">Full Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?> ">
+                            <input type="text" class="form-control" id="nama" name="nama" value="<?= $user['nama']; ?>" autocomplete="off">
                         </div>
                     </div>
 
@@ -32,9 +32,18 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="custom-file">
-
                                         <input type="file" class="custom-file-input" id="gambar" name="gambar">
                                         <label class="custom-file-label" for="gambar">Choose file</label>
+
+                                        <div>
+                                            <p>
+                                                <small class="text-primary">
+                                                    - format file png / jpg</br>
+                                                    - ukuran file max 2mb
+                                                </small>
+                                            </p>
+                                        </div>
+                                        <?= $this->session->flashdata('message'); ?>
                                     </div>
                                 </div>
                             </div>

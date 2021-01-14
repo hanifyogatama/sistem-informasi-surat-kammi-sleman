@@ -11,7 +11,7 @@ class SuratKeluarModel extends CI_Model
         $this->db->from('surat_keluar');
         $this->db->join('instansi', 'instansi.id_instansi = surat_keluar.id_instansi');
         $this->db->join('status_surat', 'status_surat.id_status_surat = surat_keluar.id_status_surat');
-        $this->db->order_by("surat_keluar.id_surat_keluar", "asc");
+        $this->db->order_by("surat_keluar.id_surat_keluar", "DESC");
 
         if ($id != null) {
             $this->db->where('surat_keluar.id_surat_keluar', $id);
@@ -25,12 +25,12 @@ class SuratKeluarModel extends CI_Model
     public function addSuratKeluar($file)
     {
         $data = [
-            "no_surat"              => $this->input->post('no_surat', true),
-            "id_instansi"           => $this->input->post('id_instansi', true),
-            "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "isi"                   => $this->input->post('isi', true),
-            "tanggal_surat"         => $this->input->post('tanggal_surat', true),
-            "keterangan"            => $this->input->post('keterangan', true),
+            "no_surat"              => htmlspecialchars($this->input->post('no_surat', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "tanggal_surat"         => htmlspecialchars($this->input->post('tanggal_surat', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true)),
             "file_surat"            => $file
         ];
 
@@ -58,12 +58,12 @@ class SuratKeluarModel extends CI_Model
     public function editSuratKeluar($file)
     {
         $data = [
-            "no_surat"              => $this->input->post('no_surat', true),
-            "id_instansi"           => $this->input->post('id_instansi', true),
-            "id_status_surat"       => $this->input->post('id_status_surat', true),
-            "tanggal_surat"         => $this->input->post('tanggal_surat', true),
-            "isi"                   => $this->input->post('isi', true),
-            "keterangan"            => $this->input->post('keterangan', true),
+            "no_surat"              => htmlspecialchars($this->input->post('no_surat', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "tanggal_surat"         => htmlspecialchars($this->input->post('tanggal_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true)),
             "file_surat"            => $file
         ];
 
