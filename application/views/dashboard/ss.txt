@@ -20,3 +20,43 @@
             </div>
         </div>
     </div>
+
+      // if (empty($_FILES['file_surat']['name'])) {
+        //     $this->form_validation->set_rules('file_surat', 'Document', 'required', [
+        //         'required' => 'pastikan file sudah dicantumkan'
+        //     ]);
+        // }
+
+        // $this->form_validation->set_rules('file_surat', 'file surat', 'required', [
+        //     'required' => 'pastikan file sudah dicantumkan dan sesuai aturan'
+        // ]);
+
+        // if ($this->input->post('file_surat') == true) {
+        //     $this->form_validation->set_rules('file_surat', 'file surat', 'required');
+        //     if ($this->form_validation->run() == FALSE) {
+        //         $this->form_validation->set_message('required', 'pastikan file sudah dicantumkan dan sesuai yang disyaratkan');
+        //     }
+        // } else {
+        //     $this->form_validation->set_rules('file_surat', 'file surat');
+        // }
+
+        // $haha = $this->session->set_flashdata('message3', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        // <span aria-hidden="true">&times;</span>
+        // </button>nomor surat sudah ada</div>');
+
+        // if (empty($this->input->post('no_surat')) == true) {
+        //     $this->form_validation->set_rules('no_surat', 'No Surat', 'trim');
+        // } else {
+        //     $this->form_validation->set_rules('no_surat', 'No Surat', 'trim|is_unique[surat_masuk.no_surat]', [
+        //         'is_unique' => $haha
+        //     ]);
+        // }
+
+
+            $this->SuratMasukModel->addSuratMasuk1();
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>data added</div>');
+            redirect('suratmasuk');
+
+                <!-- <td><?= date('d F Y', $data->tanggal_surat)  ?></td> -->

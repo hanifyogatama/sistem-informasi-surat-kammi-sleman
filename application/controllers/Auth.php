@@ -26,8 +26,12 @@ class Auth extends CI_Controller
         // }
 
         // rules form login
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim');
+        $this->form_validation->set_rules(
+            'password',
+            'Password',
+            'trim'
+        );
 
 
         if ($this->form_validation->run() == false) {
@@ -64,15 +68,28 @@ class Auth extends CI_Controller
                         redirect('dashboard');
                     }
                 } else {
-                    $this->session->set_flashdata('message',  '<div class="alert alert-danger" role = "alert">wrong password </div>');
-                    redirect('auth');
+                    $data['title'] = 'Login Page';
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>password salah</div>');
+
+
+                    $this->load->view('templates/auth_header', $data);
+                    $this->load->view('auth/login');
+                    $this->load->view('templates/auth_footer');
+                    // redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role = "alert">email has not been activated </div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>email belum diaktifkan</div>');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role = "alert">email is not registered </div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>akun tidak terdaftar</div>');
             redirect('auth');
         }
     }

@@ -41,56 +41,39 @@ class SuratMasuk extends CI_Controller
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
-        $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim|is_unique[surat_masuk.no_surat]', [
-            'required' => 'nomor surat belum diisi',
+        $this->form_validation->set_rules('no_surat', 'No Surat', 'trim|required|is_unique[surat_masuk.no_surat]', [
+            'required' =>  'nomor surat belum diisi',
             'is_unique' => 'nomor surat sudah ada'
         ]);
 
-        $this->form_validation->set_rules('id_instansi', 'Instansi', 'required|trim', [
-            'required' => 'pengirim surat belum diisi'
+        $this->form_validation->set_rules('id_instansi', 'Instansi', 'trim|required', [
+            'required' =>  'instansi belum dipilih'
         ]);
 
-        $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim', [
-            'required' => 'sifat surat belum diisi'
+        $this->form_validation->set_rules('id_status_surat', 'Status surat', 'trim|required', [
+            'required' =>  'jenis surat belum dipilih'
         ]);
 
-        $this->form_validation->set_rules('isi', 'Isi', 'required|trim', [
-            'required' => 'deskripsi surat belum diisi'
+        $this->form_validation->set_rules('isi', 'Isi', 'trim|required', [
+            'required' =>  'deskripsi belum diisi',
         ]);
 
-        $this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'required|trim', [
-            'required' => 'tanggal surat belum diisi'
+        $this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'trim|required', [
+            'required' =>  'tanggal surat belum dipilih'
         ]);
 
-        $this->form_validation->set_rules('tanggal_diterima', 'tanggal diterima', 'required|trim', [
-            'required' => 'tanggal diterima surat belum diisi'
+        $this->form_validation->set_rules('tanggal_diterima', 'tanggal diterima', 'trim|required', [
+            'required' =>  'tanggal diterima belum dipilih'
         ]);
-
-        if (empty($_FILES['file_surat']['name'])) {
-            $this->form_validation->set_rules('file_surat', 'Document', 'required', [
-                'required' => 'pastikan file sudah dicantumkan'
-            ]);
-        }
-        // $this->form_validation->set_rules('file_surat', 'file surat', 'required', [
-        //     'required' => 'pastikan file sudah dicantumkan dan sesuai aturan'
-        // ]);
-
-        // if ($this->input->post('file_surat') == true) {
-        //     $this->form_validation->set_rules('file_surat', 'file surat', 'required');
-        //     if ($this->form_validation->run() == FALSE) {
-        //         $this->form_validation->set_message('required', 'pastikan file sudah dicantumkan dan sesuai yang disyaratkan');
-        //     }
-        // } else {
-        //     $this->form_validation->set_rules('file_surat', 'file surat');
-        // }
 
         if ($this->form_validation->run() == FALSE) {
+
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('suratmasuk/add', $data);
             $this->load->view('templates/footer');
-        } else {
+        } elseif ($_FILES['file_surat']['name']) {
 
             $config['allowed_types']    = 'docx|pdf';
             $config['max_size']         = '2048';
@@ -101,8 +84,8 @@ class SuratMasuk extends CI_Controller
             if (!$this->upload->do_upload('file_surat')) {
 
                 $errorSurat = $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>format file salah / ukuran melebihi maksimal</div>');
+                        <span aria-hidden="true">&times;</span>
+                        </button>format file salah / ukuran melebihi maksimal</div>');
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar', $data);
@@ -113,10 +96,17 @@ class SuratMasuk extends CI_Controller
                 $new_file = $this->upload->data('file_name');
                 $this->SuratMasukModel->addSuratMasuk($new_file);
                 $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>data added</div>');
+                        <span aria-hidden="true">&times;</span>
+                        </button>data added</div>');
                 redirect('suratmasuk');
             }
+        } else {
+
+            $this->SuratMasukModel->addSuratMasuk1();
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>data added</div>');
+            redirect('suratmasuk');
         }
     }
 

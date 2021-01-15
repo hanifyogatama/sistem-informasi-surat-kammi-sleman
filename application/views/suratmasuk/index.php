@@ -29,7 +29,6 @@
                                     <th>Pengirim</th>
                                     <th>Isi</th>
                                     <th>Tanggal Surat</th>
-                                    <th>Tanggal Diterima</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -38,9 +37,9 @@
                                 <?php foreach ($surat_masuk->result() as $key => $data) : ?>
                                     <tr>
                                         <th scope="row" style="text-align: center;"><?= $i; ?></th>
-                                        <td><?= $data->no_surat ?></td>
-                                        <td><?= $data->nama_instansi ?></td>
-                                        <td><?= word_limiter($data->isi, 3) ?></td>
+                                        <td><?= word_limiter($data->no_surat, 1) ?></td>
+                                        <td><?= word_limiter($data->nama_instansi, 2) ?></td>
+                                        <td><?= word_limiter($data->isi, 2) ?></td>
 
                                         <?php
                                         $oldDateSurat = $data->tanggal_surat;
@@ -49,8 +48,7 @@
                                         $newDateDiterima = date("d-m-Y", strtotime($oldDateDiterima)); ?>
 
                                         <td><?= $newDateSurat ?></td>
-                                        <td><?= $newDateDiterima ?></td>
-                                        <!-- <td><?= date('d F Y', $data->tanggal_surat)  ?></td> -->
+
                                         <td align="center">
 
                                             <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>

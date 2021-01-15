@@ -43,7 +43,7 @@
                                                 </small>
                                             </p>
                                         </div>
-                                        <?= $this->session->flashdata('message'); ?>
+                                        <?= $this->session->flashdata('message_surat'); ?>
                                     </div>
                                 </div>
                             </div>

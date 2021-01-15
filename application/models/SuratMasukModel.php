@@ -37,6 +37,22 @@ class SuratMasukModel extends CI_Model
         $this->db->insert('surat_masuk', $data);
     }
 
+    public function addSuratMasuk1()
+    {
+        $data = [
+            "no_surat"              => htmlspecialchars($this->input->post('no_surat', true)),
+            "id_instansi"           => htmlspecialchars($this->input->post('id_instansi', true)),
+            "id_status_surat"       => htmlspecialchars($this->input->post('id_status_surat', true)),
+            "isi"                   => htmlspecialchars($this->input->post('isi', true)),
+            "tanggal_surat"         => htmlspecialchars($this->input->post('tanggal_surat', true)),
+            "tanggal_diterima"      => htmlspecialchars($this->input->post('tanggal_diterima', true)),
+            "keterangan"            => htmlspecialchars($this->input->post('keterangan', true))
+
+        ];
+
+        $this->db->insert('surat_masuk', $data);
+    }
+
     // get data by id
     public function getByIdSuratMasuk($id_surat_masuk)
     {
@@ -60,6 +76,8 @@ class SuratMasukModel extends CI_Model
         $this->db->where('id_surat_masuk', $this->input->post('id_surat_masuk'));
         $this->db->update('surat_masuk', $data);
     }
+
+
 
     public function getCountDataSuratMasuk()
     {

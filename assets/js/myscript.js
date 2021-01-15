@@ -16,7 +16,7 @@ $('.data-delete-2').on('click', function (e) {
 
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't to delete this!",
+        text: "You want to delete this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

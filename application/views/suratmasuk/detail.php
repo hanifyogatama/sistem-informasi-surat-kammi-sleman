@@ -18,12 +18,27 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm">
-                                    <a href="<?= base_url('suratmasuk/pdf/') . $data->file_surat  ?>" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+
+
+                                    <?php $fileSurat = $data->file_surat;
+                                    if ($fileSurat == '') : ?>
+                                        <a href="#" title="file tidak tersedia" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="cursor: no-drop;"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+                                    <?php else : ?>
+                                        <a href="<?= base_url('suratmasuk/pdf/') . $data->file_surat  ?>" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
+                                    <?php endif; ?>
+
+
+                                    <?php $fileSurat = $data->file_surat;
+                                    if ($fileSurat == '') : ?>
+                                        <a href="#" title="file tidak tersedia" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm" style="cursor: no-drop;"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+                                    <?php else : ?>
+                                        <a href="<?= base_url('suratmasuk/download/') . $data->file_surat  ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+                                    <?php endif; ?>
 
 
 
 
-                                    <a href="<?= base_url('suratmasuk/download/') . $data->file_surat  ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
+
                                 </div>
                             </div>
                         </div>
@@ -43,7 +58,7 @@
                                     <!-- <td><strong><?= $data->status; ?></strong></td> -->
                                     <?php $x = $data->status;
                                     if ($x == '') : ?>
-                                        <><strong><?= 'kosong' ?></strong></>
+                                        <strong><?= 'kosong' ?></strong></>
                                     <?php else : ?>
                                         <td><strong><?= $data->status; ?></strong></td>
                                     <?php endif; ?>
@@ -71,7 +86,14 @@
                                 </tr>
                                 <tr>
                                     <td>Keterangan</td>
+                                    <td>
+                                        <?php $x = $data->keterangan;
+                                        if ($x == '') : ?>
+                                            <em class="text-danger"><?= 'belum ada keterangan' ?></em>
+                                        <?php else : ?>
                                     <td><strong><?= $data->keterangan; ?></strong></td>
+                                <?php endif; ?>
+                                </td>
                                 </tr>
                             </table>
                         </div>
