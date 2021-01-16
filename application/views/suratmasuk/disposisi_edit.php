@@ -25,7 +25,7 @@
 
                             <div class="form-group">
                                 <div class="">
-                                    <label>Sifat Surat</label>
+                                    <label>Jenis Surat</label>
 
                                     <input type="hidden" name="id_status_surat" id="id_status_surat" class="form-control" value="<?= $surat_masuk['id_status_surat'] ?>" readonly>
 

@@ -20,13 +20,14 @@
 
                         <?php echo anchor('suratmasuk/pdfAllDisposisi', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 
+                        <?php echo anchor('suratmasuk/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="far fa-file-excel"></i> </button>'); ?>
+
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nomor Surat</th>
                                     <th scope="col">Tujuan Disposisi</th>
-                                    <th scope="col">Status Surat</th>
                                     <th scope="col">Batas Waktu</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -36,9 +37,8 @@
                                 <?php foreach ($disposisi->result() as $key => $data) : ?>
                                     <tr>
                                         <th scope="row" style="text-align: center;"><?= $i; ?></th>
-                                        <td><?= $data->nomor_surat ?></td>
+                                        <td><?= word_limiter($data->nomor_surat, 1) ?></td>
                                         <td><?= $data->nama_departemen ?></td>
-                                        <td><?= $data->status ?></td>
                                         <td><?= $data->batas_waktu ?></td>
                                         <td align="center">
 

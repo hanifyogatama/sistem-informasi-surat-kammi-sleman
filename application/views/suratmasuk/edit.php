@@ -64,16 +64,28 @@
                             </div>
                             <div class=" form-group">
                                 <div class="">
-                                    <label>Keterangan</label>
+                                    <label>Keterangan <sup><em>(*optional)</em></sup></label>
                                     <textarea class="form-control" rows="4" id="keterangan" name="keterangan"><?= $surat_masuk['keterangan']; ?></textarea>
                                 </div>
                             </div>
 
                             <div class=" card mb-4 py-3">
-                                <div class="form-group col-md-4">
-                                    <label for="file_surat"><Strong>File</Strong></label> <br>
-                                    <input type="file" id="file_surat" name="file_surat">
-                                    <small>File name now : <?= $surat_masuk['file_surat']; ?></small>
+                                <div class="card-body">
+                                    <div class="form-group col-md-6">
+                                        <label for="">File Surat <sup><em>(*optional)</em></sup></label>
+                                        <input type="file" id="file_surat" name="file_surat">
+                                        <small>File name now : <?= $surat_masuk['file_surat']; ?></small>
+                                    </div>
+
+                                    <div>
+                                        <p>
+                                            <small class="text-primary">
+                                                - format file pdf / docx </br>
+                                                - ukuran file max 2mb
+                                            </small>
+                                        </p>
+                                    </div>
+                                    <?= $this->session->flashdata('alert_message_file'); ?>
                                 </div>
                             </div>
                         </div>

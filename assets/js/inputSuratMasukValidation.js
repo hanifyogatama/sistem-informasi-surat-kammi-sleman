@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+
+
     $("#no_surat").click(function () {
         $("#clear_no_surat").remove();
     });
@@ -13,7 +15,7 @@ $(document).ready(function () {
 
     $("#id_status_surat")
         .change(function () {
-            $("#id_instansi option:selected").each(function () {
+            $("#id_status_surat option:selected").each(function () {
                 $("#clear_jenis_surat").remove();
             });
         });
@@ -26,6 +28,9 @@ $(document).ready(function () {
         $("#clear_tanggal_diterima").remove();
     });
 
+    $("#batas_waktu").click(function () {
+        $("#clear_batas_waktu").remove();
+    });
 
     $("#isi").click(function () {
         $("#clear_isi").remove();

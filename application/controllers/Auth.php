@@ -9,12 +9,6 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->library('session');
-        // $this->load->helper(array('form', 'url', 'security'));
-
-        // $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
-        // $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-        // $this->output->set_header('Pragma: no-cache');
-        // $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     }
 
     public function index()
@@ -74,7 +68,6 @@ class Auth extends CI_Controller
                     <span aria-hidden="true">&times;</span>
                     </button>password salah</div>');
 
-
                     $this->load->view('templates/auth_header', $data);
                     $this->load->view('auth/login');
                     $this->load->view('templates/auth_footer');
@@ -89,7 +82,7 @@ class Auth extends CI_Controller
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>akun tidak terdaftar</div>');
+            </button>email tidak terdaftar</div>');
             redirect('auth');
         }
     }

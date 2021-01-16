@@ -206,20 +206,24 @@ class SuratKeluar extends CI_Controller
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'Nomor Surat');
         $sheet->setCellValue('C1', 'Penerima');
-        $sheet->setCellValue('D1', 'Sifat Surat');
+        $sheet->setCellValue('D1', 'Jenis Surat');
         $sheet->setCellValue('E1', 'Deskripsi');
-        $sheet->setCellValue('F1', 'Tgl Surat');
-        $sheet->setCellValue('H1', 'Keterangan');
+        $sheet->setCellValue('F1', 'Tanggal Surat');
+        $sheet->setCellValue('G1', 'Keterangan');
         $no = 1;
         $x = 2;
         foreach ($dataSuratKeluar as $row) {
+
+            $oldDateSurat = $row->tanggal_surat;
+            $newDateSurat = date("d-m-Y", strtotime($oldDateSurat));
+
             $sheet->setCellValue('A' . $x, $no++);
             $sheet->setCellValue('B' . $x, $row->no_surat);
             $sheet->setCellValue('C' . $x, $row->nama_instansi);
             $sheet->setCellValue('D' . $x, $row->status);
             $sheet->setCellValue('E' . $x, $row->isi);
-            $sheet->setCellValue('F' . $x, $row->tanggal_surat);
-            $sheet->setCellValue('H' . $x, $row->keteranagn);
+            $sheet->setCellValue('F' . $x, $newDateSurat);
+            $sheet->setCellValue('G' . $x, $row->keteranagn);
             $x++;
         }
         $writer = new Xlsx($spreadsheet);
@@ -238,13 +242,11 @@ class SuratKeluar extends CI_Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment;filename={$filename}");
         header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-        header('Pragma: public'); // HTTP/1.0
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         //ob_end_clean();

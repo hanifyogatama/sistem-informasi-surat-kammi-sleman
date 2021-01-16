@@ -88,10 +88,10 @@
                                     <div class="form-group col-md-6">
                                         <label for="">File Surat <sup><em>(*optional)</em></sup></label>
                                         <br>
-                                        <input type="file" name="file_surat" class="">
+                                        <div class="mx-2">
+                                            <input type="file" name="file_surat" class="file_surat">
+                                        </div>
                                     </div>
-                                    <?= form_error('file_surat', '<small class="text-danger">', '</small>') ?>
-                                    <?= $this->session->flashdata('message'); ?>
                                     <div>
                                         <p>
                                             <small class="text-primary">
@@ -100,10 +100,9 @@
                                             </small>
                                         </p>
                                     </div>
+                                    <?= $this->session->flashdata('alert_message_file'); ?>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                     <button type="submit" class="btn btn-info  float-right">Add</button>

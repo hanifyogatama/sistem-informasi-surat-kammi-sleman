@@ -25,7 +25,7 @@
                 <th>No</th>
                 <th>Nomor Surat</th>
                 <th>Tujuan Disposisi</th>
-                <th>Sifat Surat</th>
+                <th>Jenis Surat</th>
                 <th>Deskripsi</th>
                 <th>Batas Waktu</th>
                 <th>Ket</th>

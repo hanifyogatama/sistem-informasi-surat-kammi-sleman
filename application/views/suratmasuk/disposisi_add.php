@@ -24,7 +24,7 @@
 
                             <div class="form-group">
                                 <div class="">
-                                    <label>Sifat Surat</label>
+                                    <label>Jenis Surat</label>
 
                                     <input type="hidden" name="id_status_surat" id="id_status_surat" class="form-control" value="<?= $surat_masuk['id_status_surat'] ?>" readonly>
 
@@ -51,7 +51,7 @@
                                             <option value="<?= $departemen['id_departemen'] ?>" <?php echo set_select('id_departemen', $departemen['id_departemen'], (!empty($data) && $data == $departemen['id_departemen'] ? TRUE : FALSE)); ?>><?= $departemen['nama_departemen'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <?= form_error('id_instansi', '<small class="text-danger ">', '</small>') ?>
+                                    <?= form_error('id_departemen', '<small id="clear_departemen" class="text-danger ">', '</small>') ?>
                                 </div>
                             </div>
 
@@ -60,7 +60,7 @@
                                 <div class="">
                                     <label>Batas Waktu</label>
                                     <input type="date" name="batas_waktu" id="batas_waktu" class="form-control" value="<?= set_value('batas_waktu') ?>">
-                                    <?= form_error('batas_waktu', '<small class="text-danger">', '</small>') ?>
+                                    <?= form_error('batas_waktu', '<small id="clear_batas_waktu" class="text-danger">', '</small>') ?>
                                 </div>
                             </div>
                         </div>
@@ -72,12 +72,12 @@
                                 <div class="">
                                     <label>Deskripsi</label>
                                     <textarea class="form-control" rows="5" id="isi" name="isi"><?= set_value('isi') ?></textarea>
-                                    <?= form_error('isi', '<small class="text-danger">', '</small>') ?>
+                                    <?= form_error('isi', '<small id="clear_isi" class="text-danger">', '</small>') ?>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="">
-                                    <label>Keterangan</label>
+                                    <label>Keterangan <sup><em>(*optional)</em></sup></label>
                                     <textarea class="form-control" rows="4" id="keterangan" name="keterangan"><?= set_value('keterangan') ?></textarea>
                                     <?= form_error('keterangan', '<small class="text-danger">', '</small>') ?>
                                 </div>
@@ -95,3 +95,22 @@
 
 </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+
+        $("#id_departemen")
+            .change(function() {
+                $("#id_departemen option:selected").each(function() {
+                    $("#clear_departemen").remove();
+                });
+            });
+
+
+        $("#batas_waktu").click(function() {
+            $("#clear_batas_waktu").remove();
+        });
+
+    });
+</script>

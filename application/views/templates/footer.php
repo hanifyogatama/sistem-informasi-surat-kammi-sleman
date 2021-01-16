@@ -81,18 +81,19 @@
 
     <!-- input validation -->
     <script src="<?= base_url('assets/'); ?>js/inputSuratMasukValidation.js"></script>
-    <script src="<?= base_url('assets/'); ?>js/inputSuratKeluarValidation.js"></script>
-    <script src="<?= base_url('assets/'); ?>js/inputDisposisiValidation.js"></script>
+    <!-- <script src="<?= base_url('assets/'); ?>js/inputSuratKeluarValidation.js"></script>
+    <script src="<?= base_url('assets/'); ?>js/inputDisposisiValidation.js"></script> -->
 
     <!-- delete modal  -->
     <script src="<?= base_url('assets/'); ?>js/myscript.js"></script>
 
 
     <script>
-        // jquary tampil gambar
+        // jquary tampil nama file
         $('.custom-file-input').on('change', function() {
             let fileName = $(this).val().split('\\').pop();
             $(this).next('.custom-file-label').addClass(" selected").html(fileName);
+
         });
 
         // ajax menu 

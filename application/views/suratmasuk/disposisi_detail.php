@@ -39,7 +39,7 @@
                                     <td><strong><?= $data->nama_departemen; ?></strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Sifat Surat</td>
+                                    <td>Jenis Surat</td>
                                     <td><strong><?= $data->status; ?></strong></td>
                                 </tr>
                                 <tr>
@@ -56,7 +56,18 @@
                                 </tr>
                                 <tr>
                                     <td>Keterangan</td>
-                                    <td><strong><?= $data->keterangan; ?></strong></td>
+
+                                    <?php $x = $data->keterangan;
+                                    if ($x == '') : ?>
+                                        <td>
+                                            <em class="text-danger"><?= 'belum ada keterangan' ?></em>
+                                        </td>
+                                    <?php else : ?>
+                                        <td>
+                                            <strong><?= $data->keterangan; ?></strong>
+                                        </td>
+                                    <?php endif; ?>
+
                                 </tr>
                             </table>
                         </div>

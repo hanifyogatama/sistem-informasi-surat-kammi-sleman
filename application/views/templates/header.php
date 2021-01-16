@@ -22,6 +22,10 @@
     <!-- Custom styles for this page -->
     <link href="<?= base_url('assets/'); ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <link href="<?= base_url('assets/'); ?>css/mystyle.css" rel="stylesheet" type="text/css">
+
+
+    </style>
 
 </head>
 

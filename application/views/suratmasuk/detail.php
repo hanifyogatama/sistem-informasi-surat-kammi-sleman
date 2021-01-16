@@ -19,14 +19,12 @@
                             <div class="row">
                                 <div class="col-sm">
 
-
                                     <?php $fileSurat = $data->file_surat;
                                     if ($fileSurat == '') : ?>
                                         <a href="#" title="file tidak tersedia" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="cursor: no-drop;"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
                                     <?php else : ?>
                                         <a href="<?= base_url('suratmasuk/pdf/') . $data->file_surat  ?>" target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-search fa-sm text-white-50"></i> Preview</a>
                                     <?php endif; ?>
-
 
                                     <?php $fileSurat = $data->file_surat;
                                     if ($fileSurat == '') : ?>
@@ -35,32 +33,28 @@
                                         <a href="<?= base_url('suratmasuk/download/') . $data->file_surat  ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download</a>
                                     <?php endif; ?>
 
-
-
-
-
                                 </div>
                             </div>
                         </div>
-                        <div class=" col-md-8">
+                        <div class=" col-md-7">
                             <table class="table table-hover">
                                 <br>
                                 <tr>
-                                    <td>Nomor Surat</td>
-                                    <td><strong><?= $data->no_surat; ?></strong></td>
+                                    <td><strong>Nomor Surat</strong></td>
+                                    <td><?= $data->no_surat; ?> </td>
                                 </tr>
                                 <tr>
-                                    <td>Pengirim</td>
-                                    <td><strong><?= $data->nama_instansi; ?></strong></td>
+                                    <td><strong>Pengirim</strong></td>
+                                    <td><?= $data->nama_instansi; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Sifat Surat</td>
+                                    <td><strong>Jenis Surat</strong></td>
                                     <!-- <td><strong><?= $data->status; ?></strong></td> -->
                                     <?php $x = $data->status;
                                     if ($x == '') : ?>
-                                        <strong><?= 'kosong' ?></strong></>
+                                        <strong><?= 'kosong' ?></strong>
                                     <?php else : ?>
-                                        <td><strong><?= $data->status; ?></strong></td>
+                                        <td><?= $data->status; ?></td>
                                     <?php endif; ?>
 
                                 </tr>
@@ -73,27 +67,31 @@
                                 $newDateDiterima = date("d-m-Y", strtotime($oldDateDiterima)); ?>
 
                                 <tr>
-                                    <td>Tanggal Surat</td>
-                                    <td><strong><?= $newDateSurat ?></strong></td>
+                                    <td><strong>Tanggal Surat</strong></td>
+                                    <td><?= $newDateSurat ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Diterima</td>
-                                    <td><strong><?= $newDateDiterima ?></strong></td>
+                                    <td><strong>Tanggal Diterima</strong></td>
+                                    <td><?= $newDateDiterima ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Deskripsi</td>
-                                    <td><strong><?= $data->isi; ?></strong></td>
+                                    <td><strong>Deskripsi</strong></td>
+                                    <td><?= $data->isi; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Keterangan</td>
-                                    <td>
-                                        <?php $x = $data->keterangan;
-                                        if ($x == '') : ?>
+                                    <td><strong>Keterangan</strong></td>
+
+                                    <?php $x = $data->keterangan;
+                                    if ($x == '') : ?>
+                                        <td>
                                             <em class="text-danger"><?= 'belum ada keterangan' ?></em>
-                                        <?php else : ?>
-                                    <td><strong><?= $data->keterangan; ?></strong></td>
-                                <?php endif; ?>
-                                </td>
+                                        </td>
+                                    <?php else : ?>
+                                        <td>
+                                            <?= $data->keterangan; ?>
+                                        </td>
+                                    <?php endif; ?>
+
                                 </tr>
                             </table>
                         </div>

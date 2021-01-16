@@ -83,9 +83,9 @@ class SuratMasuk extends CI_Controller
 
             if (!$this->upload->do_upload('file_surat')) {
 
-                $errorSurat = $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $errorSurat = $this->session->set_flashdata('alert_message_file', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>format file salah / ukuran melebihi maksimal</div>');
+                        </button>cek kembali format / ukuran file</div>');
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar', $data);
@@ -122,13 +122,13 @@ class SuratMasuk extends CI_Controller
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
 
         // rules
-        $this->form_validation->set_rules('no_surat', 'No SUrat', 'required|trim');
+        $this->form_validation->set_rules('no_surat', 'No Surat', 'required|trim');
         $this->form_validation->set_rules('id_instansi', 'Instansi', 'required|trim');
         $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim');
         $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
         $this->form_validation->set_rules('tanggal_surat', 'Tanggal Surat', 'required|trim');
         $this->form_validation->set_rules('tanggal_diterima', 'Tanggal Diterima', 'required|trim');
-        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required|trim');
+
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -136,7 +136,7 @@ class SuratMasuk extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('suratmasuk/edit', $data);
             $this->load->view('templates/footer');
-        } else {
+        } elseif ($_FILES['file_surat']['name']) {
 
             $config['allowed_types']    = 'docx|pdf';
             $config['max_size']         = '2048';
@@ -150,6 +150,17 @@ class SuratMasuk extends CI_Controller
                 $this->SuratMasukModel->editSuratMasuk($new_file);
                 $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratmasuk');
+            } elseif (!$this->upload->do_upload('file_surat')) {
+
+                $errorSurat = $this->session->set_flashdata('alert_message_file', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>cek kembali format / ukuran file</div>');
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('suratmasuk/edit', $data,  $errorSurat);
+                $this->load->view('templates/footer');
             } else {
 
                 $old_file = $data['surat_masuk']['file_surat'];
@@ -157,6 +168,11 @@ class SuratMasuk extends CI_Controller
                 $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
                 redirect('suratmasuk');
             }
+        } else {
+
+            $this->SuratMasukModel->editSuratMasuk1();
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+            redirect('suratmasuk');
         }
     }
 
@@ -206,7 +222,7 @@ class SuratMasuk extends CI_Controller
     // add disposisi data
     public function disposisi_add($id)
     {
-        $data['title']  = 'Add Data Disposisi';
+        $data['title']  = 'Add Disposisi';
         $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['surat_masuk']    = $this->SuratMasukModel->getAllSuratMasuk($id)->row_array();
         $data['status_surat']   = $this->StatusSuratModel->getRowStatusSurat();
@@ -216,9 +232,15 @@ class SuratMasuk extends CI_Controller
         // rules
         $this->form_validation->set_rules('id_surat_masuk', 'Surat masuk', 'required|trim');
         $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim');
-        $this->form_validation->set_rules('id_departemen', 'Departemen', 'required|trim');
-        $this->form_validation->set_rules('batas_waktu', 'Batas Waktu', 'required|trim');
-        $this->form_validation->set_rules('isi', 'Isi', 'required|trim');
+        $this->form_validation->set_rules('id_departemen', 'Departemen', 'required|trim', [
+            'required' => 'departemen belum dipilih'
+        ]);
+        $this->form_validation->set_rules('batas_waktu', 'Batas Waktu', 'required|trim', [
+            'required' => 'batas waktu belum dipilih'
+        ]);
+        $this->form_validation->set_rules('isi', 'Isi', 'required|trim', [
+            'required' => 'deskripsi belum diisi'
+        ]);
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'trim');
 
         if ($this->form_validation->run() == FALSE) {
@@ -252,7 +274,7 @@ class SuratMasuk extends CI_Controller
     // disposisi edit data
     public function disposisi_edit($id)
     {
-        $data['title']  = 'Edit Data';
+        $data['title']  = 'Edit Disposisi';
         $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['disposisi']      = $this->SuratMasukModel->getByIdDisposisi($id);
@@ -325,22 +347,31 @@ class SuratMasuk extends CI_Controller
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'Nomor Surat');
         $sheet->setCellValue('C1', 'Pengirim');
-        $sheet->setCellValue('D1', 'Sifat Surat');
+        $sheet->setCellValue('D1', 'Jenis Surat');
         $sheet->setCellValue('E1', 'Deskripsi');
-        $sheet->setCellValue('F1', 'Tgl Surat');
-        $sheet->setCellValue('G1', 'Tgl Diterima');
+        $sheet->setCellValue('F1', 'Tanggal Surat');
+        $sheet->setCellValue('G1', 'Tanggal Diterima');
         $sheet->setCellValue('H1', 'Keterangan');
         $no = 1;
         $x = 2;
+
+
         foreach ($dataSuratMasuk as $row) {
+
+            $oldDateSurat = $row->tanggal_surat;
+            $oldDateDiterima = $row->tanggal_diterima;
+            $newDateSurat = date("d-m-Y", strtotime($oldDateSurat));
+            $newDateDiterima = date("d-m-Y", strtotime($oldDateDiterima));
+
             $sheet->setCellValue('A' . $x, $no++);
             $sheet->setCellValue('B' . $x, $row->no_surat);
             $sheet->setCellValue('C' . $x, $row->nama_instansi);
             $sheet->setCellValue('D' . $x, $row->status);
             $sheet->setCellValue('E' . $x, $row->isi);
-            $sheet->setCellValue('F' . $x, $row->tanggal_surat);
-            $sheet->setCellValue('G' . $x, $row->tanggal_diterima);
-            $sheet->setCellValue('H' . $x, $row->keteranagn);
+
+            $sheet->setCellValue('F' . $x, $newDateSurat);
+            $sheet->setCellValue('G' . $x, $newDateDiterima);
+            $sheet->setCellValue('H' . $x, $row->keterangan);
             $x++;
         }
         $writer = new Xlsx($spreadsheet);
@@ -359,13 +390,11 @@ class SuratMasuk extends CI_Controller
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment;filename={$filename}");
         header('Cache-Control: max-age=0');
-        // If you're serving to IE 9, then the following may be needed
         header('Cache-Control: max-age=1');
-
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-        header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-        header('Pragma: public'); // HTTP/1.0
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
 
         $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         //ob_end_clean();

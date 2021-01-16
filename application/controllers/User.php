@@ -55,7 +55,7 @@ class User extends CI_Controller
 
                     $errorGambar = $this->session->set_flashdata('message_surat', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
 <span aria-hidden="true">&times;</span>
-</button>format file salah / ukuran melebihi maksimal</div>');
+</button>cek kembali format / ukuran file</div>');
 
                     $this->load->view('templates/header', $data);
                     $this->load->view('templates/sidebar', $data);
