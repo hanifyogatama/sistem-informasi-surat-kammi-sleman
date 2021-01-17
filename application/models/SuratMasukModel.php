@@ -101,6 +101,11 @@ class SuratMasukModel extends CI_Model
         return $this->db->query("select * from surat_masuk");
     }
 
+    public function getCountDataDisposisi()
+    {
+        return $this->db->query("select * from disposisi");
+    }
+
     public function detailSuratMasuk($id)
     {
         $result = $this->db->where('id_surat_masuk', $id)->get('surat_masuk');

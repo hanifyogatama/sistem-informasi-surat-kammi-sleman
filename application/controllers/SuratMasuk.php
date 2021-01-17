@@ -35,7 +35,6 @@ class SuratMasuk extends CI_Controller
     {
         $data['title']  = 'Add Surat Masuk';
         $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['surat_masuk']    = $this->db->get('surat_masuk')->result_array();
         $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
@@ -97,7 +96,7 @@ class SuratMasuk extends CI_Controller
                 $this->SuratMasukModel->addSuratMasuk($new_file);
                 $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>data added</div>');
+                        </button>data berhasil ditambah</div>');
                 redirect('suratmasuk');
             }
         } else {
@@ -105,7 +104,7 @@ class SuratMasuk extends CI_Controller
             $this->SuratMasukModel->addSuratMasuk1();
             $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>data added</div>');
+                        </button>data berhasil ditambah</div>');
             redirect('suratmasuk');
         }
     }
@@ -116,7 +115,6 @@ class SuratMasuk extends CI_Controller
     {
         $data['title']          = 'Edit Surat Masuk';
         $data['user']           = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['surat_masuk']    = $this->SuratMasukModel->getByIdSuratMasuk($id);
         $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
@@ -148,7 +146,7 @@ class SuratMasuk extends CI_Controller
 
                 $new_file = $this->upload->data('file_name');
                 $this->SuratMasukModel->editSuratMasuk($new_file);
-                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
                 redirect('suratmasuk');
             } elseif (!$this->upload->do_upload('file_surat')) {
 
@@ -165,13 +163,12 @@ class SuratMasuk extends CI_Controller
 
                 $old_file = $data['surat_masuk']['file_surat'];
                 $this->SuratMasukModel->editSuratMasuk($old_file);
-                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
                 redirect('suratmasuk');
             }
         } else {
-
             $this->SuratMasukModel->editSuratMasuk1();
-            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
             redirect('suratmasuk');
         }
     }
@@ -198,7 +195,7 @@ class SuratMasuk extends CI_Controller
         $this->SuratMasukModel->deleteSuratMasuk($id);
         $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data deleted</div>');
+            </button>data berhasil dihapus</div>');
         redirect('suratmasuk');
     }
 
@@ -252,7 +249,7 @@ class SuratMasuk extends CI_Controller
         } else {
 
             $this->SuratMasukModel->addDisposisi();
-            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data added</div>');
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil ditambah</div>');
             redirect('suratmasuk/disposisi/' . $id);
         }
     }
@@ -260,8 +257,8 @@ class SuratMasuk extends CI_Controller
     // disposisi detail data
     public function disposisi_detail($id)
     {
-        $data['title']      = 'Detail Data';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['title']  = 'Detail Disposisi';
+        $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['disposisi']  = $this->SuratMasukModel->getAllDisposisi2($id);
 
         $this->load->view('templates/header', $data);
@@ -300,10 +297,11 @@ class SuratMasuk extends CI_Controller
         } else {
 
             $this->SuratMasukModel->editDisposisi();
-            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
             redirect('suratmasuk/disposisi_detail/' . $id);
         }
     }
+
 
     public function disposisi_delete($id)
     {
@@ -312,9 +310,10 @@ class SuratMasuk extends CI_Controller
         $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss=
         "alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data deleted</div>');
+            </button>data berhasil dihapus</div>');
         redirect($url);
     }
+
 
     public function exportToPdf()
     {
@@ -323,9 +322,10 @@ class SuratMasuk extends CI_Controller
         $data = $this->load->view('pdf/data_surat_masuk', ['surat_masuk' => $dataSuratMasuk], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
-        $file_name = "Surat_Masuk_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $file_name = "Surat_Masuk_Kammi_Sleman_" . date("d-M-Y") . ".pdf";
         $mpdf->Output($file_name, 'D');
     }
+
 
     public function exportToExcel()
     {
@@ -355,7 +355,6 @@ class SuratMasuk extends CI_Controller
         $no = 1;
         $x = 2;
 
-
         foreach ($dataSuratMasuk as $row) {
 
             $oldDateSurat = $row->tanggal_surat;
@@ -368,7 +367,6 @@ class SuratMasuk extends CI_Controller
             $sheet->setCellValue('C' . $x, $row->nama_instansi);
             $sheet->setCellValue('D' . $x, $row->status);
             $sheet->setCellValue('E' . $x, $row->isi);
-
             $sheet->setCellValue('F' . $x, $newDateSurat);
             $sheet->setCellValue('G' . $x, $newDateDiterima);
             $sheet->setCellValue('H' . $x, $row->keterangan);
@@ -386,7 +384,7 @@ class SuratMasuk extends CI_Controller
 
         $spreadsheet->setActiveSheetIndex(0);
 
-        $filename = "Surat_Masuk_Kammi_Sleman_" . date("d-m-Y") . ".xlsx";
+        $filename = "Surat_Masuk_Kammi_Sleman_" . date("d-M-Y") . ".xlsx";
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment;filename={$filename}");
         header('Cache-Control: max-age=0');
@@ -402,17 +400,20 @@ class SuratMasuk extends CI_Controller
         exit;
     }
 
+
     public function print()
     {
         $data['surat_masuk'] = $this->SuratMasukModel->getAllSuratMasuk()->result();
         $this->load->view('print/surat_masuk', $data);
     }
 
+
     public function printAllDisposisi()
     {
         $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2()->result();
         $this->load->view('print/disposisi', $data);
     }
+
 
     public function pdfAllDisposisi()
     {
@@ -421,15 +422,17 @@ class SuratMasuk extends CI_Controller
         $data = $this->load->view('pdf/data_disposisi', ['disposisi' => $dataDisposisi], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
-        $file_name = "All_Disposisi_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $file_name = "Disposisi_Kammi_Sleman_" . date("d-M-Y") . ".pdf";
         $mpdf->Output($file_name, 'D');
     }
+
 
     public function printDisposisi($id)
     {
         $data['disposisi'] = $this->SuratMasukModel->getAllDisposisi2($id);
         $this->load->view('print/disposisi_per_item', $data);
     }
+
 
     public function pdfDisposisi($id)
     {
@@ -438,9 +441,10 @@ class SuratMasuk extends CI_Controller
         $data = $this->load->view('pdf/disposisi', ['disposisi' => $dataDisposisiItem], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
-        $file_name = "Disposisi_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $file_name = "Lembar_Disposisi_Kammi_Sleman_" . date("d-M-Y") . ".pdf";
         $mpdf->Output($file_name, 'D');
     }
+
 
     public function download($fileName = NULL)
     {
@@ -459,15 +463,95 @@ class SuratMasuk extends CI_Controller
         }
     }
 
-
+    // preview file
     function pdf($item)
     {
-
         $file = realpath("file_document") . "\\" . $item;;
         header('Content-type: application/pdf');
         header('Content-Disposition: inline; filename="' . $file . '"');
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
         readfile($file);
+    }
+
+
+    public function exportToExcelDisposisi()
+    {
+
+        $data['title']      = 'Excel';
+        $dataDisposisi     = $this->SuratMasukModel->getAllDisposisi2()->result();
+
+        $spreadsheet = new Spreadsheet();
+        // Set document properties
+        $spreadsheet->getProperties()->setCreator('Kammi Kamda Sleman')
+            ->setLastModifiedBy('Kammi Kamda Sleman')
+            ->setTitle('Office 2007 XLSX Test Document')
+            ->setSubject('Office 2007 XLSX Test Document')
+            ->setDescription('Test document for Office 2007 XLSX, generated using PHP classes.')
+            ->setKeywords('office 2007 openxml php')
+            ->setCategory('Test result file');
+
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nomor Surat');
+        $sheet->setCellValue('C1', 'Tanggal Surat');
+        $sheet->setCellValue('D1', 'Pengirim');
+        $sheet->setCellValue('E1', 'Tujuan Disposisi');
+        $sheet->setCellValue('F1', 'Jenis Surat');
+        $sheet->setCellValue('G1', 'Deskripsi');
+        $sheet->setCellValue('H1', 'Tanggal Disposisi');
+        $sheet->setCellValue('I1', 'Batas Waktu');
+        $sheet->setCellValue('J1', 'Keterangan');
+        $no = 1;
+        $x = 2;
+
+        foreach ($dataDisposisi as $row) {
+
+            $oldBatasWaktu = $row->batas_waktu;
+            $oldTanggalSurat = $row->tanggal_surat;
+            $oldTanggalDibuat = $row->tanggal_dibuat;
+
+            $newTanggalDibuat = date("d-m-Y", strtotime($oldTanggalDibuat));
+            $newBatasWaktu = date("d-m-Y", strtotime($oldBatasWaktu));
+            $newTanggalSurat = date("d-m-Y", strtotime($oldTanggalSurat));
+
+            $sheet->setCellValue('A' . $x, $no++);
+            $sheet->setCellValue('B' . $x, $row->nomor_surat);
+            $sheet->setCellValue('C' . $x, $newTanggalSurat);
+            $sheet->setCellValue('D' . $x, $row->nama_instansi);
+            $sheet->setCellValue('E' . $x, $row->nama_departemen);
+            $sheet->setCellValue('F' . $x, $row->status);
+            $sheet->setCellValue('G' . $x, $row->isi);
+            $sheet->setCellValue('H' . $x, $newTanggalDibuat);
+            $sheet->setCellValue('I' . $x, $newBatasWaktu);
+            $sheet->setCellValue('J' . $x, $row->keterangan);
+            $x++;
+        }
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'disposisi' . date('d-m-Y H');
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+
+        // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle('Surat Masuk ' . date('d-m-Y H'));
+
+        $spreadsheet->setActiveSheetIndex(0);
+
+        $filename = "Disposisi_Kammi_Sleman_" . date("d-M-Y") . ".xlsx";
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment;filename={$filename}");
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: public');
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        //ob_end_clean();
+        $writer->save('php://output');
+        exit;
     }
 }

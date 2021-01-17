@@ -20,7 +20,7 @@
 
                         <?php echo anchor('suratmasuk/pdfAllDisposisi', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 
-                        <?php echo anchor('suratmasuk/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="far fa-file-excel"></i> </button>'); ?>
+                        <?php echo anchor('suratmasuk/exportToExcelDisposisi', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="fa fa-file-excel"></i> </button>'); ?>
 
                         <table class="table table-hover">
                             <thead>

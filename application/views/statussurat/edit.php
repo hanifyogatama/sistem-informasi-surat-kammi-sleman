@@ -11,10 +11,16 @@
                     <div class="form-group row">
                         <input type="hidden" class="form-control" id="id_status_surat" name="id_status_surat" value="<?= $status_surat['id_status_surat'] ?>">
 
-                        <label for="status" class="col-sm-2 col-form-label">Status</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="status" name="status" value="<?= $status_surat['status'] ?>" placeholder="status" autocomplete="off">
-                            <?= form_error('status', '<small class="text-danger ">', '</small>') ?>
+                        <label for="kode_surat" class="col-sm-3 col-form-label">Kode Surat</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="kode_surat" name="kode_surat" value="<?= $status_surat['kode_surat'] ?>" placeholder="kode surat" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-3 col-form-label">Status</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="status" name="status" value="<?= $status_surat['status'] ?>" placeholder="jenis surat" autocomplete="off">
                         </div>
                     </div>
                     <div class="text-right">

@@ -26,7 +26,7 @@ class Departemen extends CI_Controller
 
     public function add()
     {
-        $data['title'] = 'Tambah Departemen';
+        $data['title'] = 'Departemen';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['departemen'] = $this->db->get('departemen')->result_array();
@@ -44,16 +44,16 @@ class Departemen extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->DepartemenModel->addDepartemen();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data added</div>');
+            </button>data berhasil ditambah</div>');
             redirect('departemen');
         }
     }
 
     public function edit()
     {
-        $data['title'] = 'Edit Departemen';
+        $data['title'] = 'Departemen';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 
         $data['departemen'] = $this->DepartemenModel->getByIdDepartemen('id_departemen');
@@ -72,20 +72,33 @@ class Departemen extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->DepartemenModel->editDepartemen();
-            $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>data edited</div>');
             redirect('departemen');
         }
     }
 
+    // public function delete($id)
+    // {
+    //     // $departemenId = $this->input->post('id_departemen');
+    //     $this->DepartemenModel->deleteDepartemen($id);
+    //     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    //         <span aria-hidden="true">&times;</span>
+    //         </button>data deleted</div>');
+    //     redirect('departemen');
+    // }
+
+
     public function delete($id)
     {
         // $departemenId = $this->input->post('id_departemen');
         $this->DepartemenModel->deleteDepartemen($id);
-        $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+
+        //$this->db->delete('instansi', array('id_instansi' => $id));
+        $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data deleted</div>');
+            </button>data berhasil dihapus</div>');
         redirect('departemen');
     }
 }

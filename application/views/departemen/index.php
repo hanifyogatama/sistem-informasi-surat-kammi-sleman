@@ -9,7 +9,7 @@
                     <div class="col-lg-6">
                         <?= form_error('departemen', '<div class="alert alert-danger" role = "alert">', '</div>') ?>
 
-                        <?= $this->session->flashdata('message'); ?>
+                        <?= $this->session->flashdata('message2'); ?>
 
                         <a href="" title="Add" class="btn btn-outline-primary btn-sm mb-3 px-3" data-toggle="modal" data-target="#newDepartemenModal"><i class="fas fa-plus"> </i></a>
 
@@ -30,7 +30,9 @@
                                         <td>
                                             <a href="" data-toggle="modal" data-target="#modal-edit<?= $dep['id_departemen']; ?>" class="badge badge-success">edit</a>
 
-                                            <a href="" data-toggle="modal" data-target="#modal-delete<?= $dep['id_departemen']; ?>" class="badge badge-danger">delete</a>
+                                            <a href="<?= base_url('departemen/delete/') . $dep['id_departemen']; ?>" class="badge badge-danger data-delete-2">delete</a>
+
+
                                         </td>
                                     </tr>
                                     <?php $i++; ?>
@@ -51,7 +53,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newDepartemenModalLabel">Add New Departemen</h5>
+                <h6 class="modal-title m-0 font-weight-bold text-primary" id="newDepartemenModalLabel">Add Departemen</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -59,8 +61,8 @@
             <form action="<?= base_url('departemen/add'); ?>" method="POST">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen name" autocomplete="off">
-                        <?= form_error('nama_departemen', '<small class="text-danger ">', '</small>') ?>
+                        <input type="text" class="form-control" id="nama_departemen" value="<?= set_value('nama_departemen') ?>" name="nama_departemen" placeholder="departemen name" autocomplete="off">
+                        <?= form_error('nama_departemen', '<small  id="clear_nama_departemen"  class="text-danger ">', '</small>') ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -80,7 +82,7 @@ foreach ($departemen as $dep) :  $no++; ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="newEditModalLabel">Edit Departemen</h5>
+                    <h6 class="modal-title m-0 font-weight-bold text-primary" id="newEditModalLabel">Edit Departemen</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,7 +94,7 @@ foreach ($departemen as $dep) :  $no++; ?>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="nama_departemen" name="nama_departemen" placeholder="departemen" value="<?= $dep['nama_departemen']; ?>" autocomplete="off">
-                            <?= form_error('nama_departemen', '<small class="text-danger ">', '</small>') ?>
+                            <!-- <?= form_error('nama_departemen', '<small class="text-danger ">', '</small>') ?> -->
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -106,39 +108,10 @@ foreach ($departemen as $dep) :  $no++; ?>
 <?php endforeach; ?>
 
 
-<!-- departemen delete departemen -->
-<?php $no = 0;
-foreach ($departemen as $dep) :  $no++; ?>
-    <div class="modal fade" id="modal-delete<?= $dep['id_departemen']; ?>" tabindex="-1" role="dialog" aria-labelledby="newDeleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newDeleteModalLabel">Delete data</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="<?= base_url('departemen/delete/') . $dep['id_departemen'] ?>" method="POST">
-                    <div class="modal-body">
-                        <div class="row justify-content-center">
-                            <i class="fas fa-exclamation-circle fa-4x"></i>
-                        </div>
-                        <br>
-                        <div class="row justify-content-center">
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" name="id_departemen" value="<?= $dep['id_departemen']; ?>">
-                            </div>
-                            <div class="form-group">
-                                <p>Are you sure you want to delete data?</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-                        <a href="<?= base_url() ?>departemen/delete/<?= $dep['id_departemen']; ?>" class="btn btn-danger">Delete</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-<?php endforeach; ?>
+<script>
+    $(document).ready(function() {
+        $("#nama_departemen").click(function() {
+            $("#clear_nama_departemen").remove();
+        });
+    });
+</script>

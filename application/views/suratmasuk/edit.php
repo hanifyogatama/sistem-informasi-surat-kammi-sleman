@@ -71,17 +71,23 @@
 
                             <div class=" card mb-4 py-3">
                                 <div class="card-body">
-                                    <div class="form-group col-md-6">
+                                    <div class="form-group col-md">
                                         <label for="">File Surat <sup><em>(*optional)</em></sup></label>
-                                        <input type="file" id="file_surat" name="file_surat">
-                                        <small>File name now : <?= $surat_masuk['file_surat']; ?></small>
-                                    </div>
-
-                                    <div>
+                                        <input type="file" id="file_surat" class="file_surat" name="file_surat">
+                                        <small>File saat ini :
+                                            <?php $x = $surat_masuk['file_surat'];;
+                                            if ($x == '') : ?>
+                                                <span class="text-danger"><em>
+                                                        <?= 'tidak ada file' ?>
+                                                    </em></span>
+                                            <?php else : ?>
+                                                <?= $surat_masuk['file_surat']; ?>
+                                            <?php endif; ?>
+                                        </small>
                                         <p>
                                             <small class="text-primary">
                                                 - format file pdf / docx </br>
-                                                - ukuran file max 2mb
+                                                - ukuran file max 2 Mb
                                             </small>
                                         </p>
                                     </div>

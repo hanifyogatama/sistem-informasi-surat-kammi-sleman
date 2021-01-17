@@ -26,7 +26,6 @@
                             <div class="form-group">
                                 <div class="">
                                     <label>Jenis Surat</label>
-
                                     <input type="hidden" name="id_status_surat" id="id_status_surat" class="form-control" value="<?= $surat_masuk['id_status_surat'] ?>" readonly>
 
                                     <input type="text" name="" id="" class="form-control" value="<?= $surat_masuk['status'] ?>" readonly>
@@ -38,7 +37,6 @@
                             <div class="form-group">
                                 <div class="">
                                     <label>Pengirim</label>
-
                                     <input type="hidden" name="id_instansi" id="id_instansi" class="form-control" value="<?= $surat_masuk['id_instansi'] ?>" readonly>
 
                                     <input type="text" name="" id="" class="form-control" value="<?= $surat_masuk['nama_instansi'] ?>" readonly>
@@ -55,7 +53,6 @@
                                             <option value="<?= $departemen['id_departemen'] ?>" <?= $departemen['id_departemen'] == $disposisi['id_departemen'] ? "selected" : null ?>> <?= $departemen['nama_departemen'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
-
 
                                     <?= form_error('id_instansi', '<small class="text-danger ">', '</small>') ?>
                                 </div>
@@ -90,12 +87,10 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-info float-right">Edit</button>
-
                     <?php form_close(); ?>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </div>

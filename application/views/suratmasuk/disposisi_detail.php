@@ -13,7 +13,7 @@
 
                     <a href="<?= base_url('suratmasuk/disposisi_edit/') . $data->id_disposisi  ?>" title="Edit" class="btn btn-outline-success btn-sm mb-3 px-3"><i class="fas fa-edit"></i></a>
 
-                    <a href="<?= base_url('suratmasuk/printDisposisi/') . $data->id_disposisi  ?>" title="Print" class="btn btn-outline-warning btn-sm mb-3 px-3"><i class="fas fa-print"></i></a>
+                    <a href="<?= base_url('suratmasuk/printDisposisi/') . $data->id_disposisi  ?>" title="Print" class="btn btn-outline-warning btn-sm mb-3 px-3" target="_blank"><i class="fas fa-print"></i></a>
 
                     <a href="<?= base_url('suratmasuk/pdfDisposisi/') . $data->id_disposisi  ?>" title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3"><i class="fa fa-file-pdf"></i></a>
 
@@ -23,39 +23,54 @@
                             <table class="table table-hover">
                                 <br>
                                 <tr>
-                                    <td>Nomor Surat</td>
-                                    <td><strong><?= $data->nomor_surat; ?></strong></td>
+                                    <td><strong>Nomor Surat</strong></td>
+                                    <td><?= $data->nomor_surat; ?></td>
+                                </tr>
+                                <?php
+                                $oldBatasWaktu = $data->batas_waktu;
+                                $oldTanggalDiterima = $data->tanggal_diterima;
+                                $oldTanggalSurat = $data->tanggal_surat;
+                                $oldTanggalDibuat = $data->tanggal_dibuat;
+
+                                $newBatasWaktu = date("d-m-Y", strtotime($oldBatasWaktu));
+                                $newTanggalDiterima = date("d-m-Y", strtotime($oldTanggalDiterima));
+                                $newTanggalSurat = date("d-m-Y", strtotime($oldTanggalSurat));
+                                $newTanggalDibuat = date("d-m-Y", strtotime($oldTanggalDibuat));
+                                ?>
+                                <tr>
+                                    <td><strong>Tanggal Surat</strong></td>
+                                    <td><?= $newTanggalSurat; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Surat</td>
-                                    <td><strong><?= $data->tanggal_surat; ?></strong></td>
+                                    <td><strong>Tanggal Diterima</strong></td>
+                                    <td><?= $newTanggalDiterima ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tanggal Diterima</td>
-                                    <td><strong><?= $data->tanggal_diterima; ?></strong></td>
+                                    <td><strong>Tujuan Disposisi</strong></td>
+                                    <td><?= $data->nama_departemen; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Tujuan Disposisi</td>
-                                    <td><strong><?= $data->nama_departemen; ?></strong></td>
+                                    <td><strong>Jenis Surat</strong></td>
+                                    <td><?= $data->status; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Jenis Surat</td>
-                                    <td><strong><?= $data->status; ?></strong></td>
+                                    <td><strong>Pengirim</strong></td>
+                                    <td><?= $data->nama_instansi; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Pengirim</td>
-                                    <td><strong><?= $data->nama_instansi; ?></strong></td>
+                                    <td><strong>Tanggal Disposisi</strong></td>
+                                    <td><?= $newTanggalDibuat ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Batas Waktu</td>
-                                    <td><strong><?= $data->batas_waktu; ?></strong></td>
+                                    <td><strong>Batas Waktu</strong></td>
+                                    <td><?= $newBatasWaktu ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Deskripsi</td>
-                                    <td><strong><?= $data->isi; ?></strong></td>
+                                    <td><strong>Deskripsi</strong></td>
+                                    <td><?= $data->isi; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Keterangan</td>
+                                    <td><strong>Keterangan</strong></td>
 
                                     <?php $x = $data->keterangan;
                                     if ($x == '') : ?>
@@ -64,10 +79,9 @@
                                         </td>
                                     <?php else : ?>
                                         <td>
-                                            <strong><?= $data->keterangan; ?></strong>
+                                            <?= $data->keterangan; ?>
                                         </td>
                                     <?php endif; ?>
-
                                 </tr>
                             </table>
                         </div>

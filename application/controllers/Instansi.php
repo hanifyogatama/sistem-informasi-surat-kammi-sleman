@@ -27,7 +27,7 @@ class Instansi extends CI_Controller
 
     public function add()
     {
-        $data['title'] = 'Tambah Instansi';
+        $data['title'] = 'Instansi';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['instansi'] = $this->db->get('instansi')->result_array();
 
@@ -49,7 +49,7 @@ class Instansi extends CI_Controller
             $this->InstansiModel->addInstansi();
             $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data added</div>');
+            </button>data berhasil ditambah</div>');
             redirect('instansi');
         }
     }
@@ -79,7 +79,7 @@ class Instansi extends CI_Controller
             $this->InstansiModel->editInstansi();
             $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data edited</div>');
+            </button>data berhasil diupdate</div>');
             redirect('instansi');
         }
     }
@@ -92,7 +92,7 @@ class Instansi extends CI_Controller
         //$this->db->delete('instansi', array('id_instansi' => $id));
         $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data deleted</div>');
+            </button>data berhasil dihapus</div>');
         redirect('instansi');
     }
 }

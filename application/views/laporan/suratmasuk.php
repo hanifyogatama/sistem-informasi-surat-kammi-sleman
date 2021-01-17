@@ -13,10 +13,11 @@
                     <form action="" method="GET">
                         <div class="row mb-3">
                             <div class="col-sm-3">
-                                <input type="date" class="form-control" name="tanggalawal">
+                                <input type="date" class="form-control" name="tanggalawal" title="tanggal awal">
                             </div>
+                            <div class="my-auto"><i class="fas fa-arrows-alt-h"></i></div>
                             <div class="col-sm-3">
-                                <input type="date" class="form-control" name="tanggalakhir">
+                                <input type="date" class="form-control" name="tanggalakhir" title="tanggal akhir">
                             </div>
                             <div class="col">
                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
@@ -31,17 +32,24 @@
                     $newTanggalAkhir = date("d-m-Y", strtotime($tanggalAkhir));
                     ?>
 
+                    <!-- pdf -->
                     <?php if (!$tanggalAwal && !$tanggalAkhir) :  ?>
                         <?php echo anchor('suratmasuk/exportToPdf', '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
-                        <h6 class="font-weight-bold mt-2 text-primary">Laporan Surat Masuk tanggal <?= date('d F Y'); ?></h6>
+
+                        <?php echo anchor('suratmasuk/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="fa fa-file-excel"></i> </button>'); ?>
+
+                        <h6 class="font-weight-bold mt-2 text-primary text-center">Laporan surat masuk tanggal <?= date('d-m-Y'); ?></h6>
+                        <br>
                     <?php else : ?>
                         <?php echo anchor('laporan/pdfSuratMasuk?tanggalawal=' . $tanggalAwal . '&tanggalakhir=' . $tanggalAkhir, '<button title="Export to pdf" class="btn btn-outline-danger btn-sm mb-3 px-3 "><i class="fa fa-file-pdf "></i> </button>'); ?>
 
+                        <?php echo anchor('laporan/exportExcelSuratMasuk?tanggalawal=' . $tanggalAwal . '&tanggalakhir=' . $tanggalAkhir, '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="fa fa-file-excel "></i> </button>'); ?>
 
-                        <h6 class="font-weight-bold mt-2 text-primary">Laporan surat masuk tanggal <?= $newTanggalAwal . ' s/d ' . $newTanggalAkhir ?></h6>
+                        <h6 class="font-weight-bold mt-2 text-primary text-center">Laporan surat masuk tanggal <?= $newTanggalAwal . ' s/d ' . $newTanggalAkhir ?></h6>
+                        <br>
                     <?php endif; ?>
 
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="dataTable">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -58,8 +66,8 @@
                                 <tr>
                                     <th scope="row" style="text-align: center;"><?= $i; ?></th>
                                     <td><?= $data->no_surat ?></td>
-                                    <td><?= $data->nama_instansi ?></td>
-                                    <td><?= word_limiter($data->isi, 3) ?></td>
+                                    <td><?= word_limiter($data->nama_instansi, 2) ?></td>
+                                    <td><?= word_limiter($data->isi, 2) ?></td>
 
                                     <?php
                                     $oldDateSurat = $data->tanggal_surat;

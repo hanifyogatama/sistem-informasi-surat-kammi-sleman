@@ -3,7 +3,7 @@
         <?php foreach ($users as $user) : ?>
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary"><?= $title; ?><strong>
-                        <div class="badge badge-warning py-1"><?= $user->nama; ?></div>
+                        <!-- <div class="badge badge-warning py-1"><?= $user->nama; ?></div> -->
                     </strong></h6>
             </div>
             <div class="card-body">
@@ -22,33 +22,33 @@
                             <table class="table table-hover">
                                 <br>
                                 <tr>
-                                    <td>Full Name</td>
-                                    <td><strong><?= $user->nama; ?></strong></td>
+                                    <td><strong>Nama Lengkap</strong></td>
+                                    <td><?= $user->nama; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Email</td>
-                                    <td><strong><?= $user->email; ?></strong></td>
+                                    <td><strong>Email</strong></td>
+                                    <td><?= $user->email; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Role</td>
-                                    <td><strong><?= $user->nama_role; ?></strong></td>
+                                    <td><strong>Role</strong></td>
+                                    <td><?= $user->nama_role; ?></td>
                                 </tr>
                                 <tr>
-                                    <td>Status</td>
+                                    <td><strong>Status</strong></td>
                                     <td>
-                                        <strong>
-                                            <?php $x = $user->is_active;
-                                            if ($x == 0) : ?>
-                                                <div class="badge badge-danger"><?= $user->status_user; ?></div>
-                                            <?php elseif ($x == 1) : ?>
-                                                <div class="badge badge-success"><?= $user->status_user; ?></div>
-                                            <?php endif; ?>
-                                        </strong>
+
+                                        <?php $x = $user->is_active;
+                                        if ($x == 0) : ?>
+                                            <div class="badge badge-danger"><?= $user->status_user; ?></div>
+                                        <?php elseif ($x == 1) : ?>
+                                            <div class="badge badge-success"><?= $user->status_user; ?></div>
+                                        <?php endif; ?>
+
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Date Created</td>
-                                    <td><strong><?= date('d F Y', $user->tanggal_dibuat); ?></strong></td>
+                                    <td><strong>Date Created</strong></td>
+                                    <td><?= date('d F Y', $user->tanggal_dibuat); ?></td>
                                 </tr>
                             </table>
                         </div>

@@ -65,10 +65,28 @@
                                 </div>
 
                                 <div class=" card mb-4 py-3">
-                                    <div class="form-group col-md-4">
-                                        <label for="file_surat"><Strong>File</Strong></label> <br>
-                                        <input type="file" id="file_surat" name="file_surat">
-                                        <small>File now : <?= $surat_keluar['file_surat']; ?></small>
+                                    <div class="card-body">
+                                        <div class="form-group col-md">
+                                            <label for="">File Surat <sup><em>(*optional)</em></sup></label>
+                                            <input type="file" id="file_surat" class="file_surat" name="file_surat">
+                                            <small>File saat ini :
+                                                <?php $x = $surat_keluar['file_surat'];;
+                                                if ($x == '') : ?>
+                                                    <span class="text-danger"><em>
+                                                            <?= 'tidak ada file' ?>
+                                                        </em></span>
+                                                <?php else : ?>
+                                                    <?= $surat_keluar['file_surat']; ?>
+                                                <?php endif; ?>
+                                            </small>
+                                            <p>
+                                                <small class="text-primary">
+                                                    - format file pdf / docx </br>
+                                                    - ukuran file max 2 Mb
+                                                </small>
+                                            </p>
+                                        </div>
+                                        <?= $this->session->flashdata('message_file_surat_keluar'); ?>
                                     </div>
                                 </div>
                             </div>

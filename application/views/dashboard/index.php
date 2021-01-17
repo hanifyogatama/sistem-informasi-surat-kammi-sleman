@@ -87,16 +87,16 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">instansi
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">disposisi
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $this->myfunction->countInstansi(); ?></div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $this->myfunction->countDisposisi(); ?></div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                            <i class="fas fa-paper-plane fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>

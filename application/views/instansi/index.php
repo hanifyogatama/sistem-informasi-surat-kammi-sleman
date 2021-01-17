@@ -17,7 +17,7 @@
 
                         <a href="" class="btn btn-outline-primary btn-sm mb-3 px-3" title="Add" data-toggle="modal" data-target="#newInstansiModal"><i class="fas fa-plus"> </i></a>
 
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="dataTable">
                             <thead>
                                 <tr>
                                     <th scope="col">No</th>
@@ -56,20 +56,20 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="newDepartemenModalLabel">Add New Instansi</h5>
+                <h6 class="modal-title m-0 font-weight-bold text-primary" id="newDepartemenModalLabel">Add Instansi</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('instansi/add'); ?>" method="POST">
+            <form action="<?= base_url('instansi/add'); ?>" method="POST" id="MyModal">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" placeholder="instansi" autocomplete="off">
-                        <?= form_error('nama_instansi', '<small class="text-danger ">', '</small>') ?>
+                        <input type="text" value="<?= set_value('nama_instansi') ?>" class="form-control" id="nama_instansi" name="nama_instansi" placeholder="instansi" autocomplete="off">
+                        <?= form_error('nama_instansi', '<small id="clear_nama_instansi" class="text-danger ">', '</small>') ?>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="alamat" autocomplete="off">
-                        <?= form_error('alamat', '<small class="text-danger ">', '</small>') ?>
+                        <input type="text" value="<?= set_value('alamat') ?>" class="form-control" id="alamat" name="alamat" placeholder="alamat" autocomplete="off">
+                        <?= form_error('alamat', '<small id="clear_alamat" class="text-danger ">', '</small>') ?>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -80,3 +80,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#nama_instansi").click(function() {
+            $("#clear_nama_instansi").remove();
+        });
+
+        $("#alamat").click(function() {
+            $("#clear_alamat").remove();
+        });
+
+    });
+</script>

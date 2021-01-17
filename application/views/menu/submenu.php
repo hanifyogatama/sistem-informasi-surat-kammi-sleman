@@ -19,7 +19,7 @@
 
                     <a href="" class="btn btn-outline-primary btn-sm px-3 mb-3" title="Add" data-toggle="modal" data-target="#newSubMenuModal"><i class="fas fa-plus"></i></a>
 
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="dataTable">
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
@@ -51,6 +51,8 @@
                                         </strong>
                                     </td>
                                     <td align="center">
+                                        <!-- data-toggle="dropdown" 
+                                        style="cursor: no-drop;" -->
                                         <a type="button" data-toggle="dropdown" id="dropdownMenuButton"><i class="fas fa-bars text-dark"></i></a>
                                         <div class="dropdown-menu shadow" aria-labelledby="dropdownMenuButton">
                                             <div class="row justify-content-center text-center">

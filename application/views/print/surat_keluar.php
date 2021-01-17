@@ -19,13 +19,14 @@
 
 <body>
     Tanggal cetak : <?= date('d F Y') ?>
+    <br><br>
     <table style="width:100%">
         <thead>
-            <tr>
+            <tr style="background-color: cornflowerblue;">
                 <th>No</th>
                 <th>Nomor Surat</th>
                 <th>Penerima</th>
-                <th>Sifat Surat</th>
+                <th>Jenis Surat</th>
                 <th>Deskripsi</th>
                 <th>Tanggal Surat</th>
                 <th>Ket</th>
@@ -35,7 +36,7 @@
             <?php $i = 1; ?>
             <?php foreach ($surat_keluar as $data) : ?>
                 <tr>
-                    <th><?= $i; ?></th>
+                    <td style="text-align: center;"><?= $i; ?></td>
                     <td><?= $data->no_surat ?></td>
                     <td><?= $data->nama_instansi ?></td>
                     <td><?= $data->status ?></td>

@@ -12,9 +12,6 @@
                     <?php echo form_open_multipart('suratmasuk/add') ?>
                     <div class="form-row">
                         <div class="col-lg-6">
-
-
-
                             <div class="form-group">
                                 <div class="">
                                     <label>Nomor Surat</label>
@@ -91,8 +88,6 @@
                                         <div class="mx-2">
                                             <input type="file" name="file_surat" class="file_surat">
                                         </div>
-                                    </div>
-                                    <div>
                                         <p>
                                             <small class="text-primary">
                                                 - format file pdf / docx </br>

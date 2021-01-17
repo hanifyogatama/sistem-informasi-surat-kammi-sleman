@@ -33,6 +33,12 @@ class MyFunction
         return $this->ci->InstansiModel->getCountDataInstansi()->num_rows();
     }
 
+    public function countDisposisi()
+    {
+        $this->ci->load->model('SuratMasukModel');
+        return $this->ci->SuratMasukModel->getCountDataDisposisi()->num_rows();
+    }
+
     public function getDataDiposisiLaporan()
     {
         $this->ci->load->model('LaporanModel');

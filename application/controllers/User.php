@@ -7,7 +7,6 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
         is_logged_in();
     }
 
@@ -77,7 +76,7 @@ class User extends CI_Controller
 
                     $this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>your profile has been updated</div>');
+                    </button>profile berhasil diupdate</div>');
 
                     redirect('user');
                 }
@@ -95,10 +94,13 @@ class User extends CI_Controller
             'required' => 'password lama belum diisi'
         ]);
 
-        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[5]|matches[new_password2]', [
-            'required' => 'password baru belum diisi'
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[6]|matches[new_password2]', [
+            'required' => 'password baru belum diisi',
+            'min_length'    => 'password terlalu pendek , min 6 karakter',
+            'matches'    => 'sesuaikan password baru'
+
         ]);
-        $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[5]|matches[new_password1]');
+        $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[6]|matches[new_password1]');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -111,11 +113,15 @@ class User extends CI_Controller
             $new_password = $this->input->post('new_password1');
 
             if (!password_verify($old_password, $data['user']['password'])) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role = "alert">wrong current password</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>password lama salah</div>');
                 redirect('user/ubahpassword');
             } else {
                 if ($old_password == $new_password) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role = "alert">new password cannot be the same as current password!</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>password baru tidak boleh sama dengan password lama</div>');
                     redirect('user/ubahpassword');
                 } else {
                     // true password
@@ -125,7 +131,7 @@ class User extends CI_Controller
                     $this->db->where('email', $this->session->userdata('email'));
                     $this->db->update('user');
 
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">password changed</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role = "alert">password berhasil diubah</div>');
                     redirect('user/ubahpassword');
                 }
             }

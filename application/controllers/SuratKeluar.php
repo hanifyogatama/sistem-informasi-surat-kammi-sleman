@@ -1,11 +1,9 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 
 class SuratKeluar extends CI_Controller
 {
@@ -48,26 +46,20 @@ class SuratKeluar extends CI_Controller
         ]);
 
         $this->form_validation->set_rules('id_instansi', 'Instansi', 'required|trim', [
-            'required' => 'pengirim surat belum diisi'
+            'required' => 'pengirim belum diilih'
         ]);
 
         $this->form_validation->set_rules('id_status_surat', 'Status surat', 'required|trim', [
-            'required' => 'sifat surat belum diisi'
+            'required' => 'jenis surat belum dipilih'
         ]);
 
         $this->form_validation->set_rules('isi', 'Isi', 'required|trim', [
-            'required' => 'deskripsi surat belum diisi'
+            'required' => 'deskripsi belum diisi'
         ]);
 
         $this->form_validation->set_rules('tanggal_surat', 'tanggal surat', 'required', [
-            'required' => 'tanggal surat belum diisi'
+            'required' => 'tanggal surat belum dipilih'
         ]);
-
-        if (empty($_FILES['file_surat']['name'])) {
-            $this->form_validation->set_rules('file_surat', 'Document', 'required', [
-                'required' => 'pastikan file sudah dicantumkan'
-            ]);
-        }
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
@@ -75,7 +67,7 @@ class SuratKeluar extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('suratkeluar/add', $data);
             $this->load->view('templates/footer');
-        } else {
+        } elseif ($_FILES['file_surat']['name']) {
 
             $config['allowed_types']    = 'pdf';
             $config['max_size']         = '2048';
@@ -84,9 +76,9 @@ class SuratKeluar extends CI_Controller
             $this->load->library('upload', $config);
 
             if (!$this->upload->do_upload('file_surat')) {
-                $errorSurat = $this->session->set_flashdata('message', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $errorSurat = $this->session->set_flashdata('message_file_surat_keluar', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-                </button>file salah format / ukuran melebihi maksimal</div>');
+                </button>cek kembali format / ukuran file</div>');
 
                 $this->load->view('templates/header', $data);
                 $this->load->view('templates/sidebar', $data);
@@ -98,9 +90,15 @@ class SuratKeluar extends CI_Controller
                 $this->SuratKeluarModel->addSuratKeluar($new_file);
                 $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-                </button>data added</div>');
+                </button>data berhasil ditambah</div>');
                 redirect('suratkeluar');
             }
+        } else {
+            $this->SuratKeluarModel->addSuratKeluar1();
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>data berhasil ditambah</div>');
+            redirect('suratkeluar');
         }
     }
 
@@ -109,7 +107,6 @@ class SuratKeluar extends CI_Controller
     {
         $data['title']  = 'Edit Surat Keluar';
         $data['user']   = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-
         $data['surat_keluar']   = $this->SuratKeluarModel->getByIdSuratKeluar($id);
         $data['status_surat']   = $this->StatusSuratModel->getAllStatusSurat();
         $data['instansi']       = $this->InstansiModel->getAllInstansi();
@@ -128,7 +125,7 @@ class SuratKeluar extends CI_Controller
             $this->load->view('templates/topbar', $data);
             $this->load->view('suratkeluar/edit', $data);
             $this->load->view('templates/footer');
-        } else {
+        } elseif ($_FILES['file_surat']['name']) {
 
             $config['allowed_types']    = 'docx|pdf';
             $config['max_size']         = '2048';
@@ -140,15 +137,30 @@ class SuratKeluar extends CI_Controller
 
                 $new_file = $this->upload->data('file_name');
                 $this->SuratKeluarModel->editSuratKeluar($new_file);
-                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
                 redirect('suratkeluar');
+            } elseif (!$this->upload->do_upload('file_surat')) {
+
+                $errorSurat = $this->session->set_flashdata('message_file_surat_keluar', '<div class="alert alert-danger alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>cek kembali format / ukuran file</div>');
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('suratkeluar/edit', $data,  $errorSurat);
+                $this->load->view('templates/footer');
             } else {
 
-                $old_file = $data['surat_keluar']['file_surat'];
+                $old_file = $data['surat_masuk']['file_surat'];
                 $this->SuratKeluarModel->editSuratKeluar($old_file);
-                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data edited</div>');
+                $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
                 redirect('suratkeluar');
             }
+        } else {
+            $this->SuratKeluarModel->editSuratKeluar1();
+            $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>data berhasil diupdate</div>');
+            redirect('suratkeluar');
         }
     }
 
@@ -171,7 +183,7 @@ class SuratKeluar extends CI_Controller
         $this->SuratKeluarModel->deleteSuratKeluar($id);
         $this->session->set_flashdata('message2', '<div class="alert alert-success alert-dismissible fade show"" role = "alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-            </button>data deleted</div>');
+            </button>data berhasil dihapus</div>');
         redirect('suratkeluar');
     }
 
@@ -182,10 +194,16 @@ class SuratKeluar extends CI_Controller
         $data = $this->load->view('pdf/data_surat_keluar', ['surat_keluar' => $dataSuratKeluar], True);
         $mpdf->WriteHTML($data);
         $mpdf->SetDisplayMode('fullwidth');
-        $file_name = "Surat_Keluar_Kammi_Sleman_" . date("d-m-Y") . ".pdf";
+        $file_name = "Surat_Keluar_Kammi_Sleman_" . date("d-M-Y") . ".pdf";
         $mpdf->Output($file_name, 'D');
     }
 
+
+
+
+
+
+    // new 
     public function exportToExcel()
     {
 
@@ -212,6 +230,7 @@ class SuratKeluar extends CI_Controller
         $sheet->setCellValue('G1', 'Keterangan');
         $no = 1;
         $x = 2;
+
         foreach ($dataSuratKeluar as $row) {
 
             $oldDateSurat = $row->tanggal_surat;
@@ -223,7 +242,7 @@ class SuratKeluar extends CI_Controller
             $sheet->setCellValue('D' . $x, $row->status);
             $sheet->setCellValue('E' . $x, $row->isi);
             $sheet->setCellValue('F' . $x, $newDateSurat);
-            $sheet->setCellValue('G' . $x, $row->keteranagn);
+            $sheet->setCellValue('G' . $x, $row->keterangan);
             $x++;
         }
         $writer = new Xlsx($spreadsheet);
@@ -238,7 +257,7 @@ class SuratKeluar extends CI_Controller
 
         $spreadsheet->setActiveSheetIndex(0);
 
-        $filename = "Surat_Keluar_Kammi_Sleman_" . date("d-m-Y") . ".xlsx";
+        $filename = "Surat_Keluar_Kammi_Sleman_" . date("d-M-Y") . ".xlsx";
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment;filename={$filename}");
         header('Cache-Control: max-age=0');
@@ -253,6 +272,10 @@ class SuratKeluar extends CI_Controller
         $writer->save('php://output');
         exit;
     }
+
+
+
+
 
     public function print()
     {
@@ -276,7 +299,6 @@ class SuratKeluar extends CI_Controller
             }
         }
     }
-
 
     function pdf($item)
     {

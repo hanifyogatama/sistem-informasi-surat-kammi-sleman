@@ -22,6 +22,7 @@ class StatusSuratModel extends CI_Model
     public function addStatusSurat()
     {
         $data = [
+            "kode_surat"   => htmlspecialchars($this->input->post('kode_surat', true)),
             "status"   => htmlspecialchars($this->input->post('status', true))
         ];
 
@@ -43,8 +44,10 @@ class StatusSuratModel extends CI_Model
     // edit data by id
     public function editStatusSurat()
     {
-        $data = ["status" => htmlspecialchars($this->input->post('status', true))];
-
+        $data = [
+            "kode_surat"   => htmlspecialchars($this->input->post('kode_surat', true)),
+            "status"   => htmlspecialchars($this->input->post('status', true))
+        ];
         $this->db->where('id_status_surat', $this->input->post('id_status_surat'));
         $this->db->update('status_surat', $data);
     }

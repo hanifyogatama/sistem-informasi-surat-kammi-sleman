@@ -38,6 +38,7 @@ class LaporanModel extends CI_Model
     function filterByDateSuratDisposisi($startDate = null, $endDate = null)
     {
         $this->db->select('disposisi.*, departemen.nama_departemen as nama_departemen, status_surat.status as status,surat_masuk.no_surat as nomor_surat,surat_masuk.tanggal_surat as tanggal_surat, surat_masuk.tanggal_diterima as tanggal_diterima,instansi.nama_instansi as nama_instansi');
+
         $this->db->from('disposisi');
         $this->db->join('departemen', 'departemen.id_departemen = disposisi.id_departemen');
         $this->db->join('surat_masuk', 'surat_masuk.id_surat_masuk = disposisi.id_surat_masuk');

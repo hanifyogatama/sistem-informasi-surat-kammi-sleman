@@ -32,8 +32,7 @@
                             <tr>
                                 <th scope="row"><?= $i; ?></th>
                                 <td><img src="<?= base_url('assets/img/profile/') . $user->gambar ?>" class="img-profile rounded-circle" alt="profile image" width="30px" height="30px"></td>
-
-                                <td><?= $user->nama; ?></td>
+                                <td><?= word_limiter($user->nama, 3) ?></td>
                                 <td><?= $user->email; ?></td>
                                 <td>
                                     <strong>

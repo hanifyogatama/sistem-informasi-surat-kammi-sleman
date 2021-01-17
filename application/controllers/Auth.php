@@ -15,16 +15,20 @@ class Auth extends CI_Controller
     {
 
         // session
-        // if ($this->session->userdata('email')) {
-        //     redirect('dashboard');
-        // }
+        if ($this->session->userdata('email')) {
+            redirect('dashboard');
+        }
 
         // rules form login
-        $this->form_validation->set_rules('email', 'Email', 'trim');
+        $this->form_validation->set_rules('email', 'Email', 'trim|valid_email|required', [
+            'required'  => 'email belum diisi',
+            'valid_email' => 'email tidak valid'
+        ]);
         $this->form_validation->set_rules(
             'password',
             'Password',
-            'trim'
+            'trim|required',
+            ['required'  => 'password belum diisi']
         );
 
 
@@ -91,9 +95,9 @@ class Auth extends CI_Controller
     public function registration()
     {
         // session
-        // if ($this->session->userdata('email')) {
-        //     redirect('user');
-        // }
+        if ($this->session->userdata('email')) {
+            redirect('dashboard');
+        }
 
         // rules in form registration
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
@@ -101,7 +105,7 @@ class Auth extends CI_Controller
             'is_unique' => 'email has already registered'
         ]);
 
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[5]|matches[password2]', [
+        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]', [
             'matches' => 'password dont match',
             'min_length' => 'password too short'
         ]);

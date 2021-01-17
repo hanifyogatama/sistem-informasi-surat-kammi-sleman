@@ -20,16 +20,16 @@
                                 </div>
                                 <?= $this->session->flashdata('message'); ?>
 
-                                <form id="login_validation" class="user" method="POST" action="<?= base_url('auth'); ?>" autocomplete="off">
+                                <form method="POST" action="<?= base_url('auth'); ?>" autocomplete="off">
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Email" value="<?= set_value('email') ?>" autocomplete="off" oninvalid="this.setCustomValidity('email wajib diisi')" onchange="this.setCustomValidity('')" required>
-                                        <!-- <?= form_error('email', '<small class="text-danger pl-3">', '</small>') ?> -->
+                                        <input type="text" class="form-control form-control-user" id="email" name="email" placeholder="Email" value="<?= set_value('email') ?>" autocomplete="off">
+                                        <?= form_error('email', '<small id="clear_email_login" class="text-danger">', '</small>') ?>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password" autocomplete="off" oninvalid="this.setCustomValidity('password wajib diisi')" onchange="this.setCustomValidity('')" required>
-                                        <!-- <?= form_error('password', '<small class="text-danger pl-3">', '</small>') ?> -->
+                                        <input type="password" class="form-control form-control-user" id="password_login" name="password" placeholder="Password" autocomplete="off">
+                                        <?= form_error('password', '<small id="clear_password_login" class="text-danger">', '</small>') ?>
                                     </div>
                                     <br>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
@@ -50,18 +50,16 @@
     </div>
 
 </div>
+<script>
+    $(document).ready(function() {
 
-<!-- <script>
-    function InvalidMsg(textbox) {
-        if (textbox.value == '') {
-            textbox.setCustomValidity('Lütfen işaretli yerleri doldurunuz');
-        } else if (textbox.validity.typeMismatch) {
-            {
-                textbox.setCustomValidity('please enter a valid email address');
-            } else {
-                textbox.setCustomValidity('');
-            }
-            return true;
-        }
-    }
-</script> -->
+
+        $("#email").click(function() {
+            $("#clear_email_login").remove();
+        });
+
+        $("#password_login").click(function() {
+            $("#clear_password_login").remove();
+        });
+    });
+</script>

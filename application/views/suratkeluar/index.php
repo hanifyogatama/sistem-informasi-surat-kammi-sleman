@@ -17,11 +17,11 @@
 
                     <?php echo anchor('suratkeluar/exportToPdf', '<button class="btn btn-outline-danger btn-sm mb-3 px-3 " title="Export to pdf"><i class="fa fa-file-pdf" ></i> </button>'); ?>
 
-                    <?php echo anchor('suratkeluar/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="far fa-file-excel"></i> </button>'); ?>
+                    <?php echo anchor('suratkeluar/exportToExcel', '<button title="Export to excel" class="btn btn-outline-warning btn-sm mb-3 px-3 "><i class="fa fa-file-excel"></i> </button>'); ?>
 
                     <!-- table  -->
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -36,9 +36,9 @@
                                 <?php foreach ($surat_keluar->result() as $key => $data) : ?>
                                     <tr>
                                         <th scope="row" style="text-align: center;"><?= $i; ?></th>
-                                        <td><?= $data->no_surat ?></td>
-                                        <td><?= $data->nama_instansi ?></td>
-                                        <td><?= word_limiter($data->isi, 3) ?></td>
+                                        <td><?= word_limiter($data->no_surat, 1) ?></td>
+                                        <td><?= word_limiter($data->nama_instansi, 4) ?></td>
+                                        <td><?= word_limiter($data->isi, 2) ?></td>
                                         <?php
                                         $oldate = $data->tanggal_surat;
                                         $newDate = date("d-m-Y", strtotime($oldate)); ?>
