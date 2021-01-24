@@ -59,7 +59,7 @@
                                 </div>
                                 <div class=" form-group">
                                     <div class="">
-                                        <label for="keterangan">Keterangan</label>
+                                        <label for="keterangan">Keterangan<sup><em>(*optional)</em></sup></label>
                                         <textarea class="form-control" rows="4" id="keterangan" name="keterangan"><?= $surat_keluar['keterangan']; ?></textarea>
                                     </div>
                                 </div>
